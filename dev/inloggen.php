@@ -57,7 +57,7 @@ if(isset($_POST['Inloggen']))
 	if(login($Username, $Password, $pdo))
 	{
 		echo'U bent succesvol ingelogd';
-		header("Location: index.php");;
+		?> <script> location.replace("index.php"); </script> <?php
 	}
 	else
 	{

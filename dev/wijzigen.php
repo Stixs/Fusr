@@ -13,7 +13,6 @@ if(LoginCheck($pdo))
 	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = NULL;
 
 	$Specialiteiten = specialiteitenlijst($pdo);
-	$Branches = branchelijst($pdo);
 
 	
 	//controleert of de knop aanpassen of verwijderen is ingedurkt.
@@ -27,6 +26,12 @@ if(LoginCheck($pdo))
 		switch($action)
 		{
 			case'edit':
+					
+					$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+					$sth = $pdo->prepare('select * from bedrijfs_specialiteiten where bedrijfs_id = :bedrijfs_id');
+					$sth->execute($parameters);
+					$row = $sth->fetch();
+					
 					
 					//SQL query om de gegevens van het juiste bedrijf uit de database halen
 					$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
@@ -44,7 +49,7 @@ if(LoginCheck($pdo))
 					$website = $row['website'];
 					$telefoon = $row['telefoon'];
 					$fax = $row['fax'];
-					$specialiteit = $row['specialiteit'];
+					
 					$type = $row['type'];
 					$bereik = $row['bereik'];
 					$transport_manager = $row['transport_manager'];
@@ -55,22 +60,7 @@ if(LoginCheck($pdo))
 					$bedrijfs_email = $row['bedrijfs_email'];
 					$premium = $row['premium'];
 					
-					
-					$specialarr = (explode(", ",$specialiteit));
-					if(!isset($specialarr[0]))
-						{$specialarr[0] = NULL;}
-					if(!isset($specialarr[1]))
-						{$specialarr[1] = NULL;}
-					if(!isset($specialarr[2]))
-						{$specialarr[2] = NULL;}
-					if(!isset($specialarr[3]))
-						{$specialarr[3] = NULL;}
-					if(!isset($specialarr[4]))
-						{$specialarr[4] = NULL;}
-					if(!isset($specialarr[5]))
-						{$specialarr[5] = NULL;}
-					
-					
+
 					
 					//controleert of de submit knop wijzigenbedrijf in het formulier is ingedurkt.
 					if(isset($_POST['Del_Image']))
@@ -82,8 +72,8 @@ if(LoginCheck($pdo))
 					$sth = $pdo->prepare('UPDATE bedrijfgegevens SET '.$image.'=:leeg WHERE bedrijfs_id = :bedrijfs_id');
 					$sth->execute($parameter);
 					
-					unlink('images/bedrijf_images/'.$bedrijfs_id .'/'. $row[$image]);
-					header("Refresh: ;URL=wijzigen.php?action=edit&bedrijfs_id=".$bedrijfs_id);
+					//unlink('images/bedrijf_images/'.$bedrijfs_id .'/'. $row[$image]);
+					
 					}
 					
 					if(isset($_POST['Wijzigenbedrijf']))
@@ -104,16 +94,14 @@ if(LoginCheck($pdo))
 					$telefoon = $_POST['telefoon'];
 					$fax = $_POST['fax'];
 					$specialiteit = $_POST['specialiteit'];
-					$type = $_POST['type'];
-					$bereik = $_POST['bereik'];
 					$transport_manager = $_POST['transport_manager'];
 					$aantal = $_POST['aantal'];
 					$rechtsvorm = $_POST['rechtsvorm'];
 					$vergunning = $_POST['vergunning'];
-					$geldigtot = $_POST['geldigtot'];
 					$bedrijfs_email = $_POST['bedrijfs_email'];
 					$beschrijving = $_POST['beschrijving'];
 					$premium = $_POST['premium'];
+					
 					
 					if (basename($_FILES["foto"]["name"]) == null)
 								{
@@ -141,29 +129,14 @@ if(LoginCheck($pdo))
 								}
 					
 					
-					
+					$N = 0;
 					foreach($specialiteit as $value) 
 					{
-						if(!next($specialiteit)) 
-						{
-							$special.= $value;
-							$specialZ.= "[[:<:]]".$value."[[:>:]]'";
-						}
-						else
-						{
-							$special.= $value.', ';
-							$specialZ.= "[[:<:]]".$value."[[:>:]]|";
-						}
+						$N++;
+						${'specialiteit_'.$N} = $value;
 					}
 					
-					$sth = $pdo->prepare('SELECT * FROM specialiteiten WHERE specialiteit_id REGEXP '.$specialZ);
-					$sth->execute($parameters);
-					while($row = $sth->fetch())
-					{
-						$specialname.= $row['specialiteit'].', ';
-					}
 					
-					$specialname = substr($specialname, 0, -2);
 					
 					
 					//begin controlles
@@ -228,61 +201,26 @@ if(LoginCheck($pdo))
 						$target_file = $target_dir . basename($_FILES["logo"]["name"]);
 						if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)){}
 						//De gegevens die uit het formulier komen en die correct zijn worden in de array parameters gezet
-						$parameters = array(':bedrijfs_id'=>$bedrijfs_id,
-											':bedrijfsnaam'=>$bedrijfs_naam,
-											':beschrijving'=>$beschrijving,
-											':adres'=>$adres,
-											':postcode'=>$postcode,
-											':plaats'=>$plaats,
-											':provincie'=>$provincie,
-											':website'=>$website,
-											':telefoon'=>$telefoon,
-											':fax'=>$fax,
-											':specialiteit'=>$special,
-											':specialiteitnaam'=>$specialname,
-											':type'=>$type,
-											':bereik'=>$bereik,
-											':transport_manager'=>$transport_manager,
-											':aantal'=>$aantal,
-											':rechtsvorm'=>$rechtsvorm,
-											':vergunning'=>$vergunning,
-											':geldig_tot'=>$geldigtot,
-											':bedrijfs_email'=>$bedrijfs_email,
-											':premium'=>$premium,
-											':foto'=>$foto,
-											':banner'=>$banner,
-											':logo'=>$logo);
+						
+						$parameters = array(':bedrijfs_id'=>$bedrijfs_id,':bedrijfsnaam'=>$bedrijfs_naam,':beschrijving'=>$beschrijving,':adres'=>$adres,':postcode'=>$postcode,':plaats'=>$plaats,':provincie'=>$provincie,':website'=>$website,':telefoon'=>$telefoon,':fax'=>$fax,':specialiteit'=>$special,':specialiteitnaam'=>$specialname,':transport_manager'=>$transport_manager,':aantal'=>$aantal,':rechtsvorm'=>$rechtsvorm,':vergunning'=>$vergunning,':bedrijfs_email'=>$bedrijfs_email,':premium'=>$premium,':foto'=>$foto,':banner'=>$banner,':logo'=>$logo);
+						
 						//de SQL query om de gegevens in de database te veranderen.
-						$sth = $pdo->prepare('UPDATE bedrijfgegevens 
-											  SET bedrijfsnaam=:bedrijfsnaam,
-												  beschrijving=:beschrijving,
-												  adres=:adres,
-												  postcode=:postcode,
-												  plaats=:plaats,
-												  provincie=:provincie,
-												  website=:website,
-												  telefoon=:telefoon,
-												  fax=:fax,
-												  specialiteit=:specialiteit,
-												  specialiteitnaam=:specialiteitnaam,
-												  type=:type,
-												  bereik=:bereik,
-												  transport_manager=:transport_manager,
-												  aantal=:aantal,
-												  rechtsvorm=:rechtsvorm,
-												  vergunning=:vergunning,
-												  geldig_tot=:geldig_tot,
-												  bedrijfs_email=:bedrijfs_email,
-												  premium=:premium,
-												  afbeelding=:foto,
-												  logo=:logo,
-												  banner=:banner
-												  WHERE bedrijfs_id = :bedrijfs_id');
+						
+						$sth = $pdo->prepare('UPDATE bedrijfgegevens SET bedrijfsnaam=:bedrijfsnaam, beschrijving=:beschrijving,   adres=:adres, postcode=:postcode, plaats=:plaats, provincie=:provincie, website=:website, telefoon=:telefoon,  fax=:fax, specialiteit=:specialiteit, specialiteit=:specialiteit, specialiteitnaam=:specialiteitnaam,  transport_manager=:transport_manager, aantal=:aantal, rechtsvorm=:rechtsvorm, vergunning=:vergunning, bedrijfs_email=:bedrijfs_email, premium=:premium, afbeelding=:foto, logo=:logo, banner=:banner WHERE bedrijfs_id = :bedrijfs_id');
 						//De variabele parameters wordt uitgevoerd
 						$sth->execute($parameters);
 						
+						
+						$parameters = array(':bedrijfs_id'=>$bedrijfs_id,':specialiteit_1'=>$specialiteit_1,':specialiteit_2'=>$specialiteit_2,':specialiteit_3'=>$specialiteit_3,':specialiteit_4'=>$specialiteit_4,':specialiteit_5'=>$specialiteit_5,':specialiteit_6'=>$specialiteit_6,':specialiteit_7'=>$specialiteit_7,':specialiteit_8'=>$specialiteit_8,':specialiteit_9'=>$specialiteit_9,':specialiteit_10'=>$specialiteit_10,':specialiteit_11'=>$specialiteit_11,':specialiteit_12'=>$specialiteit_12,':specialiteit_13'=>$specialiteit_13,':specialiteit_14'=>$specialiteit_14,':specialiteit_15'=>$specialiteit_15,':specialiteit_16'=>$specialiteit_16,':specialiteit_17'=>$specialiteit_17,':specialiteit_18'=>$specialiteit_18,':specialiteit_19'=>$specialiteit_19,':specialiteit_20'=>$specialiteit_20);
+						
+						$sth = $pdo->prepare('UPDATE bedrijfs_specialiteiten SET 
+						specialiteit_1=:specialiteit_1, specialiteit_2=:specialiteit_2, specialiteit_3=:specialiteit_3, specialiteit_4=:specialiteit_4, specialiteit_5=:specialiteit_5, specialiteit_6=:specialiteit_6, specialiteit_7=:specialiteit_7, specialiteit_8=:specialiteit_8, specialiteit_9=:specialiteit_9, specialiteit_10=:specialiteit_10, specialiteit_11=:specialiteit_11, specialiteit_12=:specialiteit_12, specialiteit_13=:specialiteit_13, specialiteit_14=specialiteit_14, specialiteit_15=:specialiteit_15, specialiteit_16=:specialiteit_16, specialiteit_17=:specialiteit_17, specialiteit_18=:specialiteit_18, specialiteit_19=:specialiteit_19, specialiteit_20=:specialiteit_20 WHERE = bedrijfs_id = :bedrijfs_id');
+						$sth->execute($parameters);
+						
+						
+						
 						echo'De gegvens van '. $bedrijfs_naam.' zijn bijgewerkt.<br />';
-						?> <script> location.replace("wijzigen.php"); </script> <?php
+						//echo '<META http-equiv="refresh" content="0;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
 					}
 				}
 				else

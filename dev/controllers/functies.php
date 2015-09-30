@@ -188,30 +188,26 @@ function branchekeuze($pdo, $name, $id, $keuze = NULL) {
     return $html;
 }
 
-function getBranche()
-{
-	$tmp = $_GET["branche"];
-	if ($tmp==""){$tmp=1;}
-	return $tmp;
-}
+
 
 function specialiteitkeuze($pdo, $name, $id, $keuze = NULL) {
-	$active_branche = getBranche();
-	$html = '<label for="sel'.$id.'">Specialiteiten:</label>';
+
+	$html = '<label for="sel'.$id.'">Specialiteit:</label>';
     $html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';	
-	$sth = $pdo->prepare('select * from specialiteiten where branche_id = '.$active_branche);
+	$sth = $pdo->prepare('SELECT * FROM specialiteiten');
 		$sth->execute();
+		
 			
 			while($row = $sth->fetch())
 				{
 					
-					if($row['specialiteit_id'] == $keuze)
+					if($row['specialiteit'] == $keuze)
 					{
-						$html .= '<option value="'.$row['specialiteit_id'].'" selected="selected">'.$row['specialiteit'].'</option>';
+						$html .= '<option value="'.$row['specialiteit'].'" selected="selected">'.$row['specialiteit'].'</option>';
 					}
 					else
 					{
-						$html .= '<option value="'.$row['specialiteit_id'].'">'.$row['specialiteit'].'</option>';
+						$html .= '<option value="'.$row['specialiteit'].'">'.$row['specialiteit'].'</option>';
 					}
 				}
 	$html .= '</select>';

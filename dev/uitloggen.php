@@ -1,5 +1,4 @@
 <?php
-require('./controllers/header.php');
 
 // Unset session var 
 $_SESSION = array();
@@ -20,7 +19,4 @@ session_destroy();
 
 // Header refresh naar homepage
 header("location:index.php");
-
-
-require('./controllers/footer.php');
 ?>
