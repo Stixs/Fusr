@@ -1,4 +1,6 @@
 <?php
+$sm = 0;
+
 require('./controllers/header.php');
 
 	$bedrijfs_id = $_GET['bedrijfs_id'];	
@@ -65,15 +67,16 @@ if ($row['premium'] == 'gold')
 				<td>Website:</td><td><a href="http://<?php echo $row['website']; ?>" target="_blank" alt="<?php echo $row['bedrijfsnaam']; ?>"><?php echo $row['website']; ?></a></td>
 			</tr>
 			<?php
-			//if(isset
-			//{
+			if($sm == 1)
+			{
 			?>
 			<tr>
 				<td>Social media</td>
 				<td>
 					<table>
 						<?php 
-						
+						if($sm == 1)
+						{
 						?>
 						<tr>
 							<td>
@@ -95,7 +98,7 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								<a href="https://twitter.com/share" class="twitter-share-button" data-counturl="<?php echo $row[''];?>" >Tweet</a>
+								<a href="https://twitter.com/share" class="twitter-share-button"  >Tweet</a>
 							</td>
 						</tr>
 						<?php
@@ -103,7 +106,7 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								<div class="g-plusone" data-annotation="none" data-size="tall" data-url="<?php echo $row['']; ?>" ... ></div>
+								<div class="g-plusone" data-annotation="none" data-size="tall"  ... ></div>
 							</td>
 						</tr>
 						<?php
@@ -112,7 +115,7 @@ if ($row['premium'] == 'gold')
 						<tr>
 							<td>
 								<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-								<script type="IN/Share" data-url="<?php echo $row['']; ?>" data-counter="top"></script>
+								<script type="IN/Share"  data-counter="top"></script>
 							</td>
 						</tr>
 						<?php
@@ -124,13 +127,13 @@ if ($row['premium'] == 'gold')
 							</td>
 						</tr>
 						<?php
-						
+						}
 						?>
 					</table>
 				</td>
 			</tr>
 			<?php 
-			//}
+			}
 			?>
 			<tr>
 				<td>Transport Manager:</td><td><?php echo $row['transport_manager']; ?></td>
@@ -158,7 +161,7 @@ if ($row['premium'] == 'gold')
 		</div>
 	</div>
 	<div class="col-xs-12">
-		<?php include_once('./controllers/sm_buttons.php'); ?>
+		<?php include('./controllers/sm_buttons.php'); ?>
 	</div>
 </div>
 <?php

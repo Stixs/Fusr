@@ -14,7 +14,7 @@
 </div>
 <div class="col-xs-2 linkedin">
 	<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-	<script type="IN/Share" data-counter="top"></script>
+<script type="IN/Share" data-counter="right"></script>
 </div>
 <div class="col-xs-2 instagram">
 	<span class="ig-follow" data-id="5479dee" data-handle="igfbdotcom" data-count="true" data-size="large" data-username="true"></span>
