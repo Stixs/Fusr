@@ -295,3 +295,6 @@ else
 
 require('./controllers/footer.php');
 ?>
+<script>
+analytics.js: ga('send', 'pageview', '/gids.php?q=$trefwoord'); 
+</script>

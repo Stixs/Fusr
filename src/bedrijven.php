@@ -59,11 +59,79 @@ if ($row['premium'] == 'gold')
 				<td>Fax:</td><td><?php echo $row['fax']; ?></td>
 			</tr>
 			<tr>
-				<td>Email:</td><td><a href="mailto:<?php echo $row['bedrijfs_email']; ?>&subject=Contact via TransportPlaza"><?php echo $row['bedrijfs_email']; ?></a></td>
+				<td>Email:</td><td><a href="mailto:<?php echo $row['bedrijfs_email']; ?>&subject=Contact via Fusr"><?php echo $row['bedrijfs_email']; ?></a></td>
 			</tr>
 			<tr>
 				<td>Website:</td><td><a href="http://<?php echo $row['website']; ?>" target="_blank" alt="<?php echo $row['bedrijfsnaam']; ?>"><?php echo $row['website']; ?></a></td>
 			</tr>
+			<?php
+			//if(isset
+			//{
+			?>
+			<tr>
+				<td>Social media</td>
+				<td>
+					<table>
+						<?php 
+						
+						?>
+						<tr>
+							<td>
+								<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+							</td>
+						</tr>
+						<?php
+						
+						?>
+						<tr>
+							<td>
+								<a data-pin-do="embedPin" href="https://www.pinterest.com/pin/99360735500167749/"></a>
+								<!-- Please call pinit.js only once per page -->
+								<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+							</td>
+						</tr>
+						<?php
+						
+						?>
+						<tr>
+							<td>
+								<a href="https://twitter.com/share" class="twitter-share-button" data-counturl="<?php echo $row[''];?>" >Tweet</a>
+							</td>
+						</tr>
+						<?php
+							
+						?>
+						<tr>
+							<td>
+								<div class="g-plusone" data-annotation="none" data-size="tall" data-url="<?php echo $row['']; ?>" ... ></div>
+							</td>
+						</tr>
+						<?php
+						
+						?>
+						<tr>
+							<td>
+								<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+								<script type="IN/Share" data-url="<?php echo $row['']; ?>" data-counter="top"></script>
+							</td>
+						</tr>
+						<?php
+						
+						?>
+						<tr>
+							<td>
+								<span class="ig-follow" data-id="5479dee" data-handle="igfbdotcom" data-count="true" data-size="large" data-username="true"></span>
+							</td>
+						</tr>
+						<?php
+						
+						?>
+					</table>
+				</td>
+			</tr>
+			<?php 
+			//}
+			?>
 			<tr>
 				<td>Transport Manager:</td><td><?php echo $row['transport_manager']; ?></td>
 			</tr>
@@ -85,6 +153,12 @@ if ($row['premium'] == 'gold')
 				?></td>
 			</tr>
 		</table>
+		<div class="col-xs-12">
+			<!-- video -->
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<?php include_once('./controllers/sm_buttons.php'); ?>
 	</div>
 </div>
 <?php

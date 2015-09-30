@@ -22,7 +22,7 @@ else
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Transportplaza</title>
+    <title>Fusr</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,10 @@ else
     <![endif]-->
   </head>
   <body>
-	<?php include_once("analyticstracking.php"); ?>
+	<?php 
+		include_once("analyticstracking.php");
+		include_once("./controllers/socialmedia.php");
+	?>
 	<div class="container">
 		<div class="box-shadow">
 			<div class="row">
