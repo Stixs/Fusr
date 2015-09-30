@@ -1,0 +1,541 @@
+body {
+	color: #4e4e4e;
+    font-family: "Trebuchet MS", Verdana, Sans-Serif;
+    font-size: 16px;
+    line-height: 20px;
+	background-color: #BFCCE7;
+}
+.h1, .h2, .h3, h1, h2, h3 {
+	margin:0;
+}
+h1 {
+	font-family: Century Gothic, Verdana, Sans-Serif;
+	font-size: 1.667em;
+	padding-bottom: 15px;
+}
+h2 {
+	font-family: Century Gothic, Verdana, Sans-Serif;
+	font-size: 1.385em;
+	padding-bottom: 10px;
+	padding-top: 20px;
+}
+select.input-sm[multiple] {
+	height:30px;
+}
+input {
+	height:30px;
+	border:1px solid #4e4e4e;
+}
+textarea {
+	resize: none;
+	border:1px solid #4e4e4e;
+}
+.checkbox label, .radio label {
+    line-height: 35px;
+}
+.weight-normal {
+	font-weight:400;
+}
+.lightbold {
+	font-weight:600;
+}
+.bold {
+	font-weight:700;
+}
+.pull-center {
+	text-align:center;
+}
+.align-right {
+	text-align:right !important;
+}
+.vert-align-bottom {
+	padding-top:8px;
+}
+.spacer {
+	margin-bottom:20px;
+}
+.spacer2 {
+	margin-top:30px;
+}
+.btn-group-lg > .btn, .btn-lg {
+	font-size:1em;
+	font-weight: 600;
+	padding: 10px 26px;
+}
+.btn-success {
+	background:#A3DD49;
+	border-color:#8bbc3e;
+}
+.btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {
+	background:#8bbc3e;
+}
+.container {
+	max-width: 1200px;
+	margin-bottom:120px;
+}
+.box-shadow {
+	background-color: white;
+	box-shadow: 0px 0px 6px 6px #B6C2DC;
+}
+label {
+	font-weight:400;
+}
+input[type=text], input[type=password] {
+	border: 1px solid #cccccc;
+	font-size: 1em;
+	line-height:1em;
+	color:#acacac;
+	padding: 5px;
+	height:30px;
+}
+
+input[type=text]:hover, input[type=password]:hover,
+input[type=text]:active, input[type=password]:active,
+input[type=text]:focus,input[type=password]:focus {
+	color:#4e4e4e;
+	border: 1px solid #4a4a4a;
+}
+input[type=submit], .btn-default {
+	border: 1px solid #4a4a4a;
+	background-color: #a0ce67;
+	font-size: 1em;
+	line-height:1em;
+	height:30px;
+	color: #ffffff;
+	-webkit-box-shadow:inset 0 1px 1px 0 #C2FA7E;
+			   box-shadow:inset 0 1px 1px 0 #C2FA7E;
+}
+.btn {
+	border: 1px solid #4a4a4a;
+	font-size: 1em;
+	line-height:1em;
+	height:30px;
+	color: #ffffff;
+}
+input[type=submit]:hover,
+input[type=submit]:active,
+input[type=submit]:focus,
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus {
+	color: #ffffff;
+	border: 1px solid #4a4a4a;
+	background-color: #a0ce67;
+	-webkit-box-shadow:none;
+			   box-shadow:none;
+}
+.btn, .form-control {
+	border-radius:0;
+	height:30px;
+}
+.zoeken input[type=text] {
+	border: 1px solid #b2b2b2;
+}
+.zoeken [type=submit] {
+	
+}
+.zoeken a {
+	border: 1px solid #4a4a4a;
+	background-color: #acacac;
+	font-size: 1em;
+	height:30px;
+	padding: 4px 15px;
+	color: #ffffff;
+	-webkit-box-shadow:inset 0 1px 1px 0 #e3e3e3;
+			   box-shadow:inset 0 1px 1px 0 #e3e3e3;
+}
+.zoeken a:hover,
+.zoeken a:active,
+.zoeken a:focus {
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	text-decoration:none;
+	background-color: #acacac;
+}
+.form-control {
+	border: 1px solid #cccccc;
+	font-size: 0.938em;
+	line-height:0.938em;
+	color:#acacac;
+	padding: 2px 5px;
+	height:30px;
+}
+
+.form-control:hover,
+.form-control:active,
+.form-control:focus {
+	color:#4e4e4e;
+	border: 1px solid #4a4a4a;
+}
+
+.search-result {
+	text-align: center;
+}
+.search-result a:hover
+{
+	text-decoration:none;
+}
+.search-container {
+	display: inline-block;
+	width: 250px;
+	margin: 20px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border:1px solid #a7a7a7;
+	vertical-align: top;
+}
+.greylink a
+{
+	color: #333;
+}
+
+.search-container:hover {
+	border:1px solid #4e4e4e;
+	cursor: pointer;
+	text-decoration:none;
+}
+.search-image {
+	height: 130px;
+	border-bottom: 1px solid #DFDFDF;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+	overflow:hidden;
+}
+.search-image > img {
+	z-index:1;
+	max-width:100%;
+	max-height:100%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.search-naam {
+	line-height: 22px;
+	padding: 7px 0;
+}
+.premium {
+	font-size: 30px;
+	left: 100px;
+	top: -120px;
+	z-index: 2;
+	color: #23527C;
+	text-shadow: 0px 0px 5px #fff;
+}
+.no-premium {
+	font-size: 50px;
+	right: 80px;
+	top: 5px;
+	position: relative;
+	z-index: 2;
+	opacity: 0;
+}
+.naam-bedrijf {
+	font-family: "Trebuchet MS",sans-serif;
+	font-weight: 600;
+	font-size: 3em;
+	line-height: 2em;
+	text-align: center;
+	color: #585858;
+	padding-top: 15px;
+}
+.rand {
+	margin: 0px;
+}
+.beschrijving {
+	padding: 40px 30px;
+	
+}
+.beschrijving > p {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	font-size: 1em;
+	line-height: 1.5em;
+}
+.gegevens {
+	border: 1px solid black
+}
+.bedrijfSpecs {
+	padding-top:40px;
+	padding-bottom:40px;
+}
+.bedrijfSpecs .table td:first-child {
+	color:#868686;
+}
+.bedrijfSpecs .table td.titel {
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+	border-top: 0 !important;
+	border-left: 0 !important;
+	border-right: 0 !important;
+	background-color: #002682;
+	color: #fff;
+	font-weight: bold;
+}
+
+
+.box-shadow {
+	box-shadow: 0px 0px 6px 6px #B6C2DC;
+}
+#TPE_Logo {
+	padding-left:25px;
+}
+#TPE_Logo a {
+	background: url('../images/logo.png') top center no-repeat #fff;
+	height: 90px;
+	display: block;
+}
+.Hoofdmenu {margin-top:45px;}
+.navbar {
+    min-height: 40px;
+	margin-bottom:0;
+	border:0;
+	background:#fff;
+}
+.navbar .nav {
+	min-height: 30px;
+	padding: 4px 0 0 50px;
+}
+.navbar-default {
+	border-radius: 0;
+}
+.navbar-default .navbar-nav > li > a {
+	color: rgba(78, 78, 78, 0.75);
+	font-family: 'Open Sans',sans-serif;
+	font-size: 1.2em;
+	font-weight: 600;
+}
+.navbar-nav > li > a {
+    margin: 0 10px;
+	padding:0;
+    text-transform: lowercase;
+}
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+	border-bottom: 1px solid #00539b;
+	color: #00539b;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+	text-decoration:none;
+	background-color:transparent;
+	border-bottom: 1px solid #00539b;
+	color: #00539b;
+}
+.LoginLink {
+	font-size:0.9em;
+	text-transform: lowercase;
+	padding: 5px 25px 0px 0px;
+	position: absolute;
+	display: inline;
+	top: 0;
+	right: 0;
+	z-index:9;
+}
+.LoginLink li {
+	list-style: none;
+}
+.LoginLink a {
+	color:#dadada;
+}
+
+.advert {
+	text-align: center;
+	padding-bottom:50px;
+}
+.advert a:hover {
+	text-decoration:none;
+}
+.row + .advert {
+	padding-bottom: 0px/*20*/;
+}
+
+.advert .banner {
+	width:100%;
+}
+.advertcontainer {
+	display: inline-block;
+	width: 250px;
+	margin: 20px;
+	height: 168px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border:1px solid #a7a7a7;
+	vertical-align: top;
+}
+
+.advertcontainer:hover {
+	cursor: pointer;
+}
+.advertimage {
+	height: 130px;
+	border-bottom: 1px solid #DFDFDF;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+	overflow:hidden;
+}
+.advertimage > img {
+	z-index:1;
+	max-width:100%;
+	max-height:100%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.advertnaam {
+	height: 40px;
+	position: relative;
+	z-index:2;
+	bottom: 13px;
+}
+.advertnaam > h4{
+	font-family: "myriad pro", verdana, sans-serif;
+	font-size: 1em;
+	line-height: 37px;
+}
+
+
+#TitleOpnaam [type="text"] {
+	
+}
+#TitleOpnaam [type="submit"] {
+	
+}
+ .ContentPadding {
+	padding:60px 4%;
+ }
+ .specialiteit_wijzigen{
+	padding:5px 0;
+ }
+ .zoeken {
+	background:#e3e7ee;
+	border-width:1px 0;
+	border-style: solid;
+	border-color: #b6c9dd;
+	height:90px;
+}
+.zoeken .filter1,
+.zoeken .filter2 {
+	padding-top:27px;
+}
+.zoeken .filter2 .form-control {
+	outline: 1px solid #F1F4F9;
+	outline-offset: 1px;
+}
+
+.BeheerNav {
+	background:#dbdbdd;
+	padding-top:2px;
+}
+.BeheerNav .navbar-nav > li > a {
+	color: #4e4e4e;
+	font-family: Verdana, Sans-Serif;
+	font-size: 1em;
+	font-weight:400;
+	line-height:1.2em;
+	border-bottom: 1px solid #9bcc5f;
+}
+
+
+
+
+
+
+ 
+ /*  Media Queries  >  responsive   */
+
+  /*  Media Queries  :  standaard desktop   */
+@media screen and (max-width:1199px) {
+	.container {
+		width:900px;
+	}
+	.navbar .nav {
+		padding: 4px 0 0 0;
+	}
+	.search-container {
+		margin: 20px 15px;
+	}
+	.invisible-md {
+		display:none;
+		visibility:hidden;
+	}
+}
+
+  /*  Media Queries  :  tablet   */
+@media screen and (max-width:991px) {
+	.container {
+		width:729px;
+	}
+	#TPE_Logo div a {
+		background: url('../images/CourierPlazaEurope-sm-logo.jpg') center no-repeat #fff;
+	}
+	.navbar-default .navbar-nav > li > a {
+		font-size: 1em;
+		margin: 0 7px;
+	}
+	.form-control {
+		font-size:0.7em;
+	}
+	.zoeken {
+		height: 128px;
+	}
+	.zoeken .filter1 > select {
+		float:none;
+	}
+	.zoeken .filter2 {
+		padding-top:20px;
+	}
+	.zoeken .filter2 > .form-control {
+		width:58%;
+	}
+	.invisible-sm {
+		display:none;
+		visibility:hidden;
+	}
+}
+
+  /*  Media Queries  :  mobiel   */
+ @media screen and (max-width:767px) {
+	.container {
+		width:100%;
+	}
+	#TPE_Logo div a {
+		background: url('../images/CourierPlazaEurope-sm-logo.jpg') center no-repeat #fff;
+	}
+	.nav > li {
+		padding: 5px 0;
+	}
+	.navbar-nav > li > a {
+		border: 0;
+	}
+	.Hoofdmenu {
+		margin:5px 0;
+		position: static;
+	}
+	.BeheerNav {
+		margin-top:10px;
+	}
+	.zoeken {
+		height: 218px;
+	}
+	.zoeken .filter1 > select {
+		float:none;
+	}
+	.zoeken .filter2 > .form-control {
+		width:50%;
+	}
+	.xs-pull-left {
+		float:right;
+		padding-top:10px;
+	}
+	.xs-pull-right {
+		float:right;
+		padding-top:10px;
+		text-align:right;
+	}
+	.invisible-xs {
+		display:none;
+		visibility:hidden;
+	}
+}
