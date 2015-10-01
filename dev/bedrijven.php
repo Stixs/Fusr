@@ -1,5 +1,5 @@
 <?php
-$sm = 0;
+$sm = 1;
 
 require('./controllers/header.php');
 
@@ -8,15 +8,7 @@ require('./controllers/header.php');
 	$sth = $pdo->prepare('select * from bedrijfgegevens where bedrijfs_id = :bedrijfs_id');
 	$sth->execute($parameters);
 	$row = $sth->fetch();
-	
-	$specialarr = (explode(", ",$row['specialiteit']));
-					
-	$special = "'[[:<:]]".$specialarr[0]."[[:>:]]|";
-	$special .= "[[:<:]]".$specialarr[1]."[[:>:]]|";
-	$special .= "[[:<:]]".$specialarr[2]."[[:>:]]|";
-	$special .= "[[:<:]]".$specialarr[3]."[[:>:]]|";
-	$special .= "[[:<:]]".$specialarr[4]."[[:>:]]|";
-	$special .= "[[:<:]]".$specialarr[5]."[[:>:]]'";
+	$Facebook = $row['Facebook'];
 
 if ($row['premium'] == 'gold')
 {	
@@ -80,7 +72,26 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+								<?php
+									if ($Facebook == 'NULL')
+									{
+									echo 'Geen Facebook';
+									echo $row['Facebook'];
+									}
+									Else
+									{
+									//echo 'Facebook';
+									echo $row['Facebook'];
+									}
+								?>
+								</td>
+						</tr>
+						<?php
+						
+						?>
+						<tr>
+							<td>
+								Twitter
 							</td>
 						</tr>
 						<?php
@@ -88,17 +99,7 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								<a data-pin-do="embedPin" href="https://www.pinterest.com/pin/99360735500167749/"></a>
-								<!-- Please call pinit.js only once per page -->
-								<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-							</td>
-						</tr>
-						<?php
-						
-						?>
-						<tr>
-							<td>
-								<a href="https://twitter.com/share" class="twitter-share-button"  >Tweet</a>
+								Google+
 							</td>
 						</tr>
 						<?php
@@ -106,7 +107,7 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								<div class="g-plusone" data-annotation="none" data-size="tall"  ... ></div>
+								Linkedin
 							</td>
 						</tr>
 						<?php
@@ -114,8 +115,7 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-								<script type="IN/Share"  data-counter="top"></script>
+								youtube
 							</td>
 						</tr>
 						<?php
@@ -123,7 +123,7 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								<span class="ig-follow" data-id="5479dee" data-handle="igfbdotcom" data-count="true" data-size="large" data-username="true"></span>
+								Pinterest
 							</td>
 						</tr>
 						<?php
