@@ -212,7 +212,20 @@ if ($row['premium'] == 'gold')
 }
 else
 {
-	header("Refresh: ;URL=index.php");
+	
+	$bedrijfsnaam = $row['bedrijfsnaam'];
+	$_SESSION['bedrijfsnaam'] = $bedrijfsnaam;
+	?>
+	<br />
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4">
+			De Bedrijfs pagina die probeert te berijken is opgeheven.<br />
+			Als u hierna naar de bedrijven gids gaat dan komt de naam van het bedrijf dat u zocht komt in de zoek balk te staan.<br />
+			<br />
+			<a href="gids.php">Klik hier om naar de bedrijven gids toe te gaan.</a>
+		</div>
+	</div>
+	<?php
 }
 
 require('./controllers/footer.php');

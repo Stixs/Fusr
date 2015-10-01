@@ -8,8 +8,13 @@ require('./controllers/header.php');
 <div id="geo" class="geolocation_data"></div>
 <script type="text/JavaScript" src="./geolocation/geo.js"></script>
 <?php
+$bntemp = NULL;
 
-
+if(isset($_SESSION['bedrijfsnaam']))
+{
+	$bntemp = $_SESSION['bedrijfsnaam'];
+}
+unset($_SESSION['bedrijfsnaam']);
 //}
 
 if(isset($_POST['Zoek']))
@@ -166,7 +171,7 @@ if(isset($_POST['Zoek']))
 		<div class="col-sm-12 col-md-6 filter2">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-md-6">
-					<input class="form-control" type="text" name="trefwoord" placeholder="Trefwoord" autofocus size="20">
+					<input class="form-control" type="text" name="trefwoord" placeholder="Trefwoord" autofocus size="20" value="<?php echo $bntemp; ?>" >
 				</div>
 				<div class=" col-xs-6 col-sm-2 col-md-3 xs-pull-right">
 					<button class="btn btn-default col-xs-12 " type="submit" name="Zoek" value="Zoek">Zoek</button>
