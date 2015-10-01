@@ -5,13 +5,53 @@ require('./controllers/header.php');
 if(LoginCheck($pdo))
 {
 	//init fields
-	$bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldigtot = $website = $premium = $Picture = NULL;
+$specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $specialiteit_5 = $specialiteit_6 = $specialiteit_7 = $specialiteit_8 = $specialiteit_9 = $specialiteit_10 = $specialiteit_11 = $specialiteit_12 = $specialiteit_13 = $specialiteit_14 = $specialiteit_15 = $specialiteit_16 = $specialiteit_17 = $specialiteit_18 = $specialiteit_19 = $specialiteit_20 = $bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldigtot = $website = $premium = $Picture = NULL;
 
 	//init error fields
 	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = NULL;
 	
 	$Specialiteiten = specialiteitenlijst($pdo);
 	$Branches = branchelijst($pdo);
+	
+	if(isset($_POST['add_spec']) AND !empty($_POST['add_specialiteit']))
+	{
+	$bedrijfs_naam = $_POST["Bedrijfsnaam"];
+	$adres = $_POST["adres"];
+	$postcode = $_POST["postcode"];
+	$plaats = $_POST['plaats'];
+	$provincie = $_POST['provincie'];
+	$website = $_POST['website'];
+	$telefoon = $_POST['telefoon'];
+	$fax = $_POST['fax'];
+	$specialiteit = $_POST['specialiteit'];
+	$br_id = $_POST['branche'];
+	$transport_manager = $_POST['transport_manager'];
+	$aantal = $_POST['aantal'];
+	$rechtsvorm = $_POST['rechtsvorm'];
+	$vergunning = $_POST['vergunning'];
+	$bedrijfs_email = $_POST['bedrijfs_email'];
+	$beschrijving = $_POST['beschrijving'];
+	$premium = $_POST['premium'];
+	
+	
+	var_dump($_POST);
+	$N = 0;
+	$X = 1;
+		foreach($specialiteit as $value) 
+		{
+			
+			${'specialiteit_'.$X} = $value;
+			$N++;
+			$X++;
+		}	
+	$add_specialiteit = $_POST['add_specialiteit'];
+	$parameters = array(':add_specialiteit'=>$add_specialiteit);
+	$sth = $pdo->prepare('INSERT INTO specialiteiten (specialiteit)VALUES(:add_specialiteit)');
+	$sth->execute($parameters);
+	
+		
+	}
+	
 	
 		if(isset($_POST['Registrerenbedrijf']))
 	{
@@ -27,13 +67,10 @@ if(LoginCheck($pdo))
 		$fax = $_POST['fax'];
 		$specialiteit = $_POST['specialiteit'];
 		$br_id = $_POST['branche'];
-		$type = $_POST['type'];
-		$bereik = $_POST['bereik'];
 		$transport_manager = $_POST['transport_manager'];
 		$aantal = $_POST['aantal'];
 		$rechtsvorm = $_POST['rechtsvorm'];
 		$vergunning = $_POST['vergunning'];
-		$geldigtot = $_POST['geldigtot'];
 		$bedrijfs_email = $_POST['bedrijfs_email'];
 		$beschrijving = $_POST['beschrijving'];
 		$premium = $_POST['premium'];
@@ -44,20 +81,16 @@ if(LoginCheck($pdo))
 		$specialZ = "'";
 		$specialname = NULL;
 		
-		
+		var_dump($_POST);
+		$N = 0;
+		$X = 1;
 		foreach($specialiteit as $value) 
 		{
-			if(!next($specialiteit)) 
-			{
-				$special.= $value;
-				$specialZ.= "[[:<:]]".$value."[[:>:]]'";
-			}
-			else
-			{
-				$special.= $value.', ';
-				$specialZ.= "[[:<:]]".$value."[[:>:]]|";
-			}
-		}
+			
+			${'specialiteit_'.$X} = $value;
+			$N++;
+			$X++;
+		}	
 		
 		$sth = $pdo->prepare('SELECT * FROM specialiteiten WHERE specialiteit_id REGEXP '.$specialZ);
 		$sth->execute();
@@ -127,6 +160,12 @@ if(LoginCheck($pdo))
 		else
 		{
 			
+		$sth = $pdo->prepare('SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES
+		WHERE table_name = bedrijfsgegevens');
+		$sth->execute();
+		$row = $sth->fetch();
+		$bedrijfs_id = $row['auto_increment'];
+			
 		if (!file_exists('images/bedrijf_images/'.$bedrijfs_id)) {
 			mkdir('images/bedrijf_images/'.$bedrijfs_id, 0777, true);
 			}
@@ -161,15 +200,10 @@ if(LoginCheck($pdo))
 								':website'=>$website,
 								':telefoon'=>$telefoon,
 								':fax'=>$fax,
-								':specialiteit'=>$special,
-								':specialiteitnaam'=>$specialname,
-								':type'=>$type,
-								':bereik'=>$bereik,
 								':transport_manager'=>$transport_manager,
 								':aantal'=>$aantal,
 								':rechtsvorm'=>$rechtsvorm,
 								':vergunning'=>$vergunning,
-								':geldig_tot'=>$geldigtot,
 								':bedrijfs_email'=>$bedrijfs_email,
 								':premium'=>$premium,
 								':foto'=>$foto,
@@ -187,15 +221,10 @@ if(LoginCheck($pdo))
 								website, 
 								telefoon,
 								fax,
-								specialiteit,
-								specialiteitnaam, 
-								type, 
-								bereik, 
 								transport_manager, 
 								aantal, 
 								rechtsvorm, 
 								vergunning, 
-								geldig_tot, 
 								bedrijfs_email, 
 								premium,
 								afbeelding,
@@ -211,16 +240,11 @@ if(LoginCheck($pdo))
 								:provincie, 
 								:website, 
 								:telefoon,
-								:fax,
-								:specialiteit,	
-								:specialiteitnaam, 
-								:type, 
-								:bereik, 
+								:fax, 
 								:transport_manager, 
 								:aantal, 
 								:rechtsvorm, 
 								:vergunning, 
-								:geldig_tot, 
 								:bedrijfs_email, 
 								:premium,
 								:foto,
@@ -230,7 +254,7 @@ if(LoginCheck($pdo))
 			$sth->execute($parameters);
 			
 			echo'De bedrijf gegevens zijn geregistreerd.<br />';
-			RedirectNaarPagina(5);
+			echo '<META http-equiv="refresh" content="5;URL=index.php">';
 		}
 	}
 	else

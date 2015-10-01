@@ -126,7 +126,7 @@ else
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse BeheerNav" id="bs-example-navbar-collapse-2">
 								<ul class="nav navbar-nav col-sm-12">
-									<li><a href="toevoegenbedrijf.php">Bedrijf toevoegen</a></li>
+									<li><a href="toevoegenbedrijf.php?branche=1">Bedrijf toevoegen</a></li>
 									<li><a href="wijzigen.php">Bedrijf wijzigen</a></li>
 
 									<li class="pull-right"><a href="advertenties.php">Beheer Advertenties</a></li>

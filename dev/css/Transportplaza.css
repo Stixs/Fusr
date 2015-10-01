@@ -258,6 +258,10 @@ input[type=submit]:focus,
 	padding-top:40px;
 	padding-bottom:40px;
 }
+.ContentRight {
+	text-align: right;
+}
+
 .bedrijfSpecs .table td:first-child {
 	color:#868686;
 }

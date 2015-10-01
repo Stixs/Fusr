@@ -49,7 +49,6 @@ if(LoginCheck($pdo))
 					$website = $row['website'];
 					$telefoon = $row['telefoon'];
 					$fax = $row['fax'];
-					
 					$type = $row['type'];
 					$bereik = $row['bereik'];
 					$transport_manager = $row['transport_manager'];
@@ -202,7 +201,28 @@ if(LoginCheck($pdo))
 						if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)){}
 						//De gegevens die uit het formulier komen en die correct zijn worden in de array parameters gezet
 						
-						$parameters = array(':bedrijfs_id'=>$bedrijfs_id,':bedrijfsnaam'=>$bedrijfs_naam,':beschrijving'=>$beschrijving,':adres'=>$adres,':postcode'=>$postcode,':plaats'=>$plaats,':provincie'=>$provincie,':website'=>$website,':telefoon'=>$telefoon,':fax'=>$fax,':specialiteit'=>$special,':specialiteitnaam'=>$specialname,':transport_manager'=>$transport_manager,':aantal'=>$aantal,':rechtsvorm'=>$rechtsvorm,':vergunning'=>$vergunning,':bedrijfs_email'=>$bedrijfs_email,':premium'=>$premium,':foto'=>$foto,':banner'=>$banner,':logo'=>$logo);
+						$parameters = array(
+						':bedrijfs_id'=>$bedrijfs_id,
+						':bedrijfsnaam'=>$bedrijfs_naam,
+						':beschrijving'=>$beschrijving,
+						':adres'=>$adres,
+						':postcode'=>$postcode,
+						':plaats'=>$plaats,
+						':provincie'=>$provincie,
+						':website'=>$website,
+						':telefoon'=>$telefoon,
+						':fax'=>$fax,
+						':specialiteit'=>$special,
+						':specialiteitnaam'=>$specialname,
+						':transport_manager'=>$transport_manager,
+						':aantal'=>$aantal,
+						':rechtsvorm'=>$rechtsvorm,
+						':vergunning'=>$vergunning,
+						':bedrijfs_email'=>$bedrijfs_email,
+						':premium'=>$premium,
+						':foto'=>$foto,
+						':banner'=>$banner,
+						':logo'=>$logo);
 						
 						//de SQL query om de gegevens in de database te veranderen.
 						
@@ -211,16 +231,20 @@ if(LoginCheck($pdo))
 						$sth->execute($parameters);
 						
 						
-						$parameters = array(':bedrijfs_id'=>$bedrijfs_id,':specialiteit_1'=>$specialiteit_1,':specialiteit_2'=>$specialiteit_2,':specialiteit_3'=>$specialiteit_3,':specialiteit_4'=>$specialiteit_4,':specialiteit_5'=>$specialiteit_5,':specialiteit_6'=>$specialiteit_6,':specialiteit_7'=>$specialiteit_7,':specialiteit_8'=>$specialiteit_8,':specialiteit_9'=>$specialiteit_9,':specialiteit_10'=>$specialiteit_10,':specialiteit_11'=>$specialiteit_11,':specialiteit_12'=>$specialiteit_12,':specialiteit_13'=>$specialiteit_13,':specialiteit_14'=>$specialiteit_14,':specialiteit_15'=>$specialiteit_15,':specialiteit_16'=>$specialiteit_16,':specialiteit_17'=>$specialiteit_17,':specialiteit_18'=>$specialiteit_18,':specialiteit_19'=>$specialiteit_19,':specialiteit_20'=>$specialiteit_20);
+						
+						echo $specialiteit_1;
+						
+						$parameters = array(
+						':bedrijfs_id'=>$bedrijfs_id,':specialiteit_1'=>$specialiteit_1,':specialiteit_2'=>$specialiteit_2,':specialiteit_3'=>$specialiteit_3,':specialiteit_4'=>$specialiteit_4,':specialiteit_5'=>$specialiteit_5,':specialiteit_6'=>$specialiteit_6,':specialiteit_7'=>$specialiteit_7,':specialiteit_8'=>$specialiteit_8,':specialiteit_9'=>$specialiteit_9,':specialiteit_10'=>$specialiteit_10,':specialiteit_11'=>$specialiteit_11,':specialiteit_12'=>$specialiteit_12,':specialiteit_13'=>$specialiteit_13,':specialiteit_14'=>$specialiteit_14,':specialiteit_15'=>$specialiteit_15,':specialiteit_16'=>$specialiteit_16,':specialiteit_17'=>$specialiteit_17,':specialiteit_18'=>$specialiteit_18,':specialiteit_19'=>$specialiteit_19,':specialiteit_20'=>$specialiteit_20);
 						
 						$sth = $pdo->prepare('UPDATE bedrijfs_specialiteiten SET 
-						specialiteit_1=:specialiteit_1, specialiteit_2=:specialiteit_2, specialiteit_3=:specialiteit_3, specialiteit_4=:specialiteit_4, specialiteit_5=:specialiteit_5, specialiteit_6=:specialiteit_6, specialiteit_7=:specialiteit_7, specialiteit_8=:specialiteit_8, specialiteit_9=:specialiteit_9, specialiteit_10=:specialiteit_10, specialiteit_11=:specialiteit_11, specialiteit_12=:specialiteit_12, specialiteit_13=:specialiteit_13, specialiteit_14=specialiteit_14, specialiteit_15=:specialiteit_15, specialiteit_16=:specialiteit_16, specialiteit_17=:specialiteit_17, specialiteit_18=:specialiteit_18, specialiteit_19=:specialiteit_19, specialiteit_20=:specialiteit_20 WHERE = bedrijfs_id = :bedrijfs_id');
+						specialiteit_1=:specialiteit_1, specialiteit_2=:specialiteit_2, specialiteit_3=:specialiteit_3, specialiteit_4=:specialiteit_4, specialiteit_5=:specialiteit_5, specialiteit_6=:specialiteit_6, specialiteit_7=:specialiteit_7, specialiteit_8=:specialiteit_8, specialiteit_9=:specialiteit_9, specialiteit_10=:specialiteit_10, specialiteit_11=:specialiteit_11, specialiteit_12=:specialiteit_12, specialiteit_13=:specialiteit_13, specialiteit_14=:specialiteit_14, specialiteit_15=:specialiteit_15, specialiteit_16=:specialiteit_16, specialiteit_17=:specialiteit_17, specialiteit_18=:specialiteit_18, specialiteit_19=:specialiteit_19, specialiteit_20=:specialiteit_20 WHERE bedrijfs_id = :bedrijfs_id');
 						$sth->execute($parameters);
 						
 						
 						
 						echo'De gegvens van '. $bedrijfs_naam.' zijn bijgewerkt.<br />';
-						//echo '<META http-equiv="refresh" content="0;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
+						echo '<META http-equiv="refresh" content="5;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
 					}
 				}
 				else

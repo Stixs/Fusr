@@ -159,11 +159,12 @@ function specialiteitenlijst($pdo) {
 }  
 
 function branchekeuze($pdo, $name, $id, $keuze = NULL) {
+	
 	$html = '<label for="sel'.$id.'">Branche</label>';
     $html .= '<script type="text/javascript">
 								function lastselected(value)
 								{
-									window.location.href = "http://www.thuisserver.org/style/index.php?paginanr=5&branche=" + value ;
+									window.location.href = "http://localhost/Fusr/dev/toevoegenbedrijf.php?branche=" + value ;
 								}
 								</script>
 								
@@ -196,7 +197,6 @@ function specialiteitkeuze($pdo, $name, $id, $keuze = NULL) {
     $html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';	
 	$sth = $pdo->prepare('SELECT * FROM specialiteiten');
 		$sth->execute();
-		
 			
 			while($row = $sth->fetch())
 				{

@@ -1,6 +1,15 @@
 <div class="row">
 	<div class="col-xs-12 ContentPadding">
 		<h1>Registreren</h1>
+		<div class="col-xs-6 col-xs-offset-6">
+	
+		<form name="RegistrerenFormulier" class="registreren" action="" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<input type="text" class="form-control" id="specialiteit" name="add_specialiteit" placeholder="Specialiteit">
+				<button type="submit" name="add_spec" class="btn btn-default">Toevoegen</button>
+			</div>
+		
+	</div>
 		<form name="RegistrerenFormulier" class="registreren" action="" method="post" enctype="multipart/form-data">
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
@@ -67,60 +76,160 @@
 					<label for="foto">Foto:</label>
 					<input type="file" class="form-control" id="foto" name="foto" />
 				</div>
+				
+				<div class="form-group">
+					<label for="rechtsvorm">Rechtsvorm:</label>
+					<input type="text" class="form-control" id="rechtsvorm" name="rechtsvorm" value="<?php echo $rechtsvorm; ?>"  />
+				</div>
+				
+				<div class="form-group">
+					<label for="vergunning">Vergunning:</label>
+					<input type="text" class="form-control" id="vergunning" name="vergunning" value="<?php echo $vergunning ?>" />
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $specialiteit_1);
+					
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 2, $specialiteit_2);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 3, $specialiteit_3);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 4, $specialiteit_4); 
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 5, $specialiteit_5); 
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 6, $specialiteit_6);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 7, $specialiteit_7);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 8, $specialiteit_8);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 9, $specialiteit_9);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 10, $specialiteit_10); 
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 11, $specialiteit_11); 
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 12, $specialiteit_12);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 13, $specialiteit_13);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 14, $specialiteit_14);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 15, $specialiteit_15);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 16, $specialiteit_16); 
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 17, $specialiteit_17); 
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 18, $specialiteit_18);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 19, $specialiteit_19);
+					?>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="form-group">
+					<?php 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 20, $specialiteit_20);
+					?>
+				</div>
 			</div>
 				
-				<div class="col-xs-2">
-				 <div class="form-group">
-					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 1); 
-					?>
-				</div>
-			</div>
-			<div class="col-xs-2">
-				<div class="form-group">
-					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 2);
-					?>
-				</div>
-			</div>
-			<div class="col-xs-2">
-				<div class="form-group">
-					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 3);
-					?>
-				</div>
-			</div>
-			<div class="col-xs-2">
-				<div class="form-group">
-					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 4); 
-					?>
-				</div>
-			</div>
-			<div class="col-xs-2">
-				<div class="form-group">
-					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 5); 
-					?>
-				</div>
-			</div>
-			<div class="col-xs-2">
-				<div class="form-group">
-					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 6);
-					?>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6">
-				<div class="form-group">
-					<label for="type">Type:</label>
-					<input type="text" class="form-control" id="type" name="type" value="<?php echo $type; ?>"  />
-				</div>
-					
-				<div class="form-group">
-					<label for="bereik">Bereik:</label>
-					<input type="text" class="form-control" id="bereik" name="bereik" value="<?php echo $bereik; ?>"  />
-				</div>
+				<div class="col-xs-12 col-md-6">
 					
 				<div class="form-group">
 					<label for="aantal">Aantal:</label>
@@ -132,20 +241,7 @@
 					<input type="text" class="form-control" id="transport_manager" name="transport_manager" value="<?php echo $transport_manager; ?>"  />
 				</div>
 				
-				<div class="form-group">
-					<label for="rechtsvorm">Rechtsvorm:</label>
-					<input type="text" class="form-control" id="rechtsvorm" name="rechtsvorm" value="<?php echo $rechtsvorm; ?>"  />
-				</div>
 				
-				<div class="form-group">
-					<label for="vergunning">Vergunning:</label>
-					<input type="text" class="form-control" id="vergunning" name="vergunning" value="<?php echo $vergunning ?>" />
-				</div>
-				
-				<div class="form-group">
-					<label for="geldigtot">Geldig tot:</label>
-					<input type="text" class="form-control" id="geldigtot" name="geldigtot" value="<?php echo $geldigtot; ?>" />
-				</div>
 				
 				<div class="form-group">
 					<label for="premium">Premium</label>
