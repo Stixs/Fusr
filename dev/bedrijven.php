@@ -1,5 +1,5 @@
 <?php
-$sm = 1;
+
 
 require('./controllers/header.php');
 
@@ -8,7 +8,7 @@ require('./controllers/header.php');
 	$sth = $pdo->prepare('select * from bedrijfgegevens where bedrijfs_id = :bedrijfs_id');
 	$sth->execute($parameters);
 	$row = $sth->fetch();
-	$Facebook = $row['Facebook'];
+	
 
 if ($row['premium'] == 'gold')
 {	
@@ -59,31 +59,31 @@ if ($row['premium'] == 'gold')
 				<td>Website:</td><td><a href="http://<?php echo $row['website']; ?>" target="_blank" alt="<?php echo $row['bedrijfsnaam']; ?>"><?php echo $row['website']; ?></a></td>
 			</tr>
 			<?php
-			if($sm == 1)
+			if ($row['Facebook'] == '' and $row['Twitter'] == '' and $row['Google+'] == '' and $row['Linkedin'] == '' and $row['Youtube'] == '' and $row['Pinterest'] == '' )
+			{
+			echo 'Geen social media gevonden';
+			}
+			Else
 			{
 			?>
 			<tr>
 				<td>Social media</td>
 				<td>
 					<table>
-						<?php 
-						if($sm == 1)
-						{
-						?>
+						
 						<tr>
 							<td>
 								<?php
-									if ($Facebook == 'NULL')
+									if ($row['Facebook'] == '')
 									{
-									echo 'Geen Facebook';
-									echo $row['Facebook'];
 									}
 									Else
 									{
-									//echo 'Facebook';
 									echo $row['Facebook'];
 									}
+									
 								?>
+								
 								</td>
 						</tr>
 						<?php
@@ -91,7 +91,16 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								Twitter
+								<?php
+									if ($row['Twitter'] == '')
+									{								
+									}
+									Else
+									{
+									echo $row['Twitter'];
+									
+									}
+								?>
 							</td>
 						</tr>
 						<?php
@@ -99,7 +108,16 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								Google+
+								<?php
+									if ($row['Google+'] == '')
+									{									
+									}
+									Else
+									{
+									echo $row['Google+'];
+									
+									}
+								?>
 							</td>
 						</tr>
 						<?php
@@ -107,7 +125,16 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								Linkedin
+								<?php
+									if ($row['Linkedin'] == '')
+									{						
+									}
+									Else
+									{
+									echo $row['Linkedin'];
+									
+									}
+								?>
 							</td>
 						</tr>
 						<?php
@@ -115,7 +142,16 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								youtube
+								<?php
+									if ($row['Youtube'] == '')
+									{								
+									}
+									Else
+									{
+									echo $row['Youtube'];
+									
+									}
+								?>
 							</td>
 						</tr>
 						<?php
@@ -123,17 +159,25 @@ if ($row['premium'] == 'gold')
 						?>
 						<tr>
 							<td>
-								Pinterest
+								<?php
+									if ($row['Pinterest'] == '')
+									{							
+									}
+									Else
+									{
+									echo $row['Pinterest'];
+									
+									}
+								?>
 							</td>
 						</tr>
-						<?php
-						}
-						?>
+						
 					</table>
 				</td>
 			</tr>
 			<?php 
 			}
+			
 			?>
 			<tr>
 				<td>Transport Manager:</td><td><?php echo $row['transport_manager']; ?></td>
