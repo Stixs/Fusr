@@ -27,9 +27,24 @@ else
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/Transportplaza.css" rel="stylesheet">
+	<link href="css/bootstrap-social.css" rel="stylesheet">
+	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	
 	<script src="./ckeditor/ckeditor.js"></script>
+	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
 	<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script type="text/javascript">
+		function searchq()
+		{	
+			var searchTxt = $("input[name='search']").val();
+			$.post("search.php", {searchVal: searchTxt}, function (output)
+				{
+					$("#output").html(output);
+				});
+		}
+		</script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

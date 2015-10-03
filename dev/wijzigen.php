@@ -59,6 +59,13 @@ if(LoginCheck($pdo))
 					$bedrijfs_email = $row['bedrijfs_email'];
 					$premium = $row['premium'];
 					
+					$Facebook = $row['Facebook'];
+					$Twitter = $row['Twitter'];
+					$Google = $row['Google'];
+					$LinkedIn = $row['LinkedIn'];
+					$Instagram = $row['Instagram'];
+					$Pinterest = $row['Pinterest'];
+					
 
 					
 					//controleert of de submit knop wijzigenbedrijf in het formulier is ingedurkt.
@@ -100,6 +107,13 @@ if(LoginCheck($pdo))
 					$bedrijfs_email = $_POST['bedrijfs_email'];
 					$beschrijving = $_POST['beschrijving'];
 					$premium = $_POST['premium'];
+					
+					$Facebook = $_POST['Facebook'];
+					$Twitter = $_POST['Twitter'];
+					$Google = $_POST['Google'];
+					$LinkedIn = $_POST['LinkedIn'];
+					$Instagram = $_POST['Instagram'];
+					$Pinterest = $_POST['Pinterest'];
 					
 					
 					if (basename($_FILES["foto"]["name"]) == null)
@@ -220,13 +234,19 @@ if(LoginCheck($pdo))
 						':vergunning'=>$vergunning,
 						':bedrijfs_email'=>$bedrijfs_email,
 						':premium'=>$premium,
+						':Facebook'=>$Facebook,
+						':Twitter'=>$Twitter,
+						':Google'=>$Google,
+						':LinkedIn'=>$LinkedIn,
+						':Instagram'=>$Instagram,
+						':Pinterest'=>$Pinterest,
 						':foto'=>$foto,
 						':banner'=>$banner,
 						':logo'=>$logo);
 						
 						//de SQL query om de gegevens in de database te veranderen.
 						
-						$sth = $pdo->prepare('UPDATE bedrijfgegevens SET bedrijfsnaam=:bedrijfsnaam, beschrijving=:beschrijving,   adres=:adres, postcode=:postcode, plaats=:plaats, provincie=:provincie, website=:website, telefoon=:telefoon,  fax=:fax, specialiteit=:specialiteit, specialiteit=:specialiteit, specialiteitnaam=:specialiteitnaam,  transport_manager=:transport_manager, aantal=:aantal, rechtsvorm=:rechtsvorm, vergunning=:vergunning, bedrijfs_email=:bedrijfs_email, premium=:premium, afbeelding=:foto, logo=:logo, banner=:banner WHERE bedrijfs_id = :bedrijfs_id');
+						$sth = $pdo->prepare('UPDATE bedrijfgegevens SET bedrijfsnaam=:bedrijfsnaam, beschrijving=:beschrijving,   adres=:adres, postcode=:postcode, plaats=:plaats, provincie=:provincie, website=:website, telefoon=:telefoon,  fax=:fax, specialiteit=:specialiteit, specialiteit=:specialiteit, specialiteitnaam=:specialiteitnaam,  transport_manager=:transport_manager, aantal=:aantal, rechtsvorm=:rechtsvorm, vergunning=:vergunning, bedrijfs_email=:bedrijfs_email, premium=:premium, Facebook=:Facebook, Twitter=:Twitter, Google=:Google, LinkedIn=:LinkedIn, Instagram=:Instagram, Pinterest=:Pinterest, afbeelding=:foto, logo=:logo, banner=:banner WHERE bedrijfs_id = :bedrijfs_id');
 						//De variabele parameters wordt uitgevoerd
 						$sth->execute($parameters);
 						

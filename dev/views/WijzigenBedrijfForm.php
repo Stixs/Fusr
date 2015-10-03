@@ -75,16 +75,37 @@
 					<?php if(!empty($row['afbeelding'])){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $row['afbeelding']; ?>" width="70px" role="picture" />
 					<button class="btn btn-danger" type="submit" name="Del_Image" value="afbeelding" />Verwijder</button> <?php } ?>
 				</div>
+					
+			<div class="form-group">
+					<label for="Facebook">Facebook:</label>
+					<input type="text" class="form-control" id="Facebook" name="Facebook" value="<?php echo $Facebook; ?>"  />
+			</div>
+		
+			<div class="form-group">
+					<label for="Twitter">Twitter:</label>
+					<input type="text" class="form-control" id="Twitter" name="Twitter" value="<?php echo $Twitter; ?>"  />
+			</div>
+					
+			<div class="form-group">
+					<label for="Google">Google+:</label>
+					<input type="text" class="form-control" id="Google" name="Google" value="<?php echo $Google; ?>"  />
+			</div>
 			
 			<div class="form-group">
-					<label for="rechtsvorm">Rechtsvorm:</label>
-					<input type="text" class="form-control" id="rechtsvorm" name="rechtsvorm" value="<?php echo $rechtsvorm; ?>"  />
-				</div>
-				
-				<div class="form-group">
-					<label for="vergunning">Vergunning:</label>
-					<input type="text" class="form-control" id="vergunning" name="vergunning" value="<?php echo $vergunning ?>" />
-				</div>
+					<label for="LinkedIn">LinkedIn:</label>
+					<input type="text" class="form-control" id="LinkedIn" name="LinkedIn" value="<?php echo $LinkedIn; ?>"  />
+			</div>
+					
+			<div class="form-group">
+					<label for="Instagram">Instagram:</label>
+					<input type="text" class="form-control" id="Instagram" name="Instagram" value="<?php echo $Instagram; ?>"  />
+			</div>
+			
+			<div class="form-group">
+					<label for="Pinterest">Pinterest:</label>
+					<input type="text" class="form-control" id="Pinterest" name="Pinterest" value="<?php echo $Pinterest; ?>"  />
+			</div>
+			
 			
 			
 			</div>
@@ -250,7 +271,15 @@
 					<input type="text" class="form-control" id="transport_manager" name="transport_manager" value="<?php echo $transport_manager; ?>"  />
 				</div>
 				
+				<div class="form-group">
+					<label for="rechtsvorm">Rechtsvorm:</label>
+					<input type="text" class="form-control" id="rechtsvorm" name="rechtsvorm" value="<?php echo $rechtsvorm; ?>"  />
+				</div>
 				
+				<div class="form-group">
+					<label for="vergunning">Vergunning:</label>
+					<input type="text" class="form-control" id="vergunning" name="vergunning" value="<?php echo $vergunning ?>" />
+				</div>
 				
 				<div class="form-group">
 					<label for="premium">Premium</label>

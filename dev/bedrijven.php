@@ -67,112 +67,81 @@ if ($row['premium'] == 'gold')
 			{
 			?>
 			<tr>
-				<td>Social media</td>
+			<td>Social media</td>
 				<td>
-					<table>
-						
-						<tr>
-							<td>
-								<?php
-									if ($row['Facebook'] == '')
-									{
-									}
-									Else
-									{
-									echo $row['Facebook'];
-									}
-									
-								?>
-								
-								</td>
-						</tr>
-						<?php
-						
+					<?php
+						if ($row['Facebook'] == '')
+						{
+						}
+						Else
+						{
 						?>
-						<tr>
-							<td>
-								<?php
-									if ($row['Twitter'] == '')
-									{								
-									}
-									Else
-									{
-									echo $row['Twitter'];
-									
-									}
-								?>
-							</td>
-						</tr>
+							<a href="<?php echo $row['Facebook'] ?>" class="btn btn-social-icon btn-facebook social-edge">
+								<i class="fa fa-facebook"></i>
+							</a>
 						<?php
+						}
 						
+						if ($row['Twitter'] == '')
+						{								
+						}
+						Else
+						{
 						?>
-						<tr>
-							<td>
-								<?php
-									if ($row['Google+'] == '')
-									{									
-									}
-									Else
-									{
-									echo $row['Google+'];
-									
-									}
-								?>
-							</td>
-						</tr>
+							<a href="<?php echo $row['Twitter'] ?>" class="btn btn-social-icon btn-twitter social-edge">
+								<i class="fa fa-twitter"></i>
+							</a>
 						<?php
-							
+						}
+
+						if ($row['Google'] == '')
+						{									
+						}
+						Else
+						{
 						?>
-						<tr>
-							<td>
-								<?php
-									if ($row['Linkedin'] == '')
-									{						
-									}
-									Else
-									{
-									echo $row['Linkedin'];
-									
-									}
-								?>
-							</td>
-						</tr>
+							<a href="<?php echo $row['Google'] ?>" class="btn btn-social-icon btn-google social-edge">
+								<i class="fa fa-google"></i>
+							</a>
 						<?php
-						
+						}
+	
+						if ($row['LinkedIn'] == '')
+						{						
+						}
+						Else
+						{
 						?>
-						<tr>
-							<td>
-								<?php
-									if ($row['Youtube'] == '')
-									{								
-									}
-									Else
-									{
-									echo $row['Youtube'];
-									
-									}
-								?>
-							</td>
-						</tr>
+							<a href="<?php echo $row['LinkedIn'] ?>" class="btn btn-social-icon btn-linkedin social-edge">
+								<i class="fa fa-linkedin"></i>
+							</a>
 						<?php
-						
+						}
+					
+						if ($row['Instagram'] == '')
+						{								
+						}
+						Else
+						{
 						?>
-						<tr>
-							<td>
-								<?php
-									if ($row['Pinterest'] == '')
-									{							
-									}
-									Else
-									{
-									echo $row['Pinterest'];
-									
-									}
-								?>
-							</td>
-						</tr>
+							<a href="<?php echo $row['Instagram'] ?>" class="btn btn-social-icon btn-instagram social-edge">
+								<i class="fa fa-instagram"></i>
+							</a>
+						<?php
+						}
 						
-					</table>
+						if ($row['Pinterest'] == '')
+						{							
+						}
+						Else
+						{
+						?>
+							<a href="<?php echo $row['Pinterest'] ?>" class="btn btn-social-icon btn-pinterest social-edge">
+								<i class="fa fa-pinterest"></i>
+							</a>
+						<?php
+						}
+					?>
 				</td>
 			</tr>
 			<?php 

@@ -238,6 +238,11 @@ input[type=submit]:focus,
 	color: #585858;
 	padding-top: 15px;
 }
+.social-edge{
+	border-radius: 5px;
+	display: inline-block;
+}
+
 .rand {
 	margin: 0px;
 }

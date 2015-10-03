@@ -33,6 +33,12 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 	$beschrijving = $_POST['beschrijving'];
 	$premium = $_POST['premium'];
 	
+		$Facebook = $_POST['Facebook'];
+		$Twitter = $_POST['Twitter'];
+		$Google = $_POST['Google'];
+		$LinkedIn = $_POST['LinkedIn'];
+		$Instagram = $_POST['Instagram'];
+		$Pinterest = $_POST['Pinterest'];
 	
 	var_dump($_POST);
 	$N = 0;
@@ -77,6 +83,14 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 		$foto = basename($_FILES["foto"]["name"]);
 		$banner = basename($_FILES["banner"]["name"]);
 		$logo = basename($_FILES["logo"]["name"]);
+		
+		$Facebook = $_POST['Facebook'];
+		$Twitter = $_POST['Twitter'];
+		$Google = $_POST['Google'];
+		$LinkedIn = $_POST['LinkedIn'];
+		$Instagram = $_POST['Instagram'];
+		$Pinterest = $_POST['Pinterest'];
+		
 		$special = NULL;
 		$specialZ = "'";
 		$specialname = NULL;
@@ -206,6 +220,12 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 								':vergunning'=>$vergunning,
 								':bedrijfs_email'=>$bedrijfs_email,
 								':premium'=>$premium,
+								':Facebook'=>$Facebook,
+								':Twitter'=>$Twitter,
+								':Google'=>$Google,
+								':LinkedIn'=>$LinkedIn,
+								':Instagram'=>$Instagram,
+								':Pinterest'=>$Pinterest,
 								':foto'=>$foto,
 								':banner'=>$banner,
 								':logo'=>$logo,
@@ -227,6 +247,12 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 								vergunning, 
 								bedrijfs_email, 
 								premium,
+								Facebook,
+								Twitter,
+								Google,
+								LinkedIn,
+								Instagram,
+								Pinterest,
 								afbeelding,
 								banner,
 								logo,
@@ -247,6 +273,12 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 								:vergunning, 
 								:bedrijfs_email, 
 								:premium,
+								:Facebook,
+								:Twitter,
+								:Google,
+								:LinkedIn,
+								:Instagram,
+								:Pinterest,
 								:foto,
 								:banner,
 								:logo,
