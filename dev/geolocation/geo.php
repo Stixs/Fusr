@@ -20,16 +20,14 @@ foreach($xml->result->address_component as $component){
 
 }
 var_dump($geodata);
-var_dump($geodata);
-var_dump($geodata);
 list($lat,$long) = explode(',',htmlentities(htmlspecialchars(strip_tags($_GET['latlng']))));
 
 $_SESSION['latitude'] = $lat;
 $_SESSION['longitude'] = $long;
 
-$huisnummer = $geodata['Huis nummer']->asXML();
-$huisnummer = strip_tags($huisnummer);
-$_SESSION['huisnummer'] = $huisnummer;
+#$huisnummer = $geodata['Huis nummer']->asXML();
+#$huisnummer = strip_tags($huisnummer);
+#$_SESSION['huisnummer'] = $huisnummer;
 
 $straat = $geodata['Straat']->asXML();
 $straat = strip_tags($straat);
@@ -39,7 +37,7 @@ $plaats = $geodata['Plaats']->asXML();
 $plaats = strip_tags($plaats);
 $_SESSION['plaats'] = $plaats;
 
-$postcode = $geodata['Postcode']->asXML();
-$postcode = strip_tags($postcode);
-$_SESSION['postcode'] = $postcode;
+#$postcode = $geodata['Postcode']->asXML();
+#$postcode = strip_tags($postcode);
+#$_SESSION['postcode'] = $postcode;
 ?>

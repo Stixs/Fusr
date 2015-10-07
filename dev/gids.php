@@ -1,6 +1,22 @@
 <?php
 require('./controllers/header.php');
 
+if(isset($_GET['nr']))
+{
+$nr = $_GET['nr']; 
+$start = $nr * 50;
+$lat = $_SESSION['lat'];
+$lon = $_SESSION['lon'];
+$search = $_SESSION['$search'];
+$_POST['Zoek'] = 1;
+echo 'test1';
+$end = $start + 50;
+}
+else
+{
+$start = 1;
+$end = $start + 50;
+}
 
 //if(!isset($_SESSION['plaats']))
 //{
@@ -19,6 +35,7 @@ unset($_SESSION['bedrijfsnaam']);
 
 if(isset($_POST['Zoek']))
 {
+	echo 'test2';
 	$city = NULL;
 	$checkcity = NULL;
 	$trefwoord = NULL;
@@ -27,27 +44,21 @@ if(isset($_POST['Zoek']))
 	//if(!empty($_POST['specialiteit'])){$trefwoord.=' '.$_POST['specialiteit'];}
 	//if(!empty($_POST['provincie'])){$trefwoord.=' '.$_POST['provincie'];}
 	//if(!empty($_POST['bereik'])){$trefwoord.=' '.$_POST['bereik'];}
-	if(!empty($_POST['trefwoord'])){$trefwoord = $_POST['trefwoord'];}
 	
-	if(!empty($_POST['trefwoord'])){$checkcity = $_POST['trefwoord'];}
-	
-	$checkcities = (explode(" ",$checkcity));
-		foreach ($checkcities as $value)
-			{
-				$city.= $value.' ';
-			}
-		//	var_dump ($trefwoord);
+	if(!empty($_POST['trefwoord']))
+	{
+	$trefwoord = $_POST['trefwoord'];
+	var_dump ($trefwoord);
 			
-			
+	}		
 	$sth = $pdo->prepare('SELECT DISTINCT plaats FROM bedrijfgegevens WHERE MATCH (plaats) AGAINST ("'.$city.'" IN BOOLEAN MODE)');
 	$sth->execute();
 	$row = $sth->fetch(PDO::FETCH_ASSOC);
-
+	
 	
 	if( ! $row)
 	{
 	echo'niks gevonden';
-    if(!empty($_SESSION['plaats'])){$trefwoord.=' '.$_SESSION['plaats'];}
 	if(!empty($_SESSION['latitude'])){$lat = $_SESSION['latitude'];}
 	if(!empty($_SESSION['longitude'])){$lon = $_SESSION['longitude'];}
 	}
@@ -57,21 +68,16 @@ if(isset($_POST['Zoek']))
 	$coords = (explode(",",$coords));
 	$lat = $coords[0];
 	$lon = $coords[1];
+	$url = 'https://api.pro6pp.nl/v1/reverse?auth_key=9mPiDJVEjKZliA8I&lat='.$lat.'&lng='.$lon.'&format=json';
+
+	$response = file_get_contents($url);
+ 
+	$json = json_decode($response,TRUE);
+	var_dump($json); 
+ 
+	return ($json['results'][0]['lat'].",".$json['results'][0]['lng']);
 	}
 	
-	
-	$trefwoord = ltrim($trefwoord);
-	
-	$sth = $pdo->prepare('SELECT DISTINCT plaats FROM bedrijfgegevens WHERE MATCH (plaats) AGAINST ("'.$city.'" IN BOOLEAN MODE)');
-	$sth->execute();
-	
-	while($row = $sth->fetch())
-	{
-	$trefwoord = str_ireplace($row['plaats'], "", $trefwoord);
-	}
-	
-	
-	//var_dump($trefwoord);
 }
 ?>
 
@@ -183,53 +189,52 @@ if(isset($_POST['Zoek']))
 	</div>
 </form>
 <?php
-	
 if(isset($_POST['Zoek']))
 {
-	
+
 	//De zoek query
 	$search = NULL;
-	
-	
 	if(!empty($trefwoord))
 		{
 		$trefwoorden = (explode(" ",$trefwoord));
 		//var_dump($trefwoorden);
 		
-		foreach ($trefwoorden as $value)
+		foreach ($trefwoorden as $value2)
 			{	
-				if(!empty($value))
+				if(!empty($value2))
 				{
-					$search.= ''.$value.'* ';
+					$search.= ''.$value2.'* ';
 				}
 			}
 		}
-	
-	if(!isset($lat) and !isset($lon) and $search != NULL)
+	var_dump($search);
+	if(!isset($lat) and !isset($lon) and $search != '')
 	{
-		$sth = $pdo->prepare('SELECT * FROM bedrijfgegevens WHERE MATCH (bedrijfsnaam, postcode, plaats, provincie, branche) AGAINST ("'.$search.'" IN BOOLEAN MODE) ORDER BY premium DESC');
-	
+		$sth = $pdo->prepare('SELECT * FROM bedrijfgegevens WHERE MATCH (bedrijfsnaam, postcode, plaats, provincie, branche) AGAINST ("'.$search.'" IN BOOLEAN MODE) ORDER BY premium DESC LIMIT '.$start.','.$end);
+		echo 'test 1';	
 	}
 	
-	elseif(isset($lat) and isset($lon) and $search == NULL)
+	elseif(isset($lat) and isset($lon) and $search == '')
 	{
-		$sth = $pdo->prepare('SELECT *, ( 6371 * acos( cos( radians('.$lat.') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( latitude ) ) ) ) AS distance FROM bedrijfgegevens HAVING distance < 2000000 ORDER BY premium DESC, distance ASC');
-	
+		$sth = $pdo->prepare('SELECT *, ( 6371 * acos( cos( radians('.$lat.') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( latitude ) ) ) ) AS distance FROM bedrijfgegevens HAVING distance < 2000000 ORDER BY premium DESC, distance ASC LIMIT '.$start.','.$end);
+		echo 'test 2';
 	}
 	
-	elseif(isset($lat) and isset($lon) and $search != NULL)
+	elseif(isset($lat) and isset($lon) and $search != '')
 	{
-		$sth = $pdo->prepare('SELECT *, ( 6371 * acos( cos( radians('.$lat.') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( latitude ) ) ) ) AS distance FROM bedrijfgegevens WHERE MATCH (bedrijfsnaam, postcode, plaats, provincie, branche) AGAINST ("'.$search.'" IN BOOLEAN MODE) HAVING distance < 2000000 ORDER BY premium DESC, distance ASC');
-	
+		$sth = $pdo->prepare('SELECT *, ( 6371 * acos( cos( radians('.$lat.') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( latitude ) ) ) ) AS distance FROM bedrijfgegevens WHERE MATCH (bedrijfsnaam, postcode, plaats, provincie, branche) AGAINST ("'.$search.'" IN BOOLEAN MODE) HAVING distance < 2000000 ORDER BY premium DESC, distance ASC LIMIT '.$start.','.$end);
+		echo 'test 3';
 	}
 
 	else
 	{
-		$sth = $pdo->prepare('SELECT * FROM bedrijfgegevens ORDER BY premium DESC');
+		$sth = $pdo->prepare('SELECT * FROM bedrijfgegevens ORDER BY premium DESC LIMIT '.$start.','.$end);
 	
 	}
 	$sth->execute();
-
+	$_SESSION['lat'] = $lat;
+	$_SESSION['lon'] = $lon;
+	$_SESSION['$search'] = $search;
 }
 else
 {
@@ -239,9 +244,7 @@ else
 }
 
 	echo '<div class="row search-result">';
-		echo '<div class="col-xs-12">
-		
-		';
+		echo '<div class="col-xs-12">';
 		
 			while($row = $sth->fetch())
 			{
@@ -255,7 +258,7 @@ else
 						</div>
 						<span class="glyphicon glyphicon-search premium"></span>
 						<div class="search-naam">
-							<?php echo $row['bedrijfsnaam']. '<br/>' .$row['telefoon']; ?>
+							<?php echo $row['bedrijfsnaam']. '<br/>' .$row['telefoon']. '<br/>' .$row['distance']; ?>
 						</div>
 					</div>
 				<?php
@@ -272,7 +275,7 @@ else
 							<img src="images/truck.jpg">
 						</div>
 						<div class="search-naam">
-							<?php echo $row['bedrijfsnaam']. '<br>' .$row['telefoon']; ?>
+							<?php echo $row['bedrijfsnaam']. '<br>' .$row['telefoon']. '<br/>' .$row['distance']; ?>
 						</div>
 					</div>
 				<?php
@@ -287,13 +290,17 @@ else
 							<img src="images/truck.jpg">
 						</div>
 						<div class="search-naam">
-							<?php echo $row['bedrijfsnaam']; ?>
+							<?php echo $row['bedrijfsnaam']. '<br/>' .$row['distance']; ?>
 						</div>
 					</div>
 				<?php
 				}
 				 
 			}
+			$nr1 = $_GET['nr'] - 1; 
+			echo '<a href="gids.php?nr='.$nr1.'">Terug</a>';
+			$nr2 = $_GET['nr'] + 1; 
+			echo '<a href="gids.php?nr='.$nr2.'">Volgende</a>';
 		echo '</div>';
 	echo '</div>';
 
