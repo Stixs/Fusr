@@ -52,8 +52,7 @@ if(isset($_POST['Zoek']))
 	if(!empty($_SESSION['longitude'])){$lon = $_SESSION['longitude'];}
 	}
 	else
-	{
-		
+	{	
 	$coords = getCoordinates($city);
 	$coords = (explode(",",$coords));
 	$lat = $coords[0];
