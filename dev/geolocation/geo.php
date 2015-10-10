@@ -19,11 +19,11 @@ foreach($xml->result->address_component as $component){
 	}
 
 }
-var_dump($geodata);
+//var_dump($geodata);
 list($lat,$long) = explode(',',htmlentities(htmlspecialchars(strip_tags($_GET['latlng']))));
 
-$_SESSION['latitude'] = $lat;
-$_SESSION['longitude'] = $long;
+$_SESSION['lat'] = $lat;
+$_SESSION['lon'] = $long;
 
 #$huisnummer = $geodata['Huis nummer']->asXML();
 #$huisnummer = strip_tags($huisnummer);

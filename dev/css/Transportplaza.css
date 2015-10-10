@@ -242,6 +242,17 @@ input[type=submit]:focus,
 	border-radius: 5px;
 	display: inline-block;
 }
+.gids-btn-nav
+{
+	width: 100px;
+	margin: 20px;
+}
+
+#geo
+{
+	display: none;
+}
+
 
 .rand {
 	margin: 0px;

@@ -68,11 +68,6 @@ for ($N = 1; $N <20000; $N++)
 	$sth->execute($parameters);
 	
 	}
-
-
-
-
-
 }
 
 

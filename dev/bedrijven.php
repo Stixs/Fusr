@@ -1,6 +1,6 @@
 <?php
 
-
+$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 require('./controllers/header.php');
 
 	$bedrijfs_id = $_GET['bedrijfs_id'];	

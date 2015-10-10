@@ -1,0 +1,88 @@
+<div class="col-sm-12 col-md-6 filter1">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4">
+					<select class="form-control search-select col-xs-12 col-sm-4" id="sel1" name="branche_">
+						<?php
+						$sth = $pdo->prepare('select * from branche');
+						$sth->execute();
+						
+						echo '<option value="" selected style="display:none;">Branche</option>';
+						while($row = $sth->fetch())
+						{
+							if (!isset($branch) or $row['branche_name'] != $branch)
+							{
+							echo '<option value="'.$row['branche_name'].'">'.$row['branche_name'].'</option>';
+							}
+							elseif ($row['branche_name'] == $branch)
+							{
+							echo '<option value="'.$row['branche_name'].'" selected>'.$row['branche_name'].'</option>';	
+							}
+						}
+						?>		
+					</select>
+				</div>			
+				<div class="col-xs-12 col-sm-4">
+					<select class="form-control search-select" id="sel1" name="specialiteit">
+						<?php
+						$sth = $pdo->prepare('select * from specialiteiten');
+						$sth->execute();
+						
+						echo '<option value="" selected style="display:none;">Specialiteit</option>';
+						while($row = $sth->fetch())
+						{
+							if (!isset($specialiteit) or $row['specialiteit'] != $specialiteit)
+							{
+							echo '<option value="'.$row['specialiteit'].'">'.$row['specialiteit'].'</option>';
+							}
+							elseif ($row['specialiteit'] == $specialiteit)
+							{
+							echo '<option value="'.$row['specialiteit'].'" selected>'.$row['specialiteit'].'</option>';	
+							}
+				 		}
+						?>		
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<select class="form-control search-select col-xs-12 col-sm-4" id="sel1" name="provincie">
+						<?php
+						$sth = $pdo->prepare('select distinct provincie from bedrijfgegevens');
+						$sth->execute();
+						
+						echo '<option value="" selected style="display:none;">Provincie</option>';
+						while($row = $sth->fetch())
+						{
+							if (!isset($provincie) or $row['provincie'] != $provincie)
+							{
+							echo '<option value="'.$row['provincie'].'">'.$row['provincie'].'</option>';
+							}
+							elseif ($row['provincie'] == $provincie)
+							{
+							echo '<option value="'.$row['provincie'].'" selected>'.$row['provincie'].'</option>';	
+							}
+						}
+						?>		
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<select class="form-control search-select col-xs-12 col-sm-4" id="sel1" name="bereik">
+						<?php
+						$sth = $pdo->prepare('select distinct bereik from bedrijfgegevens');
+						$sth->execute();
+						
+						echo '<option value="" selected style="display:none;">Bereik</option>';
+						while($row = $sth->fetch())
+						{
+							if (!isset($bereik) or $row['bereik'] != $bereik)
+							{
+							echo '<option value="'.$row['bereik'].'">'.$row['bereik'].'</option>';
+							}
+							elseif ($row['bereik'] == $bereik)
+							{
+							echo '<option value="'.$row['bereik'].'" selected>'.$row['bereik'].'</option>';	
+							}
+						}
+						?>		
+					</select>
+				</div>
+			</div>
+		</div>
