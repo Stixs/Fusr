@@ -78,7 +78,10 @@ $keuze = $_POST['del_spec'];
 $sth = $pdo->prepare('DELETE FROM specialiteiten WHERE specialiteit_id = :keuze');
 $sth->execute($parameters);
 }
-?> 
+
+?>
+
+
 
 <div class="row">
 	<div class="col-xs-12 ContentPadding" style="padding-bottom:0;">
@@ -87,12 +90,66 @@ $sth->execute($parameters);
 		<h4>Beheer Specialiteiten</h4>
 	</div>
 </div>
+<form method="post">
+	<div class="col-xs-12">
+		<input class="form-control" type="text" name="beperk" autofocus size="1" value="" >
+	</div>
+</form>
+
 <div class="row">
+<?php
+
+if(isset($_POST['beperk']))
+{
+	$beperk = $_POST['beperk'];
+}
+else
+{
+	$beperk = NULL;
+}
+if(isset($_POST['beperk']))
+{
+	$sth = $pdo->prepare("SELECT * FROM specialiteiten WHERE branche_id = " . $branche . " AND specialiteit LIKE '%" . $beperk. "%'");
+	$sth->execute();
+	
+	?>
+	<div class="col-xs-12 ContentPadding" style="padding-top:20px;">
+	<label for="specialiteit">Specialiteit:</label>
+	<form class="form-inline" action="" method="post">
+	<?php
+	
+	while($row = $sth->fetch())
+	{
+	?>
+		
+		<div class="col-xs-6">
+			<div class="form-group specialiteit_wijzigen">
+				<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
+				<input type="text" class="form-control" name="specialiteit[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
+				<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="edit_spec" class="btn btn-default">Wijzig</button>
+				<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="del_spec" class="btn btn-danger">Verwijder</button>
+			</div>
+		</div>
+		
+	<?php
+	}
+	?>
+		</form>
+		</div>
+	<?php
+	
+	
+}
+else
+{
+?>
+
 	<div class="col-xs-12 ContentPadding" style="padding-top:20px;">
 		<label for="specialiteit">Specialiteit:</label>
 		<form class="form-inline" action="" method="post">
 
 			<?php
+
 			$sth = $pdo->prepare('select * from specialiteiten ORDER BY specialiteit');
 			$sth->execute();
 			$first = true;
@@ -106,14 +163,14 @@ $sth->execute($parameters);
 				{
 				?>
 	
-		<div class="col-xs-6">
-					<div class="form-group specialiteit_wijzigen">
+			<div class="col-xs-6">
+				<div class="form-group specialiteit_wijzigen">
 					<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
 					<input type="text" class="form-control" name="specialiteit[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
 					<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="edit_spec" class="btn btn-default">Wijzig</button>
 					<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="del_spec" class="btn btn-danger">Verwijder</button>
-					</div>
-		</div>
+				</div>
+			</div>
 				<?php
 				}
 			}
@@ -121,6 +178,9 @@ $sth->execute($parameters);
 		
 		</form>
 	</div>
+	<?php
+	}
+	?>
 	<div class="col-xs-12 ContentPadding" style="padding-top:20px;">
 		<form class="form-inline" method="post" action="" >
 			<div class="form-group spacer2">

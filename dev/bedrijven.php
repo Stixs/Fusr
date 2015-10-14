@@ -59,9 +59,9 @@ if ($row['premium'] == 'gold')
 				<td>Website:</td><td><a href="http://<?php echo $row['website']; ?>" target="_blank" alt="<?php echo $row['bedrijfsnaam']; ?>"><?php echo $row['website']; ?></a></td>
 			</tr>
 			<?php
-			if ($row['Facebook'] == '' and $row['Twitter'] == '' and $row['Google+'] == '' and $row['Linkedin'] == '' and $row['Youtube'] == '' and $row['Pinterest'] == '' )
+			if ($row['Facebook'] == '' and $row['Twitter'] == '' and $row['Google'] == '' and $row['LinkedIn'] == '' and $row['Instagram'] == '' and $row['Pinterest'] == '' )
 			{
-			echo 'Geen social media gevonden';
+			
 			}
 			Else
 			{
@@ -154,17 +154,23 @@ if ($row['premium'] == 'gold')
 			<tr>
 				<td>Specialiteit:</td><td>
 				<?php 
-				
-				
-				$sth = $pdo->prepare('SELECT * FROM specialiteiten WHERE specialiteit_id REGEXP '.$special);
+					
+				$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+				$sth = $pdo->prepare('SELECT * FROM bedrijfs_specialiteiten WHERE bedrijfs_id = :bedrijfs_id');
 				$sth->execute($parameters);
-				$specialiteiten = NULL;
-				while($row = $sth->fetch())
+				$row = $sth->fetch();
+				for($X=1; $X <= 20; $X++)
 				{
-				$specialiteiten .= $row['specialiteit'].'<br>'; 
+					if($row['specialiteit_' . $X] != '')
+					{
+						echo $row['specialiteit_' . $X];
+						$next = $X + 1;
+						if($row['specialiteit_' . $next] != '')
+						{
+							echo ', ';
+						}
+					}
 				}
-				$specialiteiten = substr($specialiteiten, 0, -4);
-				echo $specialiteiten;
 				
 				?></td>
 			</tr>

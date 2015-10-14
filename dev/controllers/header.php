@@ -144,7 +144,7 @@ else
 									<li><a href="toevoegenbedrijf.php?branche=1">Bedrijf toevoegen</a></li>
 									<li><a href="wijzigen.php">Bedrijf wijzigen</a></li>
 
-									<li class="pull-right"><a href="advertenties.php">Beheer Advertenties</a></li>
+									
 									<li class="pull-right"><a href="beheer.php">Beheer</a></li>
 							</ul>
 							</div><!-- /.navbar-collapse -->
