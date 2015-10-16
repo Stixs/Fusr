@@ -58,9 +58,8 @@ if ($row['premium'] == 'gold')
 				<td>Website:</td><td><a href="http://<?php echo $row['website']; ?>" target="_blank" alt="<?php echo $row['bedrijfsnaam']; ?>"><?php echo $row['website']; ?></a></td>
 			</tr>
 			<?php
-			if ($row['Facebook'] == '' and $row['Twitter'] == '' and $row['Google+'] == '' and $row['Linkedin'] == '' and $row['Youtube'] == '' and $row['Pinterest'] == '' )
+			if ($row['Facebook'] == '' and $row['Twitter'] == '' and $row['Google'] == '' and $row['LinkedIn'] == '' and $row['Instagram'] == '' and $row['Pinterest'] == '' )
 			{
-			echo 'Geen social media gevonden';
 			}
 			Else
 			{
