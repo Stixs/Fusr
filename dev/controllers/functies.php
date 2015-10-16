@@ -1,23 +1,6 @@
 <?php
 
-/** De functie RedirectNaarPagina
-  * optionele parameter paginanr. Hiermee kun je de gebruiker naar
-  * iedere gewenste pagina doorsturen
-  */
-/*function RedirectNaarPagina($paginanr = NULL)
-{
-	if(!isset($paginanr))
-	{
-		echo "<br />U word binnen 5 seconden doorgestuurd naar de hoofdpagina.";
-		header("Refresh: 4;URL=index.php");
-	} 
-	else
-		header("Location: index.php");
-}
-*/
-/** De functie LoginCheck
-  * controleert of de gebruiker is ingelogd
-  */
+
 function LoginCheck($pdo) 
 {
     // Controleren of Sessie variabelen bestaan
@@ -138,15 +121,6 @@ function Dropdown($name, $options, $id) {
     $html .= '</select>';
     return $html;
 }
-function branchelijst($pdo) {
-	$branches = array("");
-	$sth = $pdo->prepare('select branche_name from branche');
-		$sth->execute();
-		$result = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
-		
-	$branches = array_merge($branches, $result);
-	return $branches;
-} 
 
 function specialiteitenlijst($pdo) {
 	$specialiteiten = array("");
@@ -158,36 +132,6 @@ function specialiteitenlijst($pdo) {
 	return $specialiteiten;
 }  
 
-function branchekeuze($pdo, $name, $id, $keuze = NULL) {
-	
-	$html = '<label for="sel'.$id.'">Branche</label>';
-    $html .= '<script type="text/javascript">
-								function lastselected(value)
-								{
-									window.location.href = "http://localhost/Fusr/dev/toevoegenbedrijf.php?branche=" + value ;
-								}
-								</script>
-								
-								<select class="form-control" id="sel'.$id.'" name="'.$name.'" value="'.$name.'" onchange="lastselected(this.value)">';	
-	$sth = $pdo->prepare('select * from branche');
-		$sth->execute();
-			$branche_id = $_GET["branche"];
-			if ($branche_id==""){$branche_id=1;}
-			while($row = $sth->fetch())
-				{
-					
-					if($row['branche_id'] == $branche_id)
-					{
-						$html .= '<option value="'.$row['branche_id'].'" selected="selected">'.$row['branche_name'].'</option>';
-					}
-					else
-					{
-						$html .= '<option value="'.$row['branche_id'].'">'.$row['branche_name'].'</option>';
-					}
-				}
-	$html .= '</select>';
-    return $html;
-}
 
 
 
