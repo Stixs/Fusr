@@ -4,6 +4,8 @@ require('./controllers/header.php');
 //Controleert of je wel bent ingelogd.
 if(LoginCheck($pdo))
 {
+//openingstijden aan of uit.
+$aan = NULL;
 	//init fields
 $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $specialiteit_5 = $specialiteit_6 = $specialiteit_7 = $specialiteit_8 = $specialiteit_9 = $specialiteit_10 = $specialiteit_11 = $specialiteit_12 = $specialiteit_13 = $specialiteit_14 = $specialiteit_15 = $specialiteit_16 = $specialiteit_17 = $specialiteit_18 = $specialiteit_19 = $specialiteit_20 = $bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldigtot = $website = $premium = $Picture = $openingstijden = $otmaandag = $otdinsdag = $otwoensdag = $otdonderdag = $otvrijdag = $otzaterdag = $otzondag = $Facebook = $Twitter = $Google = $LinkedIn = $Instagram = $Pinterest = NULL;
 
@@ -40,7 +42,7 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 		$Instagram = $_POST['Instagram'];
 		$Pinterest = $_POST['Pinterest'];
 		
-	$aan = 1;	
+	$aan = 0;	
 	if($aan == 1){	
 		$openingstijden = $_POST['openingstijden'];
 		if($openingstijden == 'ja' && $openingstijden != 'nee' )
@@ -317,26 +319,28 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 								:branche_id,
 								:openingstijden)');
 			$sth->execute($parameters);
-			
-			if($openingstijden == 'ja' && $openingstijden != 'nee' )
+			if($aan == 1)
 			{
-				$parameters = array(':bedrijfsnaam'=>$bedrijfs_naam);
-				$sth = $pdo->prepare('SELECT bedrijfs_id FROM bedrijfgegevens WHERE bedrijfsnaam = :bedrijfsnaam');
-				$sth->execute($parameters);
-				$row = $sth->fetch();
-				$otbedrijfs_id = $row['bedrijfs_id'];
-				
-				$parameters = array(':bedrijfs_id'=>$otbedrijfs_id,
-									':maandag'=>$otmaandag,
-									':dinsdag'=>$otdinsdag,
-									':woensdag'=>$otwoensdag,
-									':donderdag'=>$otdonderdag,
-									':vrijdag'=>$otvrijdag,
-									':zaterdag'=>$otzaterdag,
-									':zondag'=>$otzondag);
-				$sth = $pdo->prepare('INSERT INTO openingstijden (bedrijfs_id, maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag) VALUES (:bedrijfs_id, :maandag, :dinsdag, :woensdag, :donderdag, :vrijdag, :zaterdag, :zondag)');
-				$sth->execute($parameters);
-			} 
+				if($openingstijden == 'ja' && $openingstijden != 'nee' )
+				{
+					$parameters = array(':bedrijfsnaam'=>$bedrijfs_naam);
+					$sth = $pdo->prepare('SELECT bedrijfs_id FROM bedrijfgegevens WHERE bedrijfsnaam = :bedrijfsnaam');
+					$sth->execute($parameters);
+					$row = $sth->fetch();
+					$otbedrijfs_id = $row['bedrijfs_id'];
+					
+					$parameters = array(':bedrijfs_id'=>$otbedrijfs_id,
+										':maandag'=>$otmaandag,
+										':dinsdag'=>$otdinsdag,
+										':woensdag'=>$otwoensdag,
+										':donderdag'=>$otdonderdag,
+										':vrijdag'=>$otvrijdag,
+										':zaterdag'=>$otzaterdag,
+										':zondag'=>$otzondag);
+					$sth = $pdo->prepare('INSERT INTO openingstijden (bedrijfs_id, maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag) VALUES (:bedrijfs_id, :maandag, :dinsdag, :woensdag, :donderdag, :vrijdag, :zaterdag, :zondag)');
+					$sth->execute($parameters);
+				}
+			}			
 			echo'De bedrijf gegevens zijn geregistreerd.<br />';
 			//echo '<META http-equiv="refresh" content="5;URL=index.php">';
 		}
