@@ -141,6 +141,9 @@ if(isset($_POST['Zoek']))
 			}
 		}
 	
+
+	
+	
 	if(!isset($lat) and !isset($lon) and $search != '')
 	{
 		$sth = $pdo->prepare('
