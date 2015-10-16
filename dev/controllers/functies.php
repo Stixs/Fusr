@@ -135,13 +135,14 @@ function specialiteitenlijst($pdo) {
 
 
 
-function specialiteitkeuze($pdo, $name, $id, $keuze = NULL) {
+function specialiteitkeuze($pdo, $name, $id, $keuze = NULL, $branche_id) {
+
 
 	$html = '<label for="sel'.$id.'">Specialiteit:</label>';
     $html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';	
-	$sth = $pdo->prepare('SELECT * FROM specialiteiten');
+	$sth = $pdo->prepare('SELECT * FROM specialiteiten where subbranche_id = '.$branche_id);
 		$sth->execute();
-			
+			$html .= '<option value=""></option>';
 			while($row = $sth->fetch())
 				{
 					

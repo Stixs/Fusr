@@ -1,4 +1,7 @@
 <?php
+
+require('./connection.php');
+$pdo = ConnectDB();
 //init fields
 $bedrijf_naam = $adres = $postcode = $plaats = $land = $telefoon = $fax = $type = $naar = $specialiteit = $bedrijf_email = $Username = $Password = $email = NULL;
 
@@ -15,7 +18,7 @@ if(isset($_POST['Registreerbedrijf']))
 	
 	if($CheckOnErrors == true) 
 	{
-	require('./views/RegistreerBedrijfForm.php');
+	require('./RegistreerBedrijfForm.php');
 	}
 	else
 	{
@@ -25,12 +28,12 @@ if(isset($_POST['Registreerbedrijf']))
 		$salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
 
 		//hash het paswoord met de Salt
-		$wachtwoord = hash('sha512', $wachtwoord . $salt);
+		$Password = hash('sha512', $Password . $salt);
 
 		
-		$parameters = array(':Email'=>$Email,
+		$parameters = array(':email'=>$email,
 							':Inlognaam'=>$Username,
-							':Paswoord'=>$Password,
+							':Password'=>$Password,
 							':salt'=>$salt,
 							':level'=>5
 							);
@@ -41,7 +44,7 @@ if(isset($_POST['Registreerbedrijf']))
 }
 else
 {
-	require('./views/RegistreerBedrijfForm.php');
+	require('./RegistreerBedrijfForm.php');
 }
 
 ?>

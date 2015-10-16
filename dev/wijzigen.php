@@ -58,6 +58,7 @@ if(LoginCheck($pdo))
 					$geldigtot = $row['geldig_tot'];
 					$bedrijfs_email = $row['bedrijfs_email'];
 					$premium = $row['premium'];
+					$branche_id = $row['branche_id'];
 					
 					$Facebook = $row['Facebook'];
 					$Twitter = $row['Twitter'];

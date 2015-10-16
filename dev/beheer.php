@@ -15,15 +15,28 @@ require('./controllers/header.php');
 
 </div>
 <?php
-
-if($_GET['wijzig'] == 1)
-	{
-		require('beheer3.php');
-	}
-elseif($_GET['wijzig'] == 2)
-	{
-		require('beheer2.php');
-	}
-
+if(!isset($_GET['wijzig']))
+{
+	unset($_SESSION['subbranche']);
+	unset($_SESSION['branche']);
+}
+else
+{
+	if($_GET['wijzig'] == 1)
+		{
+			require('beheer_specialiteiten.php');
+			unset($_SESSION['branche']);
+		}
+	elseif($_GET['wijzig'] == 2)
+		{
+			require('beheer_subbranches.php');
+			unset($_SESSION['subbranche']);
+			
+		}
+	elseif($_GET['wijzig'] == 3)
+		{
+			require('beheer_branches.php');
+		}
+}
 require('./controllers/footer.php');
 ?>

@@ -119,7 +119,7 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $row['specialiteit_1']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $row['specialiteit_1'], $branche_id);
 					
 					?>
 				</div>
@@ -127,133 +127,133 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 2, $row['specialiteit_2']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 2, $row['specialiteit_2'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 3, $row['specialiteit_3']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 3, $row['specialiteit_3'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 4, $row['specialiteit_4']); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 4, $row['specialiteit_4'], $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 5, $row['specialiteit_5']); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 5, $row['specialiteit_5'], $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 6, $row['specialiteit_6']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 6, $row['specialiteit_6'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 7, $row['specialiteit_7']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 7, $row['specialiteit_7'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 8, $row['specialiteit_8']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 8, $row['specialiteit_8'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 9, $row['specialiteit_9']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 9, $row['specialiteit_9'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 10, $row['specialiteit_10']); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 10, $row['specialiteit_10'], $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 11, $row['specialiteit_11']); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 11, $row['specialiteit_11'], $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 12, $row['specialiteit_12']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 12, $row['specialiteit_12'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 13, $row['specialiteit_13']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 13, $row['specialiteit_13'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 14, $row['specialiteit_14']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 14, $row['specialiteit_14'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 15, $row['specialiteit_15']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 15, $row['specialiteit_15'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 16, $row['specialiteit_16']); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 16, $row['specialiteit_16'], $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 17, $row['specialiteit_17']); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 17, $row['specialiteit_17'], $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 18, $row['specialiteit_18']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 18, $row['specialiteit_18'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 19, $row['specialiteit_19']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 19, $row['specialiteit_19'], $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 20, $row['specialiteit_20']);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 20, $row['specialiteit_20'], $branche_id);
 					?>
 				</div>
 			</div>
