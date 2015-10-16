@@ -340,90 +340,85 @@
 						?>
 					</div>
 				</div>
-			<?php if($aan == 1) { ?>
+			
 				<div class="form-group">
 					<label for="openingestijden">Openingstijden</label>
-					<div class="radio">
-						<?php 
-						if($openingstijden =='ja')
-						{
-						?>
-						<label class="radio-inline">
-							<input type="radio" name="openingstijden" id="openingstijden_ja" value="ja" checked />
-							Ja
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="openingstijden" id="openingestijden_nee" value="nee" />
-							nee
-						</label>
-						<?php
-						}
-						else
-						{
-						?>
-						<label class="radio-inline">
-							<input type="radio" name="openingstijden" id="openingstijden_ja" value="ja" />
-							Ja
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="openingstijden" id="openingestijden_nee" value="nee" checked />
-							nee
-						</label>
-						<?php
-						}
-						?>
-					</div>
+					
 				</div>
 				
-				<div class="col-xs-6">
 					<div class="formgroup">
-						<label for="otmaandag">Maandag:</label>
-						<input type="text" class="form-control" name="maandag" id="otmaandag" value="<?php echo $otmaandag; ?>" />
+						<div class="col-xs-6">
+						<label>Maandag</label>
+						</div>
+						<div class="col-xs-6">
+						<label>Vrijdag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_maandag, 'o_maandag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_maandag, 'd_maandag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_vrijdag, 'o_vrijdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_vrijdag, 'd_vrijdag') ?>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
 					<div class="formgroup">
-						<label for="otdinsdag">Dinsdag:</label>
-						<input type="text" class="form-control" name="dinsdag" id="otdinsdag" value="<?php echo $otdinsdag; ?>" />
+						<div class="col-xs-6">
+						<label>Dinsdag</label>
+						</div>
+						<div class="col-xs-6">
+						<label>Zaterdag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_dinsdag, 'o_dinsdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_dinsdag, 'd_dinsdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_zaterdag, 'o_zaterdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_zaterdag, 'd_zaterdag') ?>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
 					<div class="formgroup">
-						<label for="otwoensdag">Woensdag:</label>
-						<input type="text" class="form-control" name="Woensdag" id="otWoensdag" value="<?php echo $otwoensdag; ?>" />
+						<div class="col-xs-6">
+						<label>Woensdag</label>
+						</div>
+						<div class="col-xs-6">
+						<label>Zondag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_woensdag, 'o_woensdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_woensdag, 'd_woensdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_zondag, 'o_zondag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_zondag, 'd_zondag') ?>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
 					<div class="formgroup">
-						<label for="otdonderdag">Donderdag:</label>
-						<input type="text" class="form-control" name="donderdag" id="otdonderdag" value="<?php echo $otdonderdag; ?>" />
+						<div class="col-xs-12">
+						<label>Donderdag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_donderdag, 'o_donderdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_donderdag, 'd_donderdag') ?>
+						</div>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
-					<div class="formgroup">
-						<label for="otvrijdag">Vrijdag:</label>
-						<input type="text" class="form-control" name="vrijdag" id="otvrijdag" value="<?php echo $otvrijdag; ?>" />
-					</div>
-				</div>
-				
-				<div class="col-xs-6">
-					<div class="formgroup">
-						<label for="otzaterdag">Zaterdag:</label>
-						<input type="text" class="form-control" name="zaterdag" id="otzaterdag" value="<?php echo $otzaterdag; ?>" />
-					</div>
-				</div>
-				
-				<div class="col-xs-6">
-					<div class="formgroup">
-						<label for="otzondag">Zondag:</label>
-						<input type="text" class="form-control" name="zondag" id="otzondag" value="<?php echo $otzondag; ?>" />
-					</div>
-				</div>
-			<?php } ?>
+					
 			</div>
 			<div class="col-xs-12">
 				<div class="form-group">

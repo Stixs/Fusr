@@ -14,7 +14,7 @@
 		<form name="RegistrerenFormulier" class="registreren" action="" method="post" enctype="multipart/form-data">
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
-					<?php echo branchekeuze($pdo, 'branche', 1); ?>
+					<?php echo branchekeuze($pdo, $branche_id); ?>
 				</div>
 				<div class="form-group">
 					<label for="Bedrijfsnaam">Bedrijfsnaam:</label>
@@ -113,7 +113,7 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $specialiteit_1);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $specialiteit_1, $branche_id);
 					
 					?>
 				</div>
@@ -121,133 +121,133 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 2, $specialiteit_2);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 2, $specialiteit_2, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 3, $specialiteit_3);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 3, $specialiteit_3, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 4, $specialiteit_4); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 4, $specialiteit_4, $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 5, $specialiteit_5); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 5, $specialiteit_5, $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 6, $specialiteit_6);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 6, $specialiteit_6, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 7, $specialiteit_7);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 7, $specialiteit_7, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 8, $specialiteit_8);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 8, $specialiteit_8, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 9, $specialiteit_9);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 9, $specialiteit_9, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 10, $specialiteit_10); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 10, $specialiteit_10, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 11, $specialiteit_11); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 11, $specialiteit_11, $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 12, $specialiteit_12);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 12, $specialiteit_12, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 13, $specialiteit_13);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 13, $specialiteit_13, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 14, $specialiteit_14);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 14, $specialiteit_14, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 15, $specialiteit_15);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 15, $specialiteit_15, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 16, $specialiteit_16); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 16, $specialiteit_16, $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 17, $specialiteit_17); 
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 17, $specialiteit_17, $branche_id); 
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 18, $specialiteit_18);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 18, $specialiteit_18, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 19, $specialiteit_19);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 19, $specialiteit_19, $branche_id);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 20, $specialiteit_20);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 20, $specialiteit_20, $branche_id);
 					?>
 				</div>
 			</div>
@@ -291,70 +291,82 @@
 						</label>
 					</div>
 				</div>
-			<?php if($aan == 1) { ?>
 				<div class="form-group">
 					<label for="openingestijden">Openingstijden</label>
-					<div class="radio">
-						<label class="radio-inline">
-							<input type="radio" name="openingstijden" id="openingstijden_ja" value="ja" />
-							Ja
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="openingstijden" id="openingestijden_nee" value="nee" checked />
-							nee
-						</label>
-					</div>
 				</div>
 				
-				<div class="col-xs-6">
-					<div class="formgroup">
-						<label for="otmaandag">Maandag:</label>
-						<input type="text" class="form-control" name="maandag" id="otmaandag" value="<?php echo $otmaandag; ?>" />
+				<div class="formgroup">
+						<div class="col-xs-6">
+						<label>Maandag</label>
+						</div>
+						<div class="col-xs-6">
+						<label>Vrijdag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_maandag, 'o_maandag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_maandag, 'd_maandag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_vrijdag, 'o_vrijdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_vrijdag, 'd_vrijdag') ?>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
 					<div class="formgroup">
-						<label for="otdinsdag">Dinsdag:</label>
-						<input type="text" class="form-control" name="dinsdag" id="otdinsdag" value="<?php echo $otdinsdag; ?>" />
+						<div class="col-xs-6">
+						<label>Dinsdag</label>
+						</div>
+						<div class="col-xs-6">
+						<label>Zaterdag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_dinsdag, 'o_dinsdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_dinsdag, 'd_dinsdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_zaterdag, 'o_zaterdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_zaterdag, 'd_zaterdag') ?>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
 					<div class="formgroup">
-						<label for="otwoensdag">Woensdag:</label>
-						<input type="text" class="form-control" name="Woensdag" id="otWoensdag" value="<?php echo $otwoensdag; ?>" />
+						<div class="col-xs-6">
+						<label>Woensdag</label>
+						</div>
+						<div class="col-xs-6">
+						<label>Zondag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_woensdag, 'o_woensdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_woensdag, 'd_woensdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_zondag, 'o_zondag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_zondag, 'd_zondag') ?>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
 					<div class="formgroup">
-						<label for="otdonderdag">Donderdag:</label>
-						<input type="text" class="form-control" name="donderdag" id="otdonderdag" value="<?php echo $otdonderdag; ?>" />
+						<div class="col-xs-12">
+						<label>Donderdag</label>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($o_donderdag, 'o_donderdag') ?>
+						</div>
+						<div class="col-xs-3">
+							<?php echo openingstijden($d_donderdag, 'd_donderdag') ?>
+						</div>
+						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-6">
-					<div class="formgroup">
-						<label for="otvrijdag">Vrijdag:</label>
-						<input type="text" class="form-control" name="vrijdag" id="otvrijdag" value="<?php echo $otvrijdag; ?>" />
-					</div>
-				</div>
-				
-				<div class="col-xs-6">
-					<div class="formgroup">
-						<label for="otzaterdag">Zaterdag:</label>
-						<input type="text" class="form-control" name="zaterdag" id="otzaterdag" value="<?php echo $otzaterdag; ?>" />
-					</div>
-				</div>
-				
-				<div class="col-xs-6">
-					<div class="formgroup">
-						<label for="otzondag">Zondag:</label>
-						<input type="text" class="form-control" name="zondag" id="otzondag" value="<?php echo $otzondag; ?>" />
-					</div>
-				</div>
-				<?php } ?>
 			</div>
 			<div class="col-xs-12">
 				<div class="form-group">

@@ -5,14 +5,12 @@ require('./controllers/header.php');
 if(LoginCheck($pdo))
 {
 	//init fields
-$specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $specialiteit_5 = $specialiteit_6 = $specialiteit_7 = $specialiteit_8 = $specialiteit_9 = $specialiteit_10 = $specialiteit_11 = $specialiteit_12 = $specialiteit_13 = $specialiteit_14 = $specialiteit_15 = $specialiteit_16 = $specialiteit_17 = $specialiteit_18 = $specialiteit_19 = $specialiteit_20 = $bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldigtot = $website = $premium = $Picture = $openingstijden = $otmaandag = $otdinsdag = $otwoensdag = $otdonderdag = $otvrijdag = $otzaterdag = $otzondag = $Facebook = $Twitter = $Google = $LinkedIn = $Instagram = $Pinterest = NULL;
+$specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $specialiteit_5 = $specialiteit_6 = $specialiteit_7 = $specialiteit_8 = $specialiteit_9 = $specialiteit_10 = $specialiteit_11 = $specialiteit_12 = $specialiteit_13 = $specialiteit_14 = $specialiteit_15 = $specialiteit_16 = $specialiteit_17 = $specialiteit_18 = $specialiteit_19 = $specialiteit_20 = $bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldigtot = $website = $premium = $Picture = $o_maandag = $o_dinsdag = $o_woensdag = $o_donderdag = $o_vrijdag = $o_zaterdag = $o_zondag = $d_maandag = $d_dinsdag = $d_woensdag = $d_donderdag = $d_vrijdag = $d_zaterdag = $d_zondag = $Facebook = $Twitter = $Google = $LinkedIn = $Instagram = $Pinterest = $branche = NULL;
 
 	//init error fields
 	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = $OpeningsErr = NULL;
-	
+	$branche_id = $_POST['branche'];
 	$Specialiteiten = specialiteitenlijst($pdo);
-	$Branches = branchelijst($pdo);
-	
 	if(isset($_POST['add_spec']) AND !empty($_POST['add_specialiteit']))
 	{
 	$bedrijfs_naam = $_POST["Bedrijfsnaam"];
@@ -33,6 +31,8 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 	$beschrijving = $_POST['beschrijving'];
 	$premium = $_POST['premium'];
 	
+	$branche = $_POST['branche'];
+	
 		$Facebook = $_POST['Facebook'];
 		$Twitter = $_POST['Twitter'];
 		$Google = $_POST['Google'];
@@ -40,22 +40,22 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 		$Instagram = $_POST['Instagram'];
 		$Pinterest = $_POST['Pinterest'];
 		
-	$aan = 1;	
-	if($aan == 1){	
-		$openingstijden = $_POST['openingstijden'];
-		if($openingstijden == 'ja' && $openingstijden != 'nee' )
-		{
-			$otmaandag = $_POST['maandag'];
-			$otdinsdag = $_POST['dinsdag'];
-			$otwoensdag = $_POST['woensdag'];
-			$otdonderdag = $_POST['donderdag'];
-			$otvrijdag = $_POST['vrijdag']; 
-			$otzaterdag = $_POST['zaterdag'];
-			$otzondag = $_POST['zondag'];
-		}
-	}
+		$o_maandag = $_POST['o_maandag'];
+		$o_dinsdag = $_POST['o_dinsdag'];
+		$o_woensdag = $_POST['o_woensdag'];
+		$o_donderdag = $_POST['o_donderdag'];
+		$o_vrijdag = $_POST['o_vrijdag']; 
+		$o_zaterdag = $_POST['o_zaterdag'];
+		$o_zondag = $_POST['o_zondag'];
+		$d_maandag = $_POST['d_maandag'];
+		$d_dinsdag = $_POST['d_dinsdag'];
+		$d_woensdag = $_POST['d_woensdag'];
+		$d_donderdag = $_POST['d_donderdag'];
+		$d_vrijdag = $_POST['d_vrijdag']; 
+		$d_zaterdag = $_POST['d_zaterdag'];
+		$d_zondag = $_POST['d_zondag'];
 	
-	var_dump($_POST);
+	
 	$N = 0;
 	$X = 1;
 		foreach($specialiteit as $value) 
@@ -69,63 +69,18 @@ $specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $special
 	$parameters = array(':add_specialiteit'=>$add_specialiteit);
 	$sth = $pdo->prepare('INSERT INTO specialiteiten (specialiteit)VALUES(:add_specialiteit)');
 	$sth->execute($parameters);
-	
-		
 	}
 	
 	
-		if(isset($_POST['Registrerenbedrijf']))
+	if(isset($_POST['Registrerenbedrijf']))
 	{
 		$CheckOnErrors = false;
 		
-		$bedrijfs_naam = $_POST["Bedrijfsnaam"];
-		$adres = $_POST["adres"];
-		$postcode = $_POST["postcode"];
-		$plaats = $_POST['plaats'];
-		$provincie = $_POST['provincie'];
-		$website = $_POST['website'];
-		$telefoon = $_POST['telefoon'];
-		$fax = $_POST['fax'];
-		$specialiteit = $_POST['specialiteit'];
-		$br_id = $_POST['branche'];
-		$transport_manager = $_POST['transport_manager'];
-		$aantal = $_POST['aantal'];
-		$rechtsvorm = $_POST['rechtsvorm'];
-		$vergunning = $_POST['vergunning'];
-		$bedrijfs_email = $_POST['bedrijfs_email'];
-		$beschrijving = $_POST['beschrijving'];
-		$premium = $_POST['premium'];
-		$foto = basename($_FILES["foto"]["name"]);
-		$banner = basename($_FILES["banner"]["name"]);
-		$logo = basename($_FILES["logo"]["name"]);
-		
-		$Facebook = $_POST['Facebook'];
-		$Twitter = $_POST['Twitter'];
-		$Google = $_POST['Google'];
-		$LinkedIn = $_POST['LinkedIn'];
-		$Instagram = $_POST['Instagram'];
-		$Pinterest = $_POST['Pinterest'];
-	
-		if($aan == 1)
-		{
-			$openingstijden = $_POST['openingstijden'];
-			if($openingstijden == 'ja' && $openingstijden != 'nee' )
-			{
-				$otmaandag = $_POST['maandag'];
-				$otdinsdag = $_POST['dinsdag'];
-				$otwoensdag = $_POST['woensdag'];
-				$otdonderdag = $_POST['donderdag'];
-				$otvrijdag = $_POST['vrijdag']; 
-				$otzaterdag = $_POST['zaterdag'];
-				$otzondag = $_POST['zondag'];
-			}
-		}
 		
 		$special = NULL;
 		$specialZ = "'";
 		$specialname = NULL;
 		
-		var_dump($_POST);
 		$N = 0;
 		$X = 1;
 		foreach($specialiteit as $value) 
