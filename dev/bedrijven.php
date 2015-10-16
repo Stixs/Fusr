@@ -1,6 +1,5 @@
 <?php
 
-
 require('./controllers/header.php');
 
 	$bedrijfs_id = $_GET['bedrijfs_id'];	
@@ -146,7 +145,25 @@ if ($row['premium'] == 'gold')
 			</tr>
 			<?php 
 			}
-			
+			$aan = 1;	
+			if($aan == 1){	
+			if($row['openingstijden'] == 'ja')
+			{
+			?>
+			<tr>
+				<table>
+					<tr><td>Maandag</td><td><?php echo 'test'; ?></td></tr>
+					<tr><td>Dinsdag</td><td><?php echo 'test'; ?></td></tr>
+					<tr><td>Woensdag</td><td><?php echo 'test'; ?></td></tr>
+					<tr><td>Donderdag</td><td><?php echo 'test'; ?></td></tr>
+					<tr><td>vrijdag</td><td><?php echo 'test'; ?></td></tr>
+					<tr><td>zaterdag</td><td><?php echo 'test'; ?></td></tr>
+					<tr><td>zondag</td><td><?php echo 'test'; ?></td></tr>
+				</table>
+			</tr>
+			<?php
+			}
+			}
 			?>
 			<tr>
 				<td>Transport Manager:</td><td><?php echo $row['transport_manager']; ?></td>

@@ -44,7 +44,7 @@ else
 				<td><?php echo $row['plaats']; ?></td>
 				<td><?php echo $row['telefoon']; ?></td>
 				<td><a class="btn btn-default" role="button" href="wijzigen.php?action=edit&bedrijfs_id=<?php echo $row['bedrijfs_id']; ?>">Aanpassen</a></td>
-				<td><a class="btn btn-danger" role="button" href="wijzigen.php?ction=del&bedrijfs_id=<?php echo $row['bedrijfs_id']; ?>">Verwijderen</a></td>
+				<td><a class="btn btn-danger" role="button" href="wijzigen.php?action=del&bedrijfs_id=<?php echo $row['bedrijfs_id']; ?>">Verwijderen</a></td>
 			</tr>
 		<?php 
 		} 

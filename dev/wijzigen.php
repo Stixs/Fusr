@@ -7,10 +7,10 @@ if(LoginCheck($pdo))
 {
 	
 	//init fields
-	$bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldig_tot = $website = $branche_id = NULL;
+	$bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldig_tot = $website = $branche_id = $openingstijden = $otmaandag = $otdinsdag = $otwoensdag = $otdonderdag = $otvrijdag = $otzaterdag = $otzondag = NULL;
 
 	//init error fields
-	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = NULL;
+	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = $OpeningsErr = NULL;
 
 	$Specialiteiten = specialiteitenlijst($pdo);
 
@@ -66,7 +66,26 @@ if(LoginCheck($pdo))
 					$Instagram = $row['Instagram'];
 					$Pinterest = $row['Pinterest'];
 					
-
+					
+				$aan = 1;	
+				if($aan == 1){		
+					$openingstijden = $row['openingstijden'];
+					if($openingstijden != '')
+					{
+						$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+						$sth = $pdo->prepare('select * from openingstijden where bedrijfs_id = :bedrijfs_id');
+						$sth->execute($parameters);
+						$row = $sth->fetch();
+						
+						$otmaandag = $row['maandag'];
+						$otdinsdag = $row['dinsdag'];
+						$otwoensdag = $row['woensdag'];
+						$otdonderdag = $row['donderdag'];
+						$otvrijdag = $row['vrijdag'];
+						$otzaterdag = $row['zaterdag'];
+						$otzondag = $row['zondag'];
+					}
+				}
 					
 					//controleert of de submit knop wijzigenbedrijf in het formulier is ingedurkt.
 					if(isset($_POST['Del_Image']))
@@ -115,6 +134,19 @@ if(LoginCheck($pdo))
 					$Instagram = $_POST['Instagram'];
 					$Pinterest = $_POST['Pinterest'];
 					
+				if($aan == 1){		
+					$openingstijden = $_POST['openingstijden'];
+					if($openingstijden != 'nee' && $openingstijden == 'ja')
+					{
+						$otmaandag = $_POST['maandag'];
+						$otdinsdag = $_POST['dinsdag'];
+						$otwoensdag = $_POST['woensdag'];
+						$otdonderdag = $_POST['donderdag'];
+						$otvrijdag = $_POST['vrijdag'];
+						$otzaterdag = $_POST['zaterdag'];
+						$otzondag = $_POST['zondag'];
+					}
+				}	
 					
 					if (basename($_FILES["foto"]["name"]) == null)
 								{
@@ -242,11 +274,12 @@ if(LoginCheck($pdo))
 						':Pinterest'=>$Pinterest,
 						':foto'=>$foto,
 						':banner'=>$banner,
-						':logo'=>$logo);
+						':logo'=>$logo,
+						':openingstijden'=>$openingstijden);
 						
 						//de SQL query om de gegevens in de database te veranderen.
 						
-						$sth = $pdo->prepare('UPDATE bedrijfgegevens SET bedrijfsnaam=:bedrijfsnaam, beschrijving=:beschrijving,   adres=:adres, postcode=:postcode, plaats=:plaats, provincie=:provincie, website=:website, telefoon=:telefoon,  fax=:fax, specialiteit=:specialiteit, specialiteit=:specialiteit, specialiteitnaam=:specialiteitnaam,  transport_manager=:transport_manager, aantal=:aantal, rechtsvorm=:rechtsvorm, vergunning=:vergunning, bedrijfs_email=:bedrijfs_email, premium=:premium, Facebook=:Facebook, Twitter=:Twitter, Google=:Google, LinkedIn=:LinkedIn, Instagram=:Instagram, Pinterest=:Pinterest, afbeelding=:foto, logo=:logo, banner=:banner WHERE bedrijfs_id = :bedrijfs_id');
+						$sth = $pdo->prepare('UPDATE bedrijfgegevens SET bedrijfsnaam=:bedrijfsnaam, beschrijving=:beschrijving,   adres=:adres, postcode=:postcode, plaats=:plaats, provincie=:provincie, website=:website, telefoon=:telefoon,  fax=:fax, specialiteit=:specialiteit, specialiteit=:specialiteit, specialiteitnaam=:specialiteitnaam,  transport_manager=:transport_manager, aantal=:aantal, rechtsvorm=:rechtsvorm, vergunning=:vergunning, bedrijfs_email=:bedrijfs_email, premium=:premium, Facebook=:Facebook, Twitter=:Twitter, Google=:Google, LinkedIn=:LinkedIn, Instagram=:Instagram, Pinterest=:Pinterest, afbeelding=:foto, logo=:logo, banner=:banner, openingstijden=:openingstijden WHERE bedrijfs_id = :bedrijfs_id');
 						//De variabele parameters wordt uitgevoerd
 						$sth->execute($parameters);
 						
@@ -261,7 +294,40 @@ if(LoginCheck($pdo))
 						specialiteit_1=:specialiteit_1, specialiteit_2=:specialiteit_2, specialiteit_3=:specialiteit_3, specialiteit_4=:specialiteit_4, specialiteit_5=:specialiteit_5, specialiteit_6=:specialiteit_6, specialiteit_7=:specialiteit_7, specialiteit_8=:specialiteit_8, specialiteit_9=:specialiteit_9, specialiteit_10=:specialiteit_10, specialiteit_11=:specialiteit_11, specialiteit_12=:specialiteit_12, specialiteit_13=:specialiteit_13, specialiteit_14=:specialiteit_14, specialiteit_15=:specialiteit_15, specialiteit_16=:specialiteit_16, specialiteit_17=:specialiteit_17, specialiteit_18=:specialiteit_18, specialiteit_19=:specialiteit_19, specialiteit_20=:specialiteit_20 WHERE bedrijfs_id = :bedrijfs_id');
 						$sth->execute($parameters);
 						
-						
+						if($openingstijden == 'ja' && $openingstijden != 'nee' )
+						{
+							$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+							$sth = $pdo->prepare('SELECT bedrijfs_id FROM openingstijden WHERE bedrijfs_id = :bedrijfs_id');
+							$sth->execute($parameters);
+							$row = $sth->fetch();
+							
+							if($row['bedrijfs_id'] == NULL || $row['bedrijfs_id'] == '' )
+							{
+								$parameters = array(':bedrijfs_id'=>$bedrijfs_id,
+													':maandag'=>$otmaandag,
+													':dinsdag'=>$otdinsdag,
+													':woensdag'=>$otwoensdag,
+													':donderdag'=>$otdonderdag,
+													':vrijdag'=>$otvrijdag,
+													':zaterdag'=>$otzaterdag,
+													':zondag'=>$otzondag);
+								$sth = $pdo->prepare('INSERT INTO openingstijden (bedrijfs_id, maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag) VALUES (:bedrijfs_id, :maandag, :dinsdag, :woensdag, :donderdag, :vrijdag, :zaterdag, :zondag)');
+								$sth->execute($parameters);	
+							}
+							else
+							{
+								$parameters = array(':bedrijfs_id'=>$bedrijfs_id,
+													':maandag'=>$otmaandag,
+													':dinsdag'=>$otdinsdag,
+													':woensdag'=>$otwoensdag,
+													':donderdag'=>$otdonderdag,
+													':vrijdag'=>$otvrijdag,
+													':zaterdag'=>$otzaterdag,
+													':zondag'=>$otzondag);
+								$sth = $pdo->prepare('UPDATE openingstijden SET maandag=:maandag, dinsdag=:dinsdag, woensdag=:woensdag, donderdag=:donderdag, vrijdag=:vrijdag, zaterdag=:zaterdag, zondag=:zondag WHERE bedrijfs_id = :bedrijfs_id ');
+								$sth->execute($parameters);
+							}
+						}
 						
 						echo'De gegvens van '. $bedrijfs_naam.' zijn bijgewerkt.<br />';
 						echo '<META http-equiv="refresh" content="5;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';

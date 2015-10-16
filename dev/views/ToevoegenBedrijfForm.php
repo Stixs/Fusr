@@ -1,3 +1,4 @@
+<?php $aan = 1; ?>
 <div class="row">
 	<div class="col-xs-12 ContentPadding">
 		<h1>Registreren</h1>
@@ -290,6 +291,70 @@
 						</label>
 					</div>
 				</div>
+			<?php if($aan == 1) { ?>
+				<div class="form-group">
+					<label for="openingestijden">Openingstijden</label>
+					<div class="radio">
+						<label class="radio-inline">
+							<input type="radio" name="openingstijden" id="openingstijden_ja" value="ja" />
+							Ja
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="openingstijden" id="openingestijden_nee" value="nee" checked />
+							nee
+						</label>
+					</div>
+				</div>
+				
+				<div class="col-xs-6">
+					<div class="formgroup">
+						<label for="otmaandag">Maandag:</label>
+						<input type="text" class="form-control" name="maandag" id="otmaandag" value="<?php echo $otmaandag; ?>" />
+					</div>
+				</div>
+				
+				<div class="col-xs-6">
+					<div class="formgroup">
+						<label for="otdinsdag">Dinsdag:</label>
+						<input type="text" class="form-control" name="dinsdag" id="otdinsdag" value="<?php echo $otdinsdag; ?>" />
+					</div>
+				</div>
+				
+				<div class="col-xs-6">
+					<div class="formgroup">
+						<label for="otwoensdag">Woensdag:</label>
+						<input type="text" class="form-control" name="Woensdag" id="otWoensdag" value="<?php echo $otwoensdag; ?>" />
+					</div>
+				</div>
+				
+				<div class="col-xs-6">
+					<div class="formgroup">
+						<label for="otdonderdag">Donderdag:</label>
+						<input type="text" class="form-control" name="donderdag" id="otdonderdag" value="<?php echo $otdonderdag; ?>" />
+					</div>
+				</div>
+				
+				<div class="col-xs-6">
+					<div class="formgroup">
+						<label for="otvrijdag">Vrijdag:</label>
+						<input type="text" class="form-control" name="vrijdag" id="otvrijdag" value="<?php echo $otvrijdag; ?>" />
+					</div>
+				</div>
+				
+				<div class="col-xs-6">
+					<div class="formgroup">
+						<label for="otzaterdag">Zaterdag:</label>
+						<input type="text" class="form-control" name="zaterdag" id="otzaterdag" value="<?php echo $otzaterdag; ?>" />
+					</div>
+				</div>
+				
+				<div class="col-xs-6">
+					<div class="formgroup">
+						<label for="otzondag">Zondag:</label>
+						<input type="text" class="form-control" name="zondag" id="otzondag" value="<?php echo $otzondag; ?>" />
+					</div>
+				</div>
+				<?php } ?>
 			</div>
 			<div class="col-xs-12">
 				<div class="form-group">

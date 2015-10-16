@@ -1,0 +1,4 @@
+naam: openingstijden
+type: varchar(3)
+leeg: nee
+standaardwaarde: geen
