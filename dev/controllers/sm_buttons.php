@@ -1,6 +1,6 @@
 <div class="col-xs-2 facebook">
 	<div class="fb-like" 
-		data-href="<?php echo $actual_link; ?>" 
+		data-href="" 
 		data-layout="button_count" 
 		data-action="like" 
 		data-show-faces="true" 

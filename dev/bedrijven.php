@@ -1,8 +1,15 @@
 <?php
 
 require('./controllers/header.php');
+	$bedrijfs_id = $_GET['bedrijfs_id'];
+	
+	$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+	$sth = $pdo->prepare('select * from openingstijden where bedrijfs_id = :bedrijfs_id');
+	$sth->execute();
+	$row = $sth->fetch();
+	
 
-	$bedrijfs_id = $_GET['bedrijfs_id'];	
+		
 	$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
 	$sth = $pdo->prepare('select * from bedrijfgegevens where bedrijfs_id = :bedrijfs_id');
 	$sth->execute($parameters);
@@ -144,25 +151,7 @@ if ($row['premium'] == 'gold')
 			</tr>
 			<?php 
 			}
-			$aan = 1;	
-			if($aan == 1){	
-			if($row['openingstijden'] == 'ja')
-			{
-			?>
-			<tr>
-				<table>
-					<tr><td>Maandag</td><td><?php echo 'test'; ?></td></tr>
-					<tr><td>Dinsdag</td><td><?php echo 'test'; ?></td></tr>
-					<tr><td>Woensdag</td><td><?php echo 'test'; ?></td></tr>
-					<tr><td>Donderdag</td><td><?php echo 'test'; ?></td></tr>
-					<tr><td>vrijdag</td><td><?php echo 'test'; ?></td></tr>
-					<tr><td>zaterdag</td><td><?php echo 'test'; ?></td></tr>
-					<tr><td>zondag</td><td><?php echo 'test'; ?></td></tr>
-				</table>
-			</tr>
-			<?php
-			}
-			}
+			
 			?>
 			<tr>
 				<td>Transport Manager:</td><td><?php echo $row['transport_manager']; ?></td>
@@ -171,19 +160,44 @@ if ($row['premium'] == 'gold')
 				<td>Specialiteit:</td><td>
 				<?php 
 				
-				
-				$sth = $pdo->prepare('SELECT * FROM specialiteiten WHERE specialiteit_id REGEXP '.$special);
+				$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+				$sth = $pdo->prepare('SELECT * FROM bedrijfs_specialiteiten WHERE bedrijfs_id = :bedrijfs_id');
 				$sth->execute($parameters);
-				$specialiteiten = NULL;
-				while($row = $sth->fetch())
-				{
-				$specialiteiten .= $row['specialiteit'].'<br>'; 
-				}
-				$specialiteiten = substr($specialiteiten, 0, -4);
-				echo $specialiteiten;
 				
-				?></td>
+				$row = $sth->fetch();
+				for($count = 1; $count <= 20; $count++){
+					if(!empty($row['specialiteit_'.$count])){
+					echo $row['specialiteit_'.$count].', ';
+					}
+				}
+				
+				?>
+				</td>
 			</tr>
+			<?php
+			$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+			$sth = $pdo->prepare('SELECT * FROM openingstijden WHERE bedrijfs_id = :bedrijfs_id');
+			$sth->execute($parameters);
+			
+			if(isset($row['o_maandag']) or isset($row['o_dinsdag']) or isset($row['o_woensdag']) or isset($row['o_donderdag']) or isset($row['o_vrijdag']) or isset($row['o_zaterdag']) or isset($row['o_zondag']))
+			{
+			?>
+			<tr>
+				<td>
+					<table>
+						<tr><td>Maandag</td><td><?php echo 'test'; ?></td></tr>
+						<tr><td>Dinsdag</td><td><?php echo 'test'; ?></td></tr>
+						<tr><td>Woensdag</td><td><?php echo 'test'; ?></td></tr>
+						<tr><td>Donderdag</td><td><?php echo 'test'; ?></td></tr>
+						<tr><td>vrijdag</td><td><?php echo 'test'; ?></td></tr>
+						<tr><td>zaterdag</td><td><?php echo 'test'; ?></td></tr>
+						<tr><td>zondag</td><td><?php echo 'test'; ?></td></tr>
+					</table>
+				<td>
+			</tr>
+			<?php
+			}
+			?>
 		</table>
 		<div class="col-xs-12">
 			<!-- video -->

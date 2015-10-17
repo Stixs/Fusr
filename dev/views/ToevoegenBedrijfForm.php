@@ -14,7 +14,7 @@
 		<form name="RegistrerenFormulier" class="registreren" action="" method="post" enctype="multipart/form-data">
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
-					<?php echo branchekeuze($pdo, $branche_id); ?>
+					<?php echo branchekeuze($pdo, 'branche', 1, null); ?>
 				</div>
 				<div class="form-group">
 					<label for="Bedrijfsnaam">Bedrijfsnaam:</label>

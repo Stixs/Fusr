@@ -1,11 +1,12 @@
 <div class="row">
 	<div class="col-xs-12 ContentPadding">
 		<h1>Registreren</h1>
+		<div class="form-group">
+					<?php echo branchekeuze($pdo, 'branche', 1, null); ?>
+				</div>
 		<form name="RegistrerenFormulier" class="registreren" action="" method="post" enctype="multipart/form-data">
 			<div class="col-xs-12 col-md-6">
-				<div class="form-group">
-					<?php echo branchekeuze($pdo, 'branche', 1); ?>
-				</div>
+				
 				<div class="form-group">
 					<label for="Bedrijfsnaam">Bedrijfsnaam:</label>
 					<input type="text" class="form-control" id="bedrijf_naam" name="Bedrijfsnaam" value="<?php echo $bedrijfs_naam; ?>" />
