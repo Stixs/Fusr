@@ -1,21 +1,22 @@
 <?php
-//init fields
-$bedrijf_naam = $adres = $postcode = $plaats = $land = $telefoon = $fax = $type = $naar = $specialiteit = $bedrijf_email = $Username = $Password = $email = NULL;
 
-//init error fields
-//= NULL;
 
-if(isset($_POST['Registreerbedrijf']))
-{
-	$CheckOnErrors = false;
+
+
+require('/Usernamegenerate.php');
+require('/Passwordgenerate.php');
+require('/connection.php');
+$pdo = ConnectDB();
+
+$CheckOnErrors = false;
 	
-	$Username=$_POST['Username'];
-	$Password=$_POST['Password'];
-	$email = $_POST["email"];
+$Username= $username;
+$Password= $pw;
+	
 	
 	if($CheckOnErrors == true) 
 	{
-	require('./views/RegistreerBedrijfForm.php');
+	require('.\RegistreerBedrijfForm.php');
 	}
 	else
 	{
@@ -25,23 +26,17 @@ if(isset($_POST['Registreerbedrijf']))
 		$salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
 
 		//hash het paswoord met de Salt
-		$wachtwoord = hash('sha512', $wachtwoord . $salt);
+		$Password = hash('sha512', $Password . $salt);
 
 		
-		$parameters = array(':Email'=>$Email,
-							':Inlognaam'=>$Username,
-							':Paswoord'=>$Password,
+		$parameters = array(':Inlognaam'=>$Username,
+							':Password'=>$Password,
 							':salt'=>$salt,
 							':level'=>5
 							);
-		$sth = $pdo->prepare('INSERT INTO gebruikers (Inlognaam, email, wachtwoord, salt, level) VALUES (:Inlognaam, :email, :Password, :salt, :level)');
+		$sth = $pdo->prepare('INSERT INTO gebruikers (Inlognaam, wachtwoord, salt, level) VALUES (:Inlognaam, :Password, :salt, :level)');
 		$sth->execute($parameters);
-		echo 'test';
 	}
-}
-else
-{
-	require('./views/RegistreerBedrijfForm.php');
-}
+
 
 ?>
