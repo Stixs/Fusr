@@ -15,14 +15,24 @@ require('./controllers/header.php');
 	$sth->execute($parameters);
 	$row = $sth->fetch();
 	
-
+$krpano = 0;
 if ($row['premium'] == 'gold')
 {	
 ?>
 <div class="row">
+	<?php if($krpano == 1) { ?>
+		<script src="embedpano.js"></script>
+		
+		<div id="pano" style="width:600px; height:400px;"></div>
+
+		<script>
+			embedpano({swf:"krpano.swf", xml:"pano.xml", target:"pano"});
+		</script>
+	<?php } else { ?>
 	<div class="col-xs-12">
 		<?php if(!empty($row['banner'])){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $row['banner']; ?>" width="100%" role="banner" /> <?php } ?>
 	</div>
+	<?php  } ?>
 </div>
 <div class="rand row">
 	<div class="col-xs-12 naam-bedrijf">
