@@ -1,12 +1,11 @@
 <?php
-<<<<<<< HEAD
-=======
+
 
 require('./connection.php');
 $pdo = ConnectDB();
 //init fields
 $bedrijf_naam = $adres = $postcode = $plaats = $land = $telefoon = $fax = $type = $naar = $specialiteit = $bedrijf_email = $Username = $Password = $email = NULL;
->>>>>>> origin/master
+
 
 
 
@@ -20,15 +19,12 @@ $CheckOnErrors = false;
 	
 $Username= $username;
 $Password= $pw;
-	
+	0|0
 	
 	if($CheckOnErrors == true) 
 	{
-<<<<<<< HEAD
 	require('.\RegistreerBedrijfForm.php');
-=======
 	require('./RegistreerBedrijfForm.php');
->>>>>>> origin/master
 	}
 	else
 	{
@@ -40,13 +36,10 @@ $Password= $pw;
 		//hash het paswoord met de Salt
 		$Password = hash('sha512', $Password . $salt);
 
-		
-<<<<<<< HEAD
-		$parameters = array(':Inlognaam'=>$Username,
-=======
+	
+
 		$parameters = array(':email'=>$email,
 							':Inlognaam'=>$Username,
->>>>>>> origin/master
 							':Password'=>$Password,
 							':salt'=>$salt,
 							':level'=>5
@@ -54,14 +47,5 @@ $Password= $pw;
 		$sth = $pdo->prepare('INSERT INTO gebruikers (Inlognaam, wachtwoord, salt, level) VALUES (:Inlognaam, :Password, :salt, :level)');
 		$sth->execute($parameters);
 	}
-<<<<<<< HEAD
-
-=======
-}
-else
-{
-	require('./RegistreerBedrijfForm.php');
-}
->>>>>>> origin/master
 
 ?>
