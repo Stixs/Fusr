@@ -1,6 +1,8 @@
 <?php
 require('./controllers/header.php');
 
+
+
 function login($Username, $password, $pdo)
 {
 	
@@ -24,7 +26,7 @@ function login($Username, $password, $pdo)
 			//Controleert of het de zelfde browser is.
 			$user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-
+			
 			$_SESSION['user_id'] = $row['gebruiker_id'];
 			$_SESSION['username'] = $row['inlognaam'];
 			$_SESSION['level'] = $row['level'];

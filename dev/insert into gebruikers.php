@@ -14,7 +14,7 @@ while($row = $sth->fetch() and $count < 20)
 	$Username= $username;
 	$Password= $pw;
 	
-	$bedrijfs_id = $row['bedrijfs_id'];
+	$bedrijfs_id = $row['id'];
 	//maak unieke salt
 		$salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
 
@@ -31,8 +31,7 @@ while($row = $sth->fetch() and $count < 20)
 							);
 		$sth2 = $pdo->prepare('INSERT INTO gebruikers (gebruiker_id, bedrijfs_id, inlognaam, wachtwoord, salt, level) VALUES (:bedrijfs_id, :bedrijfs_id, :Inlognaam, :Password, :salt, :level)');
 		$sth2->execute($parameters);
-	    echo $pw;
-	    echo $row['bedrijfs_id'].'</br>';
+	    echo $row['id'] . ' - ' . $pw . '<br>';
 	
 		
 }

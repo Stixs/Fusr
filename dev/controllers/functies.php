@@ -1,5 +1,28 @@
 <?php
 
+function passwordcheck($password, $pdo)
+{
+	$gebruiker_id = $_SESSION['user_id'];
+	
+	$parameters = array(':gebruiker_id'=>$gebruiker_id);
+	$sth = $pdo->prepare('SELECT * FROM gebruikers WHERE gebruiker_id = :gebruiker_id LIMIT 1 ');
+	$sth->execute($parameters);
+	
+	$row = $sth->fetch();
+	
+	$password = hash('sha512', $password . $row['salt']);
+
+		
+		//Controleert of het wachtwoord correct is.
+		if ($row['wachtwoord'] == $password) 
+		{
+		
+		} 
+		else 
+		{
+			return false;
+		}
+}
 
 function LoginCheck($pdo) 
 {
