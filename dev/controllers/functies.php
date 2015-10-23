@@ -1,29 +1,5 @@
 <?php
 
-function passwordcheck($password, $pdo)
-{
-	$gebruiker_id = $_SESSION['user_id'];
-	
-	$parameters = array(':gebruiker_id'=>$gebruiker_id);
-	$sth = $pdo->prepare('SELECT * FROM gebruikers WHERE gebruiker_id = :gebruiker_id LIMIT 1 ');
-	$sth->execute($parameters);
-	
-	$row = $sth->fetch();
-	
-	$password = hash('sha512', $password . $row['salt']);
-
-		
-		//Controleert of het wachtwoord correct is.
-		if ($row['wachtwoord'] == $password) 
-		{
-			return true;
-		} 
-		else 
-		{
-			return false;
-			
-		}
-}
 
 function LoginCheck($pdo) 
 {
@@ -112,12 +88,12 @@ function LoginCheck($pdo)
   function is_Username_Unique($Invoer,$pdo)
   {
 	$parameters = array(':Username'=>$Invoer);
-	$sth = $pdo->prepare('SELECT gebruiker_id FROM gebruikers WHERE inlognaam = :Username LIMIT 1');
+	$sth = $pdo->prepare('SELECT gebruiker_id FROM klanten WHERE Inlognaam = :Username LIMIT 1');
 
 	$sth->execute($parameters);
 
 	// controleren of de username voorkomt in de DB
-	if ($sth->rowCount() == 1)
+	if ($sth->rowCount() == 1) 
 		return false;//username komt voor
 	else
 		return true;//username komt niet voor
@@ -180,24 +156,24 @@ function openingstijden($openingstijd = NULL, $dag) {
     return $html;
 }
 
-function specialiteitkeuze($pdo, $name, $id, $keuze = NULL, $id = null) {
+function specialiteitkeuze($pdo, $name, $id, $keuze = NULL, $branche_id = null) {
 
 
 	$html = '<label for="sel'.$id.'">Specialiteit:</label>';
     $html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';	
-	$sth = $pdo->prepare('SELECT * FROM specialiteiten where id = '.$id);
+	$sth = $pdo->prepare('SELECT * FROM specialiteiten where subbranche_id = '.$branche_id);
 		$sth->execute();
 			$html .= '<option value=""></option>';
 			while($row = $sth->fetch())
 				{
 					
-					if($row['id'] == $keuze)
+					if($row['specialiteit'] == $keuze)
 					{
-						$html .= '<option value="'.$row['id'].'" selected="selected">'.$row['id'].'</option>';
+						$html .= '<option value="'.$row['specialiteit'].'" selected="selected">'.$row['specialiteit'].'</option>';
 					}
 					else
 					{
-						$html .= '<option value="'.$row['id'].'">'.$row['id'].'</option>';
+						$html .= '<option value="'.$row['specialiteit'].'">'.$row['specialiteit'].'</option>';
 					}
 				}
 	$html .= '</select>';
@@ -239,7 +215,6 @@ function branchekeuze($pdo, $name, $id, $keuze = NULL) {
 			$html .= '<option style="display:none" value="">Selecteer branche</option>';
 			while($row = $sth->fetch())
 				{
-					
 					if($row['branche_id'] == $branche_id)
 					{
 						$html.= '<option value="'.$row['branche_id'].'" selected="selected">'.$row['subbranche'].'</option>';
@@ -268,6 +243,8 @@ return ($json['results'][0]['geometry']['location']['lat'].",".$json['results'][
  
 }
 
-
-
+function convertSearchString($string) {
+	$string = str_replace('>', '', html_entity_decode($string));
+	return preg_replace('/\b(?<!\+)\w+|["|\'].+?["|\']/', '+$0', $string);
+}
 ?>
