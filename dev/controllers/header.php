@@ -32,8 +32,8 @@ else
 	<script src="./ckeditor/ckeditor.js"></script>
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
-	<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
-
+	<!--<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+-->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.8.22/jquery-ui.min.js" type="text/javascript"></script>
 

@@ -8,32 +8,33 @@
 				
 					<div class="form-group">
 						<label for="Bedrijfsnaam">Wijzig inlognaam:</label>
-						<input type="text" class="form-control" id="bedrijf_naam" name="Inlognaam" value="<?php echo $inlognaam; ?>" />
-						<?php echo $InlogErr; ?>
+						<input type="text" class="form-control" id="bedrijf_naam" name="inlognaam" value="<?php echo $inlognaam; ?>" />
+						<?php echo '<h5 style="color:red;margin:0px;font-size:15px">'. $InlogErr. '</h5>'; ?>
 					</div>
-						
+					<hr>
 					<div class="form-group">
-						<label for="Postcode">Oud wachtwoord:</label>
-						<input type="text" class="form-control" id="Postcode" name="O_wachtwoord" value="" />
-						<?php echo $oudErr; ?>
+						<label for="Adres">Wijzig emailadres:</label>
+						<input type="text" class="form-control" id="Adres" name="emailadres" value="<?php echo $emailadres; ?>"  />
 					</div>
-					
-					
+					<hr>
 					<div class="form-group">
 						<label for="Postcode">Nieuw wachtwoord:</label>
 						<input type="text" class="form-control" id="Postcode" name="N_wachtwoord" value="" />
-						<?php echo $nieuwErr; ?>
+						<?php echo '<h5 style="color:red;margin:0px;font-size:15px">'. $nieuwErr. '</h5>'; ?>
 					</div>
 					<div class="form-group">
 						<label for="Postcode">Herhaal wachtwoord:</label>
 						<input type="text" class="form-control" id="Postcode" name="H_wachtwoord" value="" />
-						<?php echo $herhaalErr; ?>
+						<?php echo '<h5 style="color:red;margin:0px;font-size:15px">'. $herhaalErr. '</h5>'; ?>
 					</div>
 					
 					
+					<hr>
+					
 					<div class="form-group">
-						<label for="Adres">Wijzig emailadres:</label>
-						<input type="text" class="form-control" id="Adres" name="adres" value="<?php echo $Email; ?>"  />
+						<label for="Postcode">Huidig wachtwoord:</label>
+						<input type="text" class="form-control" id="Postcode" name="O_wachtwoord" value="" />
+						<?php echo '<h5 style="color:red;margin:0px;font-size:15px">'. $oudErr. '</h5>'; ?>
 					</div>
 					
 					

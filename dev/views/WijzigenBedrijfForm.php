@@ -7,13 +7,13 @@
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
 					<label for="Bedrijfsnaam">Bedrijfsnaam:</label>
-					<input type="text" class="form-control" id="bedrijf_naam" name="Bedrijfsnaam" value="<?php echo $bedrijfs_naam; ?>" />
+					<input type="text" class="form-control" id="bedrijf_naam" name="Bedrijfsnaam" value="<?php echo $bedrijfsnaam; ?>" />
 					<?php echo $NameErr; ?>
 				</div>
 					
 				<div class="form-group">
-					<label for="Adres">Adres:</label>
-					<input type="text" class="form-control" id="Adres" name="adres" value="<?php echo $adres; ?>"  />
+					<label for="Adres">Bezoekadres:</label>
+					<input type="text" class="form-control" id="Adres" name="adres" value="<?php echo $bezoekadres; ?>"  />
 				</div>
 					
 				<div class="form-group">
@@ -34,19 +34,19 @@
 				</div>
 					
 				<div class="form-group">
-					<label for="Telefoon">Telefoon:</label>
-					<input type="text" class="form-control" id="Telefoon" name="telefoon" value="<?php echo $telefoon; ?>"  />
+					<label for="Telefoon">Telefoonnummer:</label>
+					<input type="text" class="form-control" id="Telefoon" name="telefoon" value="<?php echo $telefoonnummer; ?>"  />
 					<?php echo $TelErr; ?>
 				</div>
 					
 				<div class="form-group">
-					<label for="Fax">Fax:</label>
-					<input type="text" class="form-control" id="Fax" name="fax" value="<?php echo $fax; ?>"  />
+					<label for="Fax">Mobielnummver:</label>
+					<input type="text" class="form-control" id="Fax" name="fax" value="<?php echo $mobielnummer; ?>"  />
 				</div>
 					
 				<div class="form-group">
-					<label for="Email">Bedrijfs E-mail:</label>
-					<input type="text" class="form-control" id="bedrijfs_email" name="bedrijfs_email" value="<?php echo $bedrijfs_email ?>" />
+					<label for="Email">E-mail:</label>
+					<input type="text" class="form-control" id="bedrijfs_email" name="bedrijfs_email" value="<?php echo $email ?>" />
 					<?php echo $MailErr; ?>
 				</div>
 				
@@ -79,32 +79,32 @@
 					
 			<div class="form-group">
 					<label for="Facebook">Facebook:</label>
-					<input type="text" class="form-control" id="Facebook" name="Facebook" value="<?php echo $Facebook; ?>"  />
+					<input type="text" class="form-control" id="Facebook" name="Facebook" value="<?php echo $facebook; ?>"  />
 			</div>
 		
 			<div class="form-group">
 					<label for="Twitter">Twitter:</label>
-					<input type="text" class="form-control" id="Twitter" name="Twitter" value="<?php echo $Twitter; ?>"  />
+					<input type="text" class="form-control" id="Twitter" name="Twitter" value="<?php echo $twitter; ?>"  />
 			</div>
 					
 			<div class="form-group">
 					<label for="Google">Google+:</label>
-					<input type="text" class="form-control" id="Google" name="Google" value="<?php echo $Google; ?>"  />
+					<input type="text" class="form-control" id="Google" name="Google" value="<?php echo $googleplus; ?>"  />
 			</div>
 			
 			<div class="form-group">
 					<label for="LinkedIn">LinkedIn:</label>
-					<input type="text" class="form-control" id="LinkedIn" name="LinkedIn" value="<?php echo $LinkedIn; ?>"  />
+					<input type="text" class="form-control" id="LinkedIn" name="LinkedIn" value="<?php echo $linkedin; ?>"  />
 			</div>
 					
 			<div class="form-group">
-					<label for="Instagram">Instagram:</label>
-					<input type="text" class="form-control" id="Instagram" name="Instagram" value="<?php echo $Instagram; ?>"  />
+					<label for="Instagram">Youtube:</label>
+					<input type="text" class="form-control" id="Instagram" name="Instagram" value="<?php echo $youtube; ?>"  />
 			</div>
 			
 			<div class="form-group">
 					<label for="Pinterest">Pinterest:</label>
-					<input type="text" class="form-control" id="Pinterest" name="Pinterest" value="<?php echo $Pinterest; ?>"  />
+					<input type="text" class="form-control" id="Pinterest" name="Pinterest" value="<?php echo $pinterest; ?>"  />
 			</div>
 			
 			
@@ -119,7 +119,7 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $row['specialiteit_1'], $branche_id);
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $row['naam[0]'], $branche_id);
 					
 					?>
 				</div>
@@ -260,27 +260,6 @@
 			
 			<div class="col-xs-12 col-md-6">
 				
-					
-					
-				<div class="form-group">
-					<label for="aantal">Aantal:</label>
-					<input type="number" class="form-control" id="aantal" name="aantal" value="<?php echo $aantal; ?>"  />
-				</div>
-					
-				<div class="form-group">
-					<label for="transportmanager">Transport-manager:</label>
-					<input type="text" class="form-control" id="transport_manager" name="transport_manager" value="<?php echo $transport_manager; ?>"  />
-				</div>
-				
-				<div class="form-group">
-					<label for="rechtsvorm">Rechtsvorm:</label>
-					<input type="text" class="form-control" id="rechtsvorm" name="rechtsvorm" value="<?php echo $rechtsvorm; ?>"  />
-				</div>
-				
-				<div class="form-group">
-					<label for="vergunning">Vergunning:</label>
-					<input type="text" class="form-control" id="vergunning" name="vergunning" value="<?php echo $vergunning ?>" />
-				</div>
 				
 				<div class="form-group">
 					<label for="premium">Premium</label>

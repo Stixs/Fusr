@@ -1,7 +1,17 @@
 
 
 <div class="row">
+	
 	<div class="col-xs-4 col-xs-offset-4 ContentPadding">
+	<?php
+	if(isset($_GET['edit'])){
+	?>
+		<div class="form-group">
+				Gelieve opnieuw inloggen
+		</div>
+	<?php
+	}
+	?>
 		<h1>inloggen</h1>
 		<form method="post" action="" name="inloggen">
 			<div class="form-group">

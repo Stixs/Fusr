@@ -1,7 +1,7 @@
 <?php
 require('./controllers/header.php');
 
-var_dump($_SESSION);
+
 
 ?>
 

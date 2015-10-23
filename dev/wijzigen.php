@@ -28,46 +28,47 @@ if(LoginCheck($pdo))
 			case'edit':
 					
 					$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-					$sth = $pdo->prepare('select * from bedrijfs_specialiteiten where bedrijfs_id = :bedrijfs_id');
+					$sth = $pdo->prepare('SELECT *
+					FROM
+					bedrijfgegevens_specialiteiten
+					INNER JOIN
+					specialiteiten on bedrijfgegevens_specialiteiten.specialiteiten_id = specialiteiten.id
+					INNER JOIN
+					bedrijfgegevens on bedrijfgegevens_specialiteiten.bedrijfgegevens_id = bedrijfgegevens.id
+					INNER JOIN
+					plaatsen on bedrijfgegevens.plaats_id = plaatsen.id
+					WHERE
+					bedrijfgegevens_id = '.$bedrijfs_id);
 					$sth->execute($parameters);
-					$row = $sth->fetch();
-					
-					
-					//SQL query om de gegevens van het juiste bedrijf uit de database halen
-					$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-					$sth = $pdo->prepare('select * from bedrijfgegevens where bedrijfs_id = :bedrijfs_id');
-					$sth->execute($parameters);
-					$row = $sth->fetch();
-					
+					while ($row = $sth->fetch())
+					{
 					//Gegevens uit de database halen
-					$bedrijfs_naam = $row['bedrijfsnaam'];
+					$bedrijfsnaam = $row['bedrijfsnaam'];
 					$beschrijving = $row['beschrijving'];
-					$adres = $row['adres'];
+					$bezoekadres = $row['bezoekadres'];
 					$postcode = $row['postcode'];
 					$plaats = $row['plaats'];
 					$provincie = $row['provincie'];
 					$website = $row['website'];
-					$telefoon = $row['telefoon'];
-					$fax = $row['fax'];
-					$type = $row['type'];
-					$bereik = $row['bereik'];
-					$transport_manager = $row['transport_manager'];
-					$aantal = $row['aantal'];
-					$rechtsvorm = $row['rechtsvorm'];
-					$vergunning = $row['vergunning'];
-					$geldigtot = $row['geldig_tot'];
-					$bedrijfs_email = $row['bedrijfs_email'];
+					$telefoonnummer = $row['telefoonnummer'];
+					$mobielnummer = $row['mobielnummer'];
+					$email = $row['email'];
+					$naam[] = $row['naam'];
+					
 					$premium = $row['premium'];
-					$branche_id = $row['branche_id'];
 					
-					$Facebook = $row['Facebook'];
-					$Twitter = $row['Twitter'];
-					$Google = $row['Google'];
-					$LinkedIn = $row['LinkedIn'];
-					$Instagram = $row['Instagram'];
-					$Pinterest = $row['Pinterest'];
+					$facebook = $row['facebook'];
+					$twitter = $row['twitter'];
+					$googleplus = $row['googleplus'];
+					$linkedin = $row['linkedin'];
+					$youtube = $row['youtube'];
+					$pinterest = $row['pinterest'];
 					
+					$logo = $row['logo'];
 					
+					}
+					echo $row['plaats'].'test';
+					/*
 					$sth = $pdo->prepare('select * from openingstijden where bedrijfs_id = :bedrijfs_id');
 					$sth->execute($parameters);
 					$row = $sth->fetch();
@@ -86,7 +87,7 @@ if(LoginCheck($pdo))
 					$d_vrijdag = $row['d_vrijdag'];
 					$d_zaterdag = $row['d_zaterdag'];
 					$d_zondag = $row['d_zondag'];
-					
+					*/
 				
 					
 					//controleert of de submit knop wijzigenbedrijf in het formulier is ingedurkt.
@@ -119,22 +120,16 @@ if(LoginCheck($pdo))
 					$provincie = $_POST['provincie'];
 					$website = $_POST['website'];
 					$telefoon = $_POST['telefoon'];
-					$fax = $_POST['fax'];
-					$specialiteit = $_POST['specialiteit'];
-					$transport_manager = $_POST['transport_manager'];
-					$aantal = $_POST['aantal'];
-					$rechtsvorm = $_POST['rechtsvorm'];
-					$vergunning = $_POST['vergunning'];
 					$bedrijfs_email = $_POST['bedrijfs_email'];
 					$beschrijving = $_POST['beschrijving'];
 					$premium = $_POST['premium'];
 					
-					$Facebook = $_POST['Facebook'];
-					$Twitter = $_POST['Twitter'];
-					$Google = $_POST['Google'];
-					$LinkedIn = $_POST['LinkedIn'];
-					$Instagram = $_POST['Instagram'];
-					$Pinterest = $_POST['Pinterest'];
+					$facebook = $_POST['facebook'];
+					$twitter = $_POST['twitter'];
+					$googleplus = $_POST['googleplus'];
+					$linkedIn = $_POST['linkedIn'];
+					$instagram = $_POST['instagram'];
+					$pinterest = $_POST['pinterest'];
 				
 					$o_maandag = $_POST['o_maandag'];
 					$o_dinsdag = $_POST['o_dinsdag'];
@@ -178,12 +173,6 @@ if(LoginCheck($pdo))
 								}
 					
 					
-					$N = 0;
-					foreach($specialiteit as $value) 
-					{
-						$N++;
-						${'specialiteit_'.$N} = $value;
-					}
 					
 					
 					
