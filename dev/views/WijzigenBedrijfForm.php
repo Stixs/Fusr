@@ -118,8 +118,10 @@
 			?>
 			<div class="col-xs-3">
 				<div class="form-group">
-					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $row['naam[0]'], $branche_id);
+					<?php
+					if(!isset($naam[0])){
+						$naam[0] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[0]);
 					
 					?>
 				</div>
@@ -127,21 +129,27 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 2, $row['specialiteit_2'], $branche_id);
+					if(!isset($naam[1])){
+						$naam[1] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[1]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 3, $row['specialiteit_3'], $branche_id);
+					if(!isset($naam[2])){
+						$naam[2] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[2]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 4, $row['specialiteit_4'], $branche_id); 
+					if(!isset($naam[3])){
+						$naam[3] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[3]);
 					?>
 				</div>
 			</div>

@@ -180,24 +180,24 @@ function openingstijden($openingstijd = NULL, $dag) {
     return $html;
 }
 
-function specialiteitkeuze($pdo, $name, $id, $keuze = NULL, $id = null) {
+function specialiteitkeuze($pdo, $name, $id, $keuze = NULL) {
 
 
 	$html = '<label for="sel'.$id.'">Specialiteit:</label>';
     $html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';	
-	$sth = $pdo->prepare('SELECT * FROM specialiteiten where id = '.$id);
+	$sth = $pdo->prepare('SELECT * FROM specialiteiten ORDER BY naam');
 		$sth->execute();
 			$html .= '<option value=""></option>';
 			while($row = $sth->fetch())
 				{
 					
-					if($row['id'] == $keuze)
+					if($row['naam'] == $keuze)
 					{
-						$html .= '<option value="'.$row['id'].'" selected="selected">'.$row['id'].'</option>';
+						$html .= '<option value="'.$row['id'].'" selected="selected">'.$row['naam'].'</option>';
 					}
 					else
 					{
-						$html .= '<option value="'.$row['id'].'">'.$row['id'].'</option>';
+						$html .= '<option value="'.$row['id'].'">'.$row['naam'].'</option>';
 					}
 				}
 	$html .= '</select>';

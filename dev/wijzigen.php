@@ -67,7 +67,6 @@ if(LoginCheck($pdo))
 					$logo = $row['logo'];
 					
 					}
-					echo $row['plaats'].'test';
 					/*
 					$sth = $pdo->prepare('select * from openingstijden where bedrijfs_id = :bedrijfs_id');
 					$sth->execute($parameters);
