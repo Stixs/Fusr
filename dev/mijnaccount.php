@@ -1,6 +1,6 @@
 <?php
 require('./controllers/header.php');
-
+var_dump($_SESSION);
 //Controleert of je wel bent ingelogd.
 if(LoginCheck($pdo))
 {
@@ -11,14 +11,20 @@ if(LoginCheck($pdo))
 	//init error fields
 	$InlogErr = $oudErr = $nieuwErr = $herhaalErr = NULL;
 
+	$gebruiker_id = $_SESSION['user_id'];
+	$parameters = array(':gebruiker_id'=>$gebruiker_id);
+	$sth = $pdo->prepare('SELECT gebruikers.*, bedrijfgegevens.email FROM bedrijfgegevens INNER JOIN gebruikers on gebruikers.gebruiker_id = bedrijfgegevens.id WHERE gebruiker_id = :gebruiker_id');
+	$sth->execute($parameters);
+	$row = $sth->fetch();
+
+	$inlognaam = $row['inlognaam'];
+	$email = $row['email'];
 	
-	//controleert of de knop aanpassen of verwijderen is ingedurkt.
 	if(isset($_POST['Wijzigen']))
 	{
-		//haalt gegevens uit de link via Get om tekijken of het wijzigen of verwijderen is en om welk bedrijf het gaat.
 		$user_id = $_SESSION['user_id'];
 		$inlognaam = $_POST['inlognaam'];
-		$emailadres = $_POST['emailadres'];
+		$email = $_POST['email'];
 		$O_wachtwoord = $_POST['O_wachtwoord'];
 		$N_wachtwoord = $_POST['N_wachtwoord'];
 		$H_wachtwoord = $_POST['H_wachtwoord'];
@@ -26,43 +32,51 @@ if(LoginCheck($pdo))
 					$CheckOnErrors = false;
 					$password = true;
 					
-					if(is_Username_Unique($inlognaam, $pdo) == false)
+					if($_POST['inlognaam'] != $_SESSION['username'] and $row['email'] == $_POST['email'] and $_POST['O_wachtwoord'] == NULL)
 					{
-						$InlogErr = 'Inlognaam is al in gebruik';
-						$CheckOnErrors = true;
+						if($_POST['inlognaam'] != $_SESSION['username']){
+							if(is_Username_Unique($inlognaam, $pdo) == false)
+							{
+								$InlogErr = 'Inlognaam is al in gebruik';
+								$CheckOnErrors = true;
+							}
+						}
+						if($N_wachtwoord != $H_wachtwoord)
+						{
+							$herhaalErr = 'Uw wachtwoord komt niet overeen';
+							$CheckOnErrors = true;
+							$password = false;
+						}
+						
+						if($O_wachtwoord == '')
+						{
+							$oudErr = 'Uw wachtwoord mag niet leeg zijn';
+							$CheckOnErrors = true;
+							$password = false;
+						}
+						elseif(passwordcheck($O_wachtwoord, $pdo) == false)
+						{
+							$oudErr = 'Uw wachtwoord is onjuist';
+							$CheckOnErrors = true;
+							$password = false;
+						}
+						if ($N_wachtwoord == '' or $H_wachtwoord == '')
+						{
+							$password = false;
+						}
+						
+						if($password == true)
+						{
+						$salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+						
+						$wachtwoord = hash('sha512', $N_wachtwoord . $salt);
+						}
 					}
-					
-					if($N_wachtwoord != $H_wachtwoord)
+					else
 					{
-						$herhaalErr = 'Uw wachtwoord komt niet overeen';
 						$CheckOnErrors = true;
 						$password = false;
 					}
-					
-					if($O_wachtwoord == '')
-					{
-						$oudErr = 'Uw wachtwoord mag niet leeg zijn';
-						$CheckOnErrors = true;
-						$password = false;
-					}
-					elseif(passwordcheck($O_wachtwoord, $pdo) == false)
-					{
-						$oudErr = 'Uw wachtwoord is onjuist';
-						$CheckOnErrors = true;
-						$password = false;
-					}
-					if ($N_wachtwoord == '' or $H_wachtwoord == '')
-					{
-						$password = false;
-					}
-					
-					if($password == true)
-					{
-					$salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-					
-					$wachtwoord = hash('sha512', $N_wachtwoord . $salt);
-					}
-					
 					
 					
 					//als er fouten zijn dan wordt je terug gestuurd naar het formulier met wat er verbeterd moet worden.
@@ -74,7 +88,6 @@ if(LoginCheck($pdo))
 					{
 					$parameters = array(
 					':inlognaam'=>$inlognaam,
-					':email'=>$emailadres,
 					':user_id'=>$user_id
 					);
 					
@@ -87,7 +100,7 @@ if(LoginCheck($pdo))
 					$parameters = array_merge($parameters, $parameterspass);
 					}
 					
-					$query = 'UPDATE gebruikers SET inlognaam=:inlognaam, email=:email';
+					$query = 'UPDATE gebruikers SET inlognaam=:inlognaam';
 					
 					if($password == true){
 					$query.= ', wachtwoord=:wachtwoord, salt=:salt';
@@ -95,6 +108,11 @@ if(LoginCheck($pdo))
 					$query.= ' WHERE gebruiker_id = :user_id';
 					
 					$sth = $pdo->prepare($query);
+					$sth->execute($parameters);
+					
+					$parameters = array(
+					':email'=>$emailadres);
+					$sth = $pdo->prepare('UPDATE gebruikers SET email=:email');
 					$sth->execute($parameters);
 					
 					echo 'Uw gegevens worden gewijzigd';
@@ -106,14 +124,6 @@ if(LoginCheck($pdo))
 	}
 	else
 	{
-		$gebruiker_id = $_SESSION['user_id'];
-		$parameters = array(':gebruiker_id'=>$gebruiker_id);
-		$sth = $pdo->prepare('select * from gebruikers where gebruiker_id = :gebruiker_id');
-		$sth->execute($parameters);
-		$row = $sth->fetch();
-	  
-		$inlognaam = $row['inlognaam'];
-		$emailadres = $row['email'];
 		require('./views/AccountForm.php');
 	}
 

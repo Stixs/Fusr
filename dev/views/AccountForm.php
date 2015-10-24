@@ -14,7 +14,7 @@
 					<hr>
 					<div class="form-group">
 						<label for="Adres">Wijzig emailadres:</label>
-						<input type="text" class="form-control" id="Adres" name="emailadres" value="<?php echo $emailadres; ?>"  />
+						<input type="text" class="form-control" id="Adres" name="email" value="<?php echo $email; ?>"  />
 					</div>
 					<hr>
 					<div class="form-group">

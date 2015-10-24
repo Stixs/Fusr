@@ -7,7 +7,7 @@ if(LoginCheck($pdo))
 {
 	
 	//init fields
-	$bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldig_tot = $website = $branche_id = $openingstijden = $o_maandag = $o_dinsdag = $o_woensdag = $o_donderdag = $o_vrijdag = $o_zaterdag = $o_zondag = $d_maandag = $d_dinsdag = $d_woensdag = $d_donderdag = $d_vrijdag = $d_zaterdag = $d_zondag = NULL;
+	$bedrijfsnaam = $beschrijving = $bezoekadres = $postcode = $plaats = $provincie = $telefoonnummer = $mobielnummer = $email = $website = $branche_id = $openingstijden = $o_maandag = $o_dinsdag = $o_woensdag = $o_donderdag = $o_vrijdag = $o_zaterdag = $o_zondag = $d_maandag = $d_dinsdag = $d_woensdag = $d_donderdag = $d_vrijdag = $d_zaterdag = $d_zondag = NULL;
 
 	//init error fields
 	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = $OpeningsErr = NULL;
@@ -42,6 +42,7 @@ if(LoginCheck($pdo))
 					$sth->execute($parameters);
 					while ($row = $sth->fetch())
 					{
+						
 					//Gegevens uit de database halen
 					$bedrijfsnaam = $row['bedrijfsnaam'];
 					$beschrijving = $row['beschrijving'];
@@ -53,8 +54,10 @@ if(LoginCheck($pdo))
 					$telefoonnummer = $row['telefoonnummer'];
 					$mobielnummer = $row['mobielnummer'];
 					$email = $row['email'];
-					$naam[] = $row['naam'];
-					
+					$logo = $row['logo'];
+					$banner = $row['banner'];
+					$_SESSION['logo'] = $row['logo'];
+					$_SESSION['banner'] = $row['banner'];
 					$premium = $row['premium'];
 					
 					$facebook = $row['facebook'];
@@ -64,7 +67,7 @@ if(LoginCheck($pdo))
 					$youtube = $row['youtube'];
 					$pinterest = $row['pinterest'];
 					
-					$logo = $row['logo'];
+					$naam[] = $row['naam'];
 					
 					}
 					/*
@@ -93,13 +96,13 @@ if(LoginCheck($pdo))
 					if(isset($_POST['Del_Image']))
 					{
 					$image = $_POST['Del_Image'];
-					$leeg = "0";
-					
+					$leeg = '';
 					$parameter = array(':leeg'=>$leeg, ':bedrijfs_id'=>$bedrijfs_id);
-					$sth = $pdo->prepare('UPDATE bedrijfgegevens SET '.$image.'=:leeg WHERE bedrijfs_id = :bedrijfs_id');
+					$sth = $pdo->prepare('UPDATE bedrijfgegevens SET '.$image.'=:leeg WHERE id = :bedrijfs_id');
 					$sth->execute($parameter);
 					
-					//unlink('images/bedrijf_images/'.$bedrijfs_id .'/'. $row[$image]);
+					unset($_SESSION[$image]);
+					unlink('images/bedrijf_images/'.$bedrijfs_id .'/'. $row[$image]);
 					
 					}
 					
@@ -112,22 +115,23 @@ if(LoginCheck($pdo))
 					$specialZ = "'";
 					$specialname = NULL;
 					
-					$bedrijfs_naam = $_POST["Bedrijfsnaam"];
-					$adres = $_POST["adres"];
+					$bedrijfsnaam = $_POST['bedrijfsnaam'];
+					$beschrijving = $_POST['beschrijving'];
+					$bezoekadres = $_POST["bezoekadres"];
 					$postcode = $_POST["postcode"];
 					$plaats = $_POST['plaats'];
 					$provincie = $_POST['provincie'];
 					$website = $_POST['website'];
-					$telefoon = $_POST['telefoon'];
-					$bedrijfs_email = $_POST['bedrijfs_email'];
-					$beschrijving = $_POST['beschrijving'];
+					$telefoonnummer = $_POST['telefoonnummer'];
+					$mobielnummer = $_POST['mobielnummer'];
+					$email = $_POST['email'];
 					$premium = $_POST['premium'];
 					
 					$facebook = $_POST['facebook'];
 					$twitter = $_POST['twitter'];
 					$googleplus = $_POST['googleplus'];
-					$linkedIn = $_POST['linkedIn'];
-					$instagram = $_POST['instagram'];
+					$linkedin = $_POST['linkedin'];
+					$youtube = $_POST['youtube'];
 					$pinterest = $_POST['pinterest'];
 				
 					$o_maandag = $_POST['o_maandag'];
@@ -146,14 +150,14 @@ if(LoginCheck($pdo))
 					$d_zondag = $_POST['d_zondag'];
 					
 					
-					if (basename($_FILES["foto"]["name"]) == null)
+					/*if (basename($_FILES["foto"]["name"]) == null)
 								{
 								$foto = $_SESSION['foto'];
 								}
 								else
 								{
 								$foto = basename($_FILES["foto"]["name"]);
-								}
+								}*/
 					if (basename($_FILES["banner"]["name"]) == null)
 								{
 								$banner = $_SESSION['banner'];
@@ -233,58 +237,61 @@ if(LoginCheck($pdo))
 						$target_dir = "images/bedrijf_images/".$bedrijfs_id."/";
 						$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 						if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)){} 
+						chmod($target_file, 777);
 						$target_file = $target_dir . basename($_FILES["banner"]["name"]);
-						if (move_uploaded_file($_FILES["banner"]["tmp_name"], $target_file)){} 
+						if (move_uploaded_file($_FILES["banner"]["tmp_name"], $target_file)){}
+						chmod($target_file, 777);
 						$target_file = $target_dir . basename($_FILES["logo"]["name"]);
 						if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)){}
+						chmod($target_file, 777);
 						//De gegevens die uit het formulier komen en die correct zijn worden in de array parameters gezet
-						
+						$beschrijving = 'test';
 						$parameters = array(
 						':bedrijfs_id'=>$bedrijfs_id,
-						':bedrijfsnaam'=>$bedrijfs_naam,
+						':bedrijfsnaam'=>$bedrijfsnaam,
 						':beschrijving'=>$beschrijving,
-						':adres'=>$adres,
+						':bezoekadres'=>$bezoekadres,
 						':postcode'=>$postcode,
-						':plaats'=>$plaats,
-						':provincie'=>$provincie,
 						':website'=>$website,
-						':telefoon'=>$telefoon,
-						':fax'=>$fax,
-						':specialiteit'=>$special,
-						':specialiteitnaam'=>$specialname,
-						':transport_manager'=>$transport_manager,
-						':aantal'=>$aantal,
-						':rechtsvorm'=>$rechtsvorm,
-						':vergunning'=>$vergunning,
-						':bedrijfs_email'=>$bedrijfs_email,
+						':telefoonnummer'=>$telefoonnummer,
+						':mobielnummer'=>$mobielnummer,
+						':email'=>$email,
 						':premium'=>$premium,
-						':Facebook'=>$Facebook,
-						':Twitter'=>$Twitter,
-						':Google'=>$Google,
-						':LinkedIn'=>$LinkedIn,
-						':Instagram'=>$Instagram,
-						':Pinterest'=>$Pinterest,
-						':foto'=>$foto,
-						':banner'=>$banner,
+						':facebook'=>$facebook,
+						':twitter'=>$twitter,
+						':googleplus'=>$googleplus,
+						':linkedIn'=>$linkedin,
+						':youtube'=>$youtube,
+						':pinterest'=>$pinterest,
 						':logo'=>$logo,
-						':openingstijden'=>$openingstijden);
+						':banner'=>$banner
+						);
+	
 						
-						//de SQL query om de gegevens in de database te veranderen.
-						
-						$sth = $pdo->prepare('UPDATE bedrijfgegevens SET bedrijfsnaam=:bedrijfsnaam, beschrijving=:beschrijving,   adres=:adres, postcode=:postcode, plaats=:plaats, provincie=:provincie, website=:website, telefoon=:telefoon,  fax=:fax, specialiteit=:specialiteit, specialiteit=:specialiteit, specialiteitnaam=:specialiteitnaam,  transport_manager=:transport_manager, aantal=:aantal, rechtsvorm=:rechtsvorm, vergunning=:vergunning, bedrijfs_email=:bedrijfs_email, premium=:premium, Facebook=:Facebook, Twitter=:Twitter, Google=:Google, LinkedIn=:LinkedIn, Instagram=:Instagram, Pinterest=:Pinterest, afbeelding=:foto, logo=:logo, banner=:banner, openingstijden=:openingstijden WHERE bedrijfs_id = :bedrijfs_id');
-						//De variabele parameters wordt uitgevoerd
+						$sth = $pdo->prepare('UPDATE bedrijfgegevens SET 
+						bedrijfsnaam=:bedrijfsnaam,
+						beschrijving=:beschrijving,
+						bezoekadres=:bezoekadres, 
+						postcode=:postcode, 
+						website=:website, 
+						telefoonnummer=:telefoonnummer,  
+						mobielnummer=:mobielnummer, 
+						email=:email, 
+						premium=:premium, 
+						facebook=:facebook, 
+						twitter=:twitter, 
+						googleplus=:googleplus, 
+						linkedIn=:linkedIn, 
+						youtube=:youtube, 
+						pinterest=:pinterest,
+						logo=:logo,
+						banner=:banner
+						WHERE id = :bedrijfs_id');
+	
 						$sth->execute($parameters);
 						
 						
-						
-						echo $specialiteit_1;
-						
-						$parameters = array(
-						':bedrijfs_id'=>$bedrijfs_id,':specialiteit_1'=>$specialiteit_1,':specialiteit_2'=>$specialiteit_2,':specialiteit_3'=>$specialiteit_3,':specialiteit_4'=>$specialiteit_4,':specialiteit_5'=>$specialiteit_5,':specialiteit_6'=>$specialiteit_6,':specialiteit_7'=>$specialiteit_7,':specialiteit_8'=>$specialiteit_8,':specialiteit_9'=>$specialiteit_9,':specialiteit_10'=>$specialiteit_10,':specialiteit_11'=>$specialiteit_11,':specialiteit_12'=>$specialiteit_12,':specialiteit_13'=>$specialiteit_13,':specialiteit_14'=>$specialiteit_14,':specialiteit_15'=>$specialiteit_15,':specialiteit_16'=>$specialiteit_16,':specialiteit_17'=>$specialiteit_17,':specialiteit_18'=>$specialiteit_18,':specialiteit_19'=>$specialiteit_19,':specialiteit_20'=>$specialiteit_20);
-						
-						$sth = $pdo->prepare('UPDATE bedrijfs_specialiteiten SET 
-						specialiteit_1=:specialiteit_1, specialiteit_2=:specialiteit_2, specialiteit_3=:specialiteit_3, specialiteit_4=:specialiteit_4, specialiteit_5=:specialiteit_5, specialiteit_6=:specialiteit_6, specialiteit_7=:specialiteit_7, specialiteit_8=:specialiteit_8, specialiteit_9=:specialiteit_9, specialiteit_10=:specialiteit_10, specialiteit_11=:specialiteit_11, specialiteit_12=:specialiteit_12, specialiteit_13=:specialiteit_13, specialiteit_14=:specialiteit_14, specialiteit_15=:specialiteit_15, specialiteit_16=:specialiteit_16, specialiteit_17=:specialiteit_17, specialiteit_18=:specialiteit_18, specialiteit_19=:specialiteit_19, specialiteit_20=:specialiteit_20 WHERE bedrijfs_id = :bedrijfs_id');
-						$sth->execute($parameters);
+					/*
 						
 						$parameters = array(
 						':bedrijfs_id'=>$bedrijfs_id,
@@ -307,19 +314,15 @@ if(LoginCheck($pdo))
 						bedrijfs_id=:bedrijfs_id, o_maandag=:o_maandag, o_dinsdag=:o_dinsdag, o_woensdag=:o_woensdag,o_donderdag=:o_donderdag, o_vrijdag=:o_vrijdag ,o_zaterdag=:o_zaterdag, o_zondag=:o_zondag, 
 						d_maandag=:d_maandag, d_dinsdag=:d_dinsdag, d_woensdag=:d_woensdag,d_donderdag=:d_donderdag, d_vrijdag=:d_vrijdag ,d_zaterdag=:d_zaterdag, d_zondag=:d_zondag');
 						$sth->execute($parameters);
-						
-						
-						echo'De gegvens van '. $bedrijfs_naam.' zijn bijgewerkt.<br />';
+						*/
+				
+						echo'De gegvens van '. $bedrijfsnaam.' zijn bijgewerkt.<br />';
 						echo '<META http-equiv="refresh" content="5;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
 					}
 				}
 				else
 				{
 					
-					
-					$_SESSION['logo'] = $row['logo'];
-					$_SESSION['foto'] = $row['afbeelding'];
-					$_SESSION['banner'] = $row['banner'];
 					//laat het formulier WijzigenBedrijfForm zien als de knop wijzigenbedrijf nog niet is ingedurkt.
 					require('./views/WijzigenBedrijfForm.php');
 				}

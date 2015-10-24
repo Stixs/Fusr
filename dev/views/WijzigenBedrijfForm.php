@@ -7,13 +7,13 @@
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
 					<label for="Bedrijfsnaam">Bedrijfsnaam:</label>
-					<input type="text" class="form-control" id="bedrijf_naam" name="Bedrijfsnaam" value="<?php echo $bedrijfsnaam; ?>" />
+					<input type="text" class="form-control" id="bedrijf_naam" name="bedrijfsnaam" value="<?php echo $bedrijfsnaam; ?>" />
 					<?php echo $NameErr; ?>
 				</div>
 					
 				<div class="form-group">
 					<label for="Adres">Bezoekadres:</label>
-					<input type="text" class="form-control" id="Adres" name="adres" value="<?php echo $bezoekadres; ?>"  />
+					<input type="text" class="form-control" id="Adres" name="bezoekadres" value="<?php echo $bezoekadres; ?>"  />
 				</div>
 					
 				<div class="form-group">
@@ -35,18 +35,18 @@
 					
 				<div class="form-group">
 					<label for="Telefoon">Telefoonnummer:</label>
-					<input type="text" class="form-control" id="Telefoon" name="telefoon" value="<?php echo $telefoonnummer; ?>"  />
+					<input type="text" class="form-control" id="Telefoon" name="telefoonnummer" value="<?php echo $telefoonnummer; ?>"  />
 					<?php echo $TelErr; ?>
 				</div>
 					
 				<div class="form-group">
-					<label for="Fax">Mobielnummver:</label>
-					<input type="text" class="form-control" id="Fax" name="fax" value="<?php echo $mobielnummer; ?>"  />
+					<label for="mobielnummer">Mobielnummver:</label>
+					<input type="text" class="form-control" id="mobielnummer" name="mobielnummer" value="<?php echo $mobielnummer; ?>"  />
 				</div>
 					
 				<div class="form-group">
-					<label for="Email">E-mail:</label>
-					<input type="text" class="form-control" id="bedrijfs_email" name="bedrijfs_email" value="<?php echo $email ?>" />
+					<label for="email">E-mail:</label>
+					<input type="text" class="form-control" id="email" name="email" value="<?php echo $email ?>" />
 					<?php echo $MailErr; ?>
 				</div>
 				
@@ -57,54 +57,52 @@
 				<div class="form-group">
 					<label for="banner">Banner:</label>
 					
-					<?php if(empty($row['banner'])){ ?><input type="file" class="form-control" id="banner" name="banner" /><?php } ?>
-					
-					<?php if(!empty($row['banner'])){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $row['banner']; ?>" width="70px" role="banner" />
+					<?php if(empty($banner)){ ?><input type="file" class="form-control" id="banner" name="banner" /><?php } ?>
+					<?php if(!empty($banner)){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $banner; ?>" width="70px" role="banner" />
 					<button class="btn btn-danger" type="submit" name="Del_Image" value="banner" />Verwijder</button> <?php } ?>
 				</div>
 				<div class="form-group">
 					<label for="logo">Logo:</label>
 					
-					<?php if(empty($row['logo'])){ ?><input type="file" class="form-control" id="logo" name="logo" /> <?php } ?>
-					
-					<?php if(!empty($row['logo'])){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $row['logo']; ?>" width="70px" role="logo" />
+					<?php if(empty($logo)){ ?><input type="file" class="form-control" id="logo" name="logo" /> <?php } ?>
+					<?php if(!empty($logo)){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $logo; ?>" width="70px" role="logo" />
 					<button class="btn btn-danger" type="submit" name="Del_Image" value="logo" />Verwijder</button> <?php } ?>
 				</div>
 				<div class="form-group">
 					<label for="foto">Foto:</label>
-					<?php if(empty($row['afbeelding'])){ ?><input type="file" class="form-control" id="foto" name="foto" /> <?php } ?>
-					<?php if(!empty($row['afbeelding'])){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $row['afbeelding']; ?>" width="70px" role="picture" />
+					<?php if(empty($afbeelding)){ ?><input type="file" class="form-control" id="foto" name="foto" /> <?php } ?>
+					<?php if(!empty($afbeelding)){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $afbeelding; ?>" width="70px" role="picture" />
 					<button class="btn btn-danger" type="submit" name="Del_Image" value="afbeelding" />Verwijder</button> <?php } ?>
 				</div>
 					
 			<div class="form-group">
 					<label for="Facebook">Facebook:</label>
-					<input type="text" class="form-control" id="Facebook" name="Facebook" value="<?php echo $facebook; ?>"  />
+					<input type="text" class="form-control" id="Facebook" name="facebook" value="<?php echo $facebook; ?>"  />
 			</div>
 		
 			<div class="form-group">
 					<label for="Twitter">Twitter:</label>
-					<input type="text" class="form-control" id="Twitter" name="Twitter" value="<?php echo $twitter; ?>"  />
+					<input type="text" class="form-control" id="Twitter" name="twitter" value="<?php echo $twitter; ?>"  />
 			</div>
 					
 			<div class="form-group">
 					<label for="Google">Google+:</label>
-					<input type="text" class="form-control" id="Google" name="Google" value="<?php echo $googleplus; ?>"  />
+					<input type="text" class="form-control" id="Google" name="googleplus" value="<?php echo $googleplus; ?>"  />
 			</div>
 			
 			<div class="form-group">
 					<label for="LinkedIn">LinkedIn:</label>
-					<input type="text" class="form-control" id="LinkedIn" name="LinkedIn" value="<?php echo $linkedin; ?>"  />
+					<input type="text" class="form-control" id="LinkedIn" name="linkedin" value="<?php echo $linkedin; ?>"  />
 			</div>
 					
 			<div class="form-group">
 					<label for="Instagram">Youtube:</label>
-					<input type="text" class="form-control" id="Instagram" name="Instagram" value="<?php echo $youtube; ?>"  />
+					<input type="text" class="form-control" id="Instagram" name="youtube" value="<?php echo $youtube; ?>"  />
 			</div>
 			
 			<div class="form-group">
 					<label for="Pinterest">Pinterest:</label>
-					<input type="text" class="form-control" id="Pinterest" name="Pinterest" value="<?php echo $pinterest; ?>"  />
+					<input type="text" class="form-control" id="Pinterest" name="pinterest" value="<?php echo $pinterest; ?>"  />
 			</div>
 			
 			
@@ -156,112 +154,144 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 5, $row['specialiteit_5'], $branche_id); 
+					if(!isset($naam[4])){
+						$naam[4] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[4]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 6, $row['specialiteit_6'], $branche_id);
+					if(!isset($naam[5])){
+						$naam[5] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[5]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 7, $row['specialiteit_7'], $branche_id);
+					if(!isset($naam[6])){
+						$naam[6] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[6]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 8, $row['specialiteit_8'], $branche_id);
+					if(!isset($naam[7])){
+						$naam[7] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[7]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 9, $row['specialiteit_9'], $branche_id);
+					if(!isset($naam[8])){
+						$naam[8] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[8]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 10, $row['specialiteit_10'], $branche_id); 
+					if(!isset($naam[9])){
+						$naam[9] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[9]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 11, $row['specialiteit_11'], $branche_id); 
+					if(!isset($naam[10])){
+						$naam[10] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[10]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 12, $row['specialiteit_12'], $branche_id);
+					if(!isset($naam[11])){
+						$naam[11] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[11]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 13, $row['specialiteit_13'], $branche_id);
+					if(!isset($naam[12])){
+						$naam[12] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[12]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 14, $row['specialiteit_14'], $branche_id);
+					if(!isset($naam[13])){
+						$naam[13] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[13]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 15, $row['specialiteit_15'], $branche_id);
+					if(!isset($naam[14])){
+						$naam[14] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[14]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 16, $row['specialiteit_16'], $branche_id); 
+					if(!isset($naam[15])){
+						$naam[15] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[15]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 17, $row['specialiteit_17'], $branche_id); 
+					if(!isset($naam[16])){
+						$naam[16] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[16]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 18, $row['specialiteit_18'], $branche_id);
+					if(!isset($naam[17])){
+						$naam[17] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[17]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 19, $row['specialiteit_19'], $branche_id);
+					if(!isset($naam[18])){
+						$naam[18] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[18]);
 					?>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="form-group">
 					<?php 
-					echo specialiteitkeuze($pdo, 'specialiteit[]', 20, $row['specialiteit_20'], $branche_id);
+					if(!isset($naam[19])){
+						$naam[19] = null;}
+					echo specialiteitkeuze($pdo, 'specialiteit[]', 1, $naam[19]);
 					?>
 				</div>
 			</div>
