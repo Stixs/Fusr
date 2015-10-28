@@ -1,6 +1,7 @@
 <?php
-require('./controllers/header.php');
-
+require('./controllers/header.php');daa
+$subbranche_id = $_GET['branche']
+	var_dump ($_GET['branche']);
 //Controleert of je wel bent ingelogd.
 if(LoginCheck($pdo))
 {
@@ -13,38 +14,36 @@ if(LoginCheck($pdo))
 	$Specialiteiten = specialiteitenlijst($pdo);
 	$Branches = branchelijst($pdo);
 	
+	
 		if(isset($_POST['Registrerenbedrijf']))
 	{
 		$CheckOnErrors = false;
 		
-		$bedrijfs_naam = $_POST["Bedrijfsnaam"];
-		$adres = $_POST["adres"];
+		
+		$bedrijfsnaam = $_POST['bedrijfsnaam'];
+		$beschrijving = $_POST['beschrijving'];
+		$bezoekadres = $_POST["bezoekadres"];
 		$postcode = $_POST["postcode"];
 		$plaats = $_POST['plaats'];
 		$provincie = $_POST['provincie'];
 		$website = $_POST['website'];
-		$telefoon = $_POST['telefoon'];
-		$fax = $_POST['fax'];
-		$specialiteit = $_POST['specialiteit'];
-		$br_id = $_POST['branche'];
-		$type = $_POST['type'];
-		$bereik = $_POST['bereik'];
-		$transport_manager = $_POST['transport_manager'];
-		$aantal = $_POST['aantal'];
-		$rechtsvorm = $_POST['rechtsvorm'];
-		$vergunning = $_POST['vergunning'];
-		$geldigtot = $_POST['geldigtot'];
-		$bedrijfs_email = $_POST['bedrijfs_email'];
-		$beschrijving = $_POST['beschrijving'];
+		$telefoonnummer = $_POST['telefoonnummer'];
+		$mobielnummer = $_POST['mobielnummer'];
+		$email = $_POST['email'];
 		$premium = $_POST['premium'];
+		
+		$facebook = $_POST['facebook'];
+		$twitter = $_POST['twitter'];
+		$googleplus = $_POST['googleplus'];
+		$linkedin = $_POST['linkedin'];
+		$youtube = $_POST['youtube'];
+		$pinterest = $_POST['pinterest'];
+					
 		$foto = basename($_FILES["foto"]["name"]);
 		$banner = basename($_FILES["banner"]["name"]);
 		$logo = basename($_FILES["logo"]["name"]);
-		$special = NULL;
-		$specialZ = "'";
-		$specialname = NULL;
 		
-		
+		var_dump ($_GET['branche']);
 		foreach($specialiteit as $value) 
 		{
 			if(!next($specialiteit)) 

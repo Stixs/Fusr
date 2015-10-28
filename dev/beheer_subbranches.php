@@ -51,13 +51,13 @@ $sth->execute();
 
 while($row = $sth->fetch())
 	{
-		if($row['branche_id'] == $_SESSION['branche'])
+		if($row['id'] == $_SESSION['branche'])
 		{
-		echo '<option selected value="'.$row['branche_id'].'">'.$row['branche'].'</option>';
+		echo '<option selected value="'.$row['id'].'">'.$row['naam'].'</option>';
 		}
 		else
 		{
-		echo '<option value="'.$row['branche_id'].'">'.$row['branche'].'</option>';
+		echo '<option value="'.$row['id'].'">'.$row['naam'].'</option>';
 		}
 	}
 echo '</select>';
@@ -92,8 +92,9 @@ else
 }
 if(isset($_POST['beperk']))
 {
+	var_dump($_SESSION['branche']);
 	$branche = $_SESSION['branche'];
-	$sth = $pdo->prepare("SELECT * FROM sub_branches WHERE branche_id = " . $_SESSION['branche'] . " AND subbranche LIKE '%" . $beperk. "%'");
+	$sth = $pdo->prepare("SELECT * FROM subbranches WHERE id = " . $_SESSION['branche'] . " AND subbranche LIKE '%" . $beperk. "%'");
 	$sth->execute();
 	
 	?>
@@ -108,8 +109,8 @@ if(isset($_POST['beperk']))
 		
 		<div class="col-xs-6">
 			<div class="form-group specialiteit_wijzigen">
-				<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['subbranche_id'] ?>]" value="<?php echo $row['subbranche']; ?>">
-				<input type="text" class="form-control" name="subbranche[<?php echo $row['subbranche_id'] ?>]" value="<?php echo $row['subbranche']; ?>">
+				<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['id'] ?>]" value="<?php echo $row['naam']; ?>">
+				<input type="text" class="form-control" name="subbranche[<?php echo $row['id'] ?>]" value="<?php echo $row['naam']; ?>">
 				<button type="submit" value="<?php echo $row['subbranche_id'] ?>" name="edit_sbr" class="btn btn-default">Wijzig</button>
 				<button type="submit" value="<?php echo $row['subbranche_id'] ?>" name="del_sbr" class="btn btn-danger">Verwijder</button>
 			</div>
@@ -130,22 +131,23 @@ else
 
 	<div class="col-xs-12 ContentPadding" style="padding-top:20px;">
 		<label for="specialiteit">Sub-branche:</label>
-		<form class="form-inline" action="" method="post">
+		<form class="" action="" method="post">
 
 			<?php
-
-			$sth = $pdo->prepare("select * from sub_branches WHERE branche_id = " . $_SESSION['branche'] . " ORDER BY subbranche");
+var_dump($_SESSION['branche']);
+			$sth = $pdo->prepare("select * from subbranches WHERE branche_id = " . $_SESSION['branche'] . " ORDER BY naam");
 			$sth->execute();
 			while($row = $sth->fetch())
 			{
 				?>
 	
-			<div class="col-xs-6">
+			<div class="col-xs-12">
 				<div class="form-group specialiteit_wijzigen">
-					<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['subbranche_id'] ?>]" value="<?php echo $row['subbranche']; ?>">
-					<input type="text" class="form-control" name="subbranche[<?php echo $row['subbranche_id'] ?>]" value="<?php echo $row['subbranche']; ?>">
-					<button type="submit" value="<?php echo $row['subbranche_id'] ?>" name="edit_sbr" class="btn btn-default">Wijzig</button>
-					<button type="submit" value="<?php echo $row['subbranche_id'] ?>" name="del_sbr" class="btn btn-danger">Verwijder</button>
+					<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['branche_id'] ?>]" value="<?php echo $row['naam']; ?>">
+					<input type="text" class="form-control" name="subbranche[<?php echo $row['branche_id'] ?>]" value="<?php echo $row['naam']; ?>">
+					<input type="text" class="form-control" name="subbranche[<?php echo $row['branche_id'] ?>]" value="<?php echo $row['omschrijving']; ?>">
+					<button type="submit" value="<?php echo $row['branche_id'] ?>" name="edit_sbr" class="btn btn-default">Wijzig</button>
+					<button type="submit" value="<?php echo $row['id'] ?>" name="del_sbr" class="btn btn-danger">Verwijder</button>
 				</div>
 			</div>
 			

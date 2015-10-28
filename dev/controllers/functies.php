@@ -180,13 +180,22 @@ function openingstijden($openingstijd = NULL, $dag) {
     return $html;
 }
 
-function specialiteitkeuze($pdo, $name, $id, $keuze = NULL) {
-
-
+function specialiteitkeuze($pdo, $subbranche_id, $subbranche = NULL, $name, $id, $keuze = NULL) {
+	if($subbranche == true)
+		{
+		$parameters = array(':subbranche_id'=>$subbranche_id);
+		$sth = $pdo->prepare('SELECT * FROM subbranches WHERE id = :subbranche_id ORDER BY naam');
+		$sth->execute($parameters);
+		$row = $sth->fetch();
+		$branche_id = $row['branche_id'];
+		}
+		
+	
 	$html = '<label for="sel'.$id.'">Specialiteit:</label>';
     $html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';	
-	$sth = $pdo->prepare('SELECT * FROM specialiteiten ORDER BY naam');
-		$sth->execute();
+	$parameters = array(':branche_id'=>$subbranche_id);
+	$sth = $pdo->prepare('SELECT * FROM specialiteiten WHERE branche_id = :branche_id ORDER BY naam');
+		$sth->execute($parameters);
 			$html .= '<option value=""></option>';
 			while($row = $sth->fetch())
 				{
@@ -201,6 +210,7 @@ function specialiteitkeuze($pdo, $name, $id, $keuze = NULL) {
 					}
 				}
 	$html .= '</select>';
+	
     return $html;
 }
 
@@ -230,7 +240,7 @@ function branchekeuze($pdo, $name, $id, $keuze = NULL) {
 								</script>
 								
 								<select class="form-control" id="sel'.$id.'" name="'.$name.'" value="'.$name.'" onchange="lastselected(this.value)">';	
-	$sth = $pdo->prepare('select * from sub_branches');
+	$sth = $pdo->prepare('select * from branches ORDER BY naam');
 		$sth->execute();
 			if(isset($_GET["branche"]))
 			{$branche_id = $_GET["branche"];}
@@ -240,13 +250,13 @@ function branchekeuze($pdo, $name, $id, $keuze = NULL) {
 			while($row = $sth->fetch())
 				{
 					
-					if($row['branche_id'] == $branche_id)
+					if($row['id'] == $branche_id)
 					{
-						$html.= '<option value="'.$row['branche_id'].'" selected="selected">'.$row['subbranche'].'</option>';
+						$html.= '<option value="'.$row['id'].'" selected="selected">'.$row['naam'].'</option>';
 					}
 					else
 					{
-						$html .= '<option value="'.$row['branche_id'].'">'.$row['subbranche'].'</option>';
+						$html .= '<option value="'.$row['id'].'">'.$row['naam'].'</option>';
 					}
 				}
 	$html .= '</select>';

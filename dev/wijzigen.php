@@ -5,6 +5,7 @@ require('./controllers/header.php');
 //Controleert of je wel bent ingelogd.
 if(LoginCheck($pdo))
 {
+	var_dump($_POST);
 	
 	//init fields
 	$bedrijfsnaam = $beschrijving = $bezoekadres = $postcode = $plaats = $provincie = $telefoonnummer = $mobielnummer = $email = $website = $branche_id = $openingstijden = $o_maandag = $o_dinsdag = $o_woensdag = $o_donderdag = $o_vrijdag = $o_zaterdag = $o_zondag = $d_maandag = $d_dinsdag = $d_woensdag = $d_donderdag = $d_vrijdag = $d_zaterdag = $d_zondag = NULL;
@@ -18,7 +19,6 @@ if(LoginCheck($pdo))
 	//controleert of de knop aanpassen of verwijderen is ingedurkt.
 	if(isset($_GET['action']))
 	{
-		//haalt gegevens uit de link via Get om tekijken of het wijzigen of verwijderen is en om welk bedrijf het gaat.
 		$action = $_GET['action'];
 		$bedrijfs_id = $_GET['bedrijfs_id'];
 		
@@ -28,71 +28,17 @@ if(LoginCheck($pdo))
 			case'edit':
 					
 					$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-					$sth = $pdo->prepare('SELECT *
-					FROM
-					bedrijfgegevens_specialiteiten
-					INNER JOIN
-					specialiteiten on bedrijfgegevens_specialiteiten.specialiteiten_id = specialiteiten.id
-					INNER JOIN
-					bedrijfgegevens on bedrijfgegevens_specialiteiten.bedrijfgegevens_id = bedrijfgegevens.id
-					INNER JOIN
-					plaatsen on bedrijfgegevens.plaats_id = plaatsen.id
-					WHERE
-					bedrijfgegevens_id = '.$bedrijfs_id);
-					$sth->execute($parameters);
-					while ($row = $sth->fetch())
-					{
-						
-					//Gegevens uit de database halen
-					$bedrijfsnaam = $row['bedrijfsnaam'];
-					$beschrijving = $row['beschrijving'];
-					$bezoekadres = $row['bezoekadres'];
-					$postcode = $row['postcode'];
-					$plaats = $row['plaats'];
-					$provincie = $row['provincie'];
-					$website = $row['website'];
-					$telefoonnummer = $row['telefoonnummer'];
-					$mobielnummer = $row['mobielnummer'];
-					$email = $row['email'];
-					$logo = $row['logo'];
-					$banner = $row['banner'];
-					$_SESSION['logo'] = $row['logo'];
-					$_SESSION['banner'] = $row['banner'];
-					$premium = $row['premium'];
 					
-					$facebook = $row['facebook'];
-					$twitter = $row['twitter'];
-					$googleplus = $row['googleplus'];
-					$linkedin = $row['linkedin'];
-					$youtube = $row['youtube'];
-					$pinterest = $row['pinterest'];
 					
-					$naam[] = $row['naam'];
-					
-					}
-					/*
 					$sth = $pdo->prepare('select * from openingstijden where bedrijfs_id = :bedrijfs_id');
 					$sth->execute($parameters);
 					$row = $sth->fetch();
 					
-					$o_maandag = $row['o_maandag'];
-					$o_dinsdag = $row['o_dinsdag'];
-					$o_woensdag = $row['o_woensdag'];
-					$o_donderdag = $row['o_donderdag'];
-					$o_vrijdag = $row['o_vrijdag'];
-					$o_zaterdag = $row['o_zaterdag'];
-					$o_zondag = $row['o_zondag'];
-					$d_maandag = $row['d_maandag'];
-					$d_dinsdag = $row['d_dinsdag'];
-					$d_woensdag = $row['d_woensdag'];
-					$d_donderdag = $row['d_donderdag'];
-					$d_vrijdag = $row['d_vrijdag'];
-					$d_zaterdag = $row['d_zaterdag'];
-					$d_zondag = $row['d_zondag'];
-					*/
-				
 					
-					//controleert of de submit knop wijzigenbedrijf in het formulier is ingedurkt.
+					
+					
+					
+					
 					if(isset($_POST['Del_Image']))
 					{
 					$image = $_POST['Del_Image'];
@@ -101,13 +47,13 @@ if(LoginCheck($pdo))
 					$sth = $pdo->prepare('UPDATE bedrijfgegevens SET '.$image.'=:leeg WHERE id = :bedrijfs_id');
 					$sth->execute($parameter);
 					
+					
 					unset($_SESSION[$image]);
-					unlink('images/bedrijf_images/'.$bedrijfs_id .'/'. $row[$image]);
+					//unlink('images/bedrijf_images/'.$bedrijfs_id .'/'. $row[$image]);
 					
-					}
-					
-					if(isset($_POST['Wijzigenbedrijf']))
-					{
+				}	
+				if(isset($_POST['Wijzigenbedrijf']))
+				{
 					$CheckOnErrors = false;
 					
 					//Gegevens uit het formulier halen
@@ -134,30 +80,15 @@ if(LoginCheck($pdo))
 					$youtube = $_POST['youtube'];
 					$pinterest = $_POST['pinterest'];
 				
-					$o_maandag = $_POST['o_maandag'];
-					$o_dinsdag = $_POST['o_dinsdag'];
-					$o_woensdag = $_POST['o_woensdag'];
-					$o_donderdag = $_POST['o_donderdag'];
-					$o_vrijdag = $_POST['o_vrijdag'];
-					$o_zaterdag = $_POST['o_zaterdag'];
-					$o_zondag = $_POST['o_zondag'];
-					$d_maandag = $_POST['d_maandag'];
-					$d_dinsdag = $_POST['d_dinsdag'];
-					$d_woensdag = $_POST['d_woensdag'];
-					$d_donderdag = $_POST['d_donderdag'];
-					$d_vrijdag = $_POST['d_vrijdag'];
-					$d_zaterdag = $_POST['d_zaterdag'];
-					$d_zondag = $_POST['d_zondag'];
 					
-					
-					/*if (basename($_FILES["foto"]["name"]) == null)
+					if (basename($_FILES["foto"]["name"]) == null)
 								{
 								$foto = $_SESSION['foto'];
 								}
 								else
 								{
 								$foto = basename($_FILES["foto"]["name"]);
-								}*/
+								}
 					if (basename($_FILES["banner"]["name"]) == null)
 								{
 								$banner = $_SESSION['banner'];
@@ -175,7 +106,7 @@ if(LoginCheck($pdo))
 								$logo = basename($_FILES["logo"]["name"]);
 								}
 					
-					
+					echo $banner;
 					
 					
 					
@@ -237,15 +168,11 @@ if(LoginCheck($pdo))
 						$target_dir = "images/bedrijf_images/".$bedrijfs_id."/";
 						$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 						if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)){} 
-						chmod($target_file, 777);
 						$target_file = $target_dir . basename($_FILES["banner"]["name"]);
-						if (move_uploaded_file($_FILES["banner"]["tmp_name"], $target_file)){}
-						chmod($target_file, 777);
+						if (move_uploaded_file($_FILES["banner"]["tmp_name"], $target_file)){} 
 						$target_file = $target_dir . basename($_FILES["logo"]["name"]);
 						if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)){}
-						chmod($target_file, 777);
 						//De gegevens die uit het formulier komen en die correct zijn worden in de array parameters gezet
-						$beschrijving = 'test';
 						$parameters = array(
 						':bedrijfs_id'=>$bedrijfs_id,
 						':bedrijfsnaam'=>$bedrijfsnaam,
@@ -264,7 +191,8 @@ if(LoginCheck($pdo))
 						':youtube'=>$youtube,
 						':pinterest'=>$pinterest,
 						':logo'=>$logo,
-						':banner'=>$banner
+						':banner'=>$banner,
+						':foto'=>$foto
 						);
 	
 						
@@ -285,43 +213,69 @@ if(LoginCheck($pdo))
 						youtube=:youtube, 
 						pinterest=:pinterest,
 						logo=:logo,
-						banner=:banner
+						banner=:banner,
+						foto=:foto
 						WHERE id = :bedrijfs_id');
 	
 						$sth->execute($parameters);
 						
 						
-					/*
 						
-						$parameters = array(
-						':bedrijfs_id'=>$bedrijfs_id,
-						':o_maandag'=>$o_maandag,
-						':o_dinsdag'=>$o_dinsdag,
-						':o_woensdag'=>$o_woensdag,
-						':o_donderdag'=>$o_donderdag,
-						':o_vrijdag'=>$o_vrijdag,
-						':o_zaterdag'=>$o_zaterdag,
-						':o_zondag'=>$o_zondag,
-						':d_maandag'=>$d_maandag,
-						':d_dinsdag'=>$d_dinsdag,
-						':d_woensdag'=>$d_woensdag,
-						':d_donderdag'=>$d_donderdag,
-						':d_vrijdag'=>$d_vrijdag,
-						':d_zaterdag'=>$d_zaterdag,
-						':d_zondag'=>$d_zondag);
-						
-						$sth = $pdo->prepare('UPDATE bedrijfs_specialiteiten SET
-						bedrijfs_id=:bedrijfs_id, o_maandag=:o_maandag, o_dinsdag=:o_dinsdag, o_woensdag=:o_woensdag,o_donderdag=:o_donderdag, o_vrijdag=:o_vrijdag ,o_zaterdag=:o_zaterdag, o_zondag=:o_zondag, 
-						d_maandag=:d_maandag, d_dinsdag=:d_dinsdag, d_woensdag=:d_woensdag,d_donderdag=:d_donderdag, d_vrijdag=:d_vrijdag ,d_zaterdag=:d_zaterdag, d_zondag=:d_zondag');
-						$sth->execute($parameters);
-						*/
 				
 						echo'De gegvens van '. $bedrijfsnaam.' zijn bijgewerkt.<br />';
-						echo '<META http-equiv="refresh" content="5;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
+						echo '<META http-equiv="refresh" content="60;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
 					}
 				}
 				else
 				{
+					$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
+					$sth = $pdo->prepare('SELECT *
+					FROM
+					bedrijfgegevens_specialiteiten
+					INNER JOIN
+					specialiteiten on bedrijfgegevens_specialiteiten.specialiteiten_id = specialiteiten.id
+					INNER JOIN
+					bedrijfgegevens on bedrijfgegevens_specialiteiten.bedrijfgegevens_id = bedrijfgegevens.id
+					INNER JOIN
+					plaatsen on bedrijfgegevens.plaats_id = plaatsen.id
+					WHERE
+					bedrijfgegevens_id = '.$bedrijfs_id);
+					$sth->execute($parameters);
+					while ($row = $sth->fetch())
+					{
+						
+					//Gegevens uit de database halen
+					$subbranche_id = $row['subbranche_id'];
+					$bedrijfsnaam = $row['bedrijfsnaam'];
+					$beschrijving = $row['beschrijving'];
+					$bezoekadres = $row['bezoekadres'];
+					$postcode = $row['postcode'];
+					$plaats = $row['plaats'];
+					$provincie = $row['provincie'];
+					$website = $row['website'];
+					$telefoonnummer = $row['telefoonnummer'];
+					$mobielnummer = $row['mobielnummer'];
+					$email = $row['email'];
+					$logo = $row['logo'];
+					$banner = $row['banner'];
+					$foto = $row['foto'];
+					$_SESSION['logo'] = $row['logo'];
+					$_SESSION['banner'] = $row['banner'];
+					$_SESSION['foto'] = $row['foto'];
+					$premium = $row['premium'];
+					
+					$facebook = $row['facebook'];
+					$twitter = $row['twitter'];
+					$googleplus = $row['googleplus'];
+					$linkedin = $row['linkedin'];
+					$youtube = $row['youtube'];
+					$pinterest = $row['pinterest'];
+					
+					$naam[] = $row['naam'];					
+					}
+					echo $subbranche_id;
+					
+					
 					
 					//laat het formulier WijzigenBedrijfForm zien als de knop wijzigenbedrijf nog niet is ingedurkt.
 					require('./views/WijzigenBedrijfForm.php');

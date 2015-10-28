@@ -5,54 +5,79 @@ require('./controllers/header.php');
 if(LoginCheck($pdo))
 {
 	//init fields
-$specialiteit_1 = $specialiteit_2 = $specialiteit_3 = $specialiteit_4 = $specialiteit_5 = $specialiteit_6 = $specialiteit_7 = $specialiteit_8 = $specialiteit_9 = $specialiteit_10 = $specialiteit_11 = $specialiteit_12 = $specialiteit_13 = $specialiteit_14 = $specialiteit_15 = $specialiteit_16 = $specialiteit_17 = $specialiteit_18 = $specialiteit_19 = $specialiteit_20 = $bedrijfs_naam = $beschrijving = $adres = $postcode = $plaats = $provincie = $telefoon = $fax = $bedrijfs_email = $specialiteit = $type = $bereik = $transport_manager = $aantal = $rechtsvorm = $vergunning = $geldigtot = $website = $premium = $Picture = $o_maandag = $o_dinsdag = $o_woensdag = $o_donderdag = $o_vrijdag = $o_zaterdag = $o_zondag = $d_maandag = $d_dinsdag = $d_woensdag = $d_donderdag = $d_vrijdag = $d_zaterdag = $d_zondag = $Facebook = $Twitter = $Google = $LinkedIn = $Instagram = $Pinterest = $branche = NULL;
-$branche_id = $_GET['branche'];
+$bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $telefoonnummer = $mobielnummer = $email = $website = $premium = $Picture = $facebook = $twitter = $googleplus = $linkedin = $youtube = $pinterest = $branche = NULL;
+
+	$subbranche_id = $_GET['branche'];
+	
 	//init error fields
 	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = $OpeningsErr = NULL;
 	if(isset($_POST['add_spec']) or isset($_POST['Registrerenbedrijf']))
 	{
-	$bedrijfs_naam = $_POST["Bedrijfsnaam"];
-	$adres = $_POST["adres"];
+	$bedrijfsnaam = $_POST["bedrijfsnaam"];
+	$beschrijving = $_POST['beschrijving'];
 	$postcode = $_POST["postcode"];
 	$plaats = $_POST['plaats'];
-	$provincie = $_POST['provincie'];
 	$website = $_POST['website'];
-	$telefoon = $_POST['telefoon'];
-	$fax = $_POST['fax'];
-	$specialiteit = $_POST['specialiteit'];
-	$transport_manager = $_POST['transport_manager'];
-	$aantal = $_POST['aantal'];
-	$rechtsvorm = $_POST['rechtsvorm'];
-	$vergunning = $_POST['vergunning'];
-	$bedrijfs_email = $_POST['bedrijfs_email'];
-	$beschrijving = $_POST['beschrijving'];
+	$telefoonnummer = $_POST['telefoonnummer'];
+	$mobielnummer = $_POST['mobielnummer'];
+	$email = $_POST['email'];
+	$specialiteiten = $_POST['specialiteit'];
 	$premium = $_POST['premium'];
 	
 	$foto = basename($_FILES["foto"]["name"]);
 	$banner = basename($_FILES["banner"]["name"]);
 	$logo = basename($_FILES["logo"]["name"]);
 	
-	$Facebook = $_POST['Facebook'];
-	$Twitter = $_POST['Twitter'];
-	$Google = $_POST['Google'];
-	$LinkedIn = $_POST['LinkedIn'];
-	$Instagram = $_POST['Instagram'];
-	$Pinterest = $_POST['Pinterest'];
+	$facebook = $_POST['facebook'];
+	$twitter = $_POST['twitter'];
+	$googleplus = $_POST['googleplus'];
+	$linkedin = $_POST['linkedin'];
+	$youtube = $_POST['youtube'];
+	$pinterest = $_POST['pinterest'];
 	
-	$o_maandag = $_POST['o_maandag'];
-	$o_dinsdag = $_POST['o_dinsdag'];
-	$o_woensdag = $_POST['o_woensdag'];
-	$o_donderdag = $_POST['o_donderdag'];
-	$o_vrijdag = $_POST['o_vrijdag']; 
-	$o_zaterdag = $_POST['o_zaterdag'];
-	$o_zondag = $_POST['o_zondag'];
-	$d_maandag = $_POST['d_maandag'];
-	$d_dinsdag = $_POST['d_dinsdag'];
-	$d_woensdag = $_POST['d_woensdag'];
-	$d_donderdag = $_POST['d_donderdag'];
-	$d_vrijdag = $_POST['d_vrijdag']; 
-	$d_zaterdag = $_POST['d_zaterdag'];
-	$d_zondag = $_POST['d_zondag'];
+	$adres = $_POST['adres'];
+	$toevoeging = $_POST['toevoeging'];
+	$bezoekadres = $adres.' '.$toevoeging;
+
+
+	$huisnummer = preg_replace("/[^0-9,.]/", "", $adres);
+	$url = 'https://api.pro6pp.nl/v1/autocomplete?auth_key=9mPiDJVEjKZliA8I&nl_sixpp='.$postcode.'&streetnumber='.$huisnummer . $toevoeging.'&format=json';
+	$response = file_get_contents($url);
+	$json = json_decode($response,TRUE);
+	
+ 
+	$latitude = $json['results'][0]['lat'];
+	$longitude = $json['results'][0]['lng'];
+	$provincie = $json['results'][0]['province'];
+	//var_dump($json);
+	
+	$plaats = strtoupper($plaats);
+	$parameters = array(':plaats'=>$plaats);
+	$sth = $pdo->prepare('SELECT plaats FROM plaatsen WHERE plaats = :plaats LIMIT 1');
+
+	$sth->execute($parameters);
+
+	// controleren of de plaats voorkomt in de DB
+	if ($sth->rowCount() == 1)
+	{
+		$parameters = array(':plaats'=>$plaats);
+		$sth = $pdo->prepare('SELECT id FROM plaatsen WHERE plaats = :plaats LIMIT 1');
+		$sth->execute($parameters);
+		$row = $sth->fetch();
+		$plaats_id = $row['id'];
+	}
+	else
+	{
+	$parameters = array(':plaats'=>$plaats,
+						':provincie'=>$provincie
+						);
+	$sth = $pdo->prepare('INSERT INTO plaatsen (plaats, provincie) VALUES (:plaats, :provincie)');
+	$sth->execute($parameters);
+	$plaats_id = $pdo->lastInsertId();
+	}
+	
+
+	
 	}
 	$Specialiteiten = specialiteitenlijst($pdo);
 	if(isset($_POST['add_spec']) AND !empty($_POST['add_specialiteit']))
@@ -77,28 +102,7 @@ $branche_id = $_GET['branche'];
 	{
 		$CheckOnErrors = false;
 		
-		$special = NULL;
-		$specialZ = "'";
-		$specialname = NULL;
-		
-		$N = 0;
-		$X = 1;
-		foreach($specialiteit as $value) 
-		{
-			
-			${'specialiteit_'.$X} = $value;
-			$N++;
-			$X++;
-		}	
-		
-		$sth = $pdo->prepare('SELECT * FROM specialiteiten WHERE specialiteit_id REGEXP '.$specialZ);
-		$sth->execute();
-		while($row = $sth->fetch())
-		{
-			$specialname.= $row['specialiteit'].', ';
-		}
-		
-		$specialname = substr($specialname, 0, -2);
+	
 
 		//begin controlles
 		
@@ -159,73 +163,70 @@ $branche_id = $_GET['branche'];
 		else
 		{
 			
+		echo 'Subbranche_id = '.$subbranche_id.'</br>';
+		echo 'Bedrijfsnaam = '.$bedrijfsnaam.'</br>';
+		echo 'Beschrijving = '.$beschrijving.'</br>';
+		echo 'Bezoekadres = '.$bezoekadres.'</br>';
+		echo 'Postcode = '.$postcode.'</br>';
+		echo 'Plaats_id = '.$plaats_id.'</br>';
+		echo 'Telefoonnummer = '.$telefoonnummer.'</br>';
+		echo 'Mobielnummer = '.$mobielnummer.'</br>';
+		echo 'Website = '.$website.'</br>';
+		echo 'Email = '.$email.'</br>';
+		echo 'Latitude = '.$latitude.'</br>';
+		echo 'Longitude = '.$longitude.'</br>';
+		
+		echo '</br>';
+		
+		echo 'Plaats = '.$plaats.'</br>';
+		echo 'Provincie = '.$provincie.'</br>';
+		
 			
 		
-		
-			
 			$parameters = array(
-				':bedrijfsnaam'=>$bedrijfs_naam,
+				':subbranche_id'=>$subbranche_id,
+				':bedrijfsnaam'=>$bedrijfsnaam,
 				':beschrijving'=>$beschrijving,
-				':adres'=>$adres,
+				':bezoekadres'=>$bezoekadres,
 				':postcode'=>$postcode,
-				':plaats'=>$plaats,
-				':provincie'=>$provincie,
+				':plaats_id'=>$plaats_id,
+				':telefoonnummer'=>$telefoonnummer,
+				':mobielnummer'=>$mobielnummer,
 				':website'=>$website,
-				':telefoon'=>$telefoon,
-				':fax'=>$fax,
-				':transport_manager'=>$transport_manager,
-				':aantal'=>$aantal,
-				':rechtsvorm'=>$rechtsvorm,
-				':vergunning'=>$vergunning,
-				':bedrijfs_email'=>$bedrijfs_email,
+				':email'=>$email,
+				':latitude'=>$latitude,
+				':longitude'=>$longitude
+				':facebook'=>$facebook,
+				':twitter'=>$twitter,
+				':linkedIn'=>$linkedin,
+				':pinterest'=>$pinterest,
+				':googleplus'=>$googleplus,
+				':youtube'=>$youtube,
 				':premium'=>$premium,
-				':Facebook'=>$Facebook,
-				':Twitter'=>$Twitter,
-				':Google'=>$Google,
-				':LinkedIn'=>$LinkedIn,
-				':Instagram'=>$Instagram,
-				':Pinterest'=>$Pinterest,
 				':foto'=>$foto,
 				':banner'=>$banner,
-				':logo'=>$logo,
-				':branche_id'=>$branche_id);
+				':logo'=>$logo);
 								
-				$sth = $pdo->prepare('INSERT INTO bedrijfgegevens (bedrijfsnaam, beschrijving, adres, postcode, plaats, provincie, website, telefoon, fax, transport_manager, aantal, rechtsvorm, vergunning, bedrijfs_email, premium, Facebook, Twitter, Google, LinkedIn, Instagram, Pinterest, afbeelding, banner, logo, branche_id) VALUES( :bedrijfsnaam, :beschrijving, :adres, :postcode, :plaats, :provincie, :website, :telefoon, :fax, :transport_manager, :aantal, :rechtsvorm, :vergunning, :bedrijfs_email, :premium, :Facebook, :Twitter, :Google, :LinkedIn, :Instagram, :Pinterest, :foto, :banner, :logo, :branche_id)');
+				$sth = $pdo->prepare('INSERT INTO bedrijfgegevens (subbranche_id, bedrijfsnaam, beschrijving, bezoekadres, postcode, plaats_id, telefoonnummmer, mobielnummer, website, email, facebook, twitter, linkedin, pinterest, googleplus, youtube, premium, logo, banner, foto, branche_id) VALUES(:subbranche_id, :bedrijfsnaam, :beschrijving, :bezoekadres, :postcode, :plaats_id, :telefoonnummer, :mobielnummer, :website, :email, :facebook, :witter, :linkedin, :pinterest, :googleplus,  :youtube, :premium, :foto, :banner, :logo)');
 				$sth->execute($parameters);
-				
-				$bedrijfs_id = $pdo->lastInsertId();
-				$N = 0;
-					foreach($specialiteit as $value) 
+				$plaats_id = $pdo->lastInsertId();
+
+				$X=1
+				var_dump($specialiteiten);
+				foreach ($specialiteiten as $value)
+				{
+					if($specialiteit[$X] != null)
 					{
-						$N++;
-						${'specialiteit_'.$N} = $value;
+						$parameters = array(':specialiteit'=>$specialiteit[],
+											':bedrijfgegevens_id'=>
+											);
+						$sth = $pdo->prepare('INSERT INTO specialiteiten (specialiteit)VALUES(:specialiteit)');
+						$sth->execute($parameters);
 					}
-				
-				$parameters = array(
-				':bedrijfs_id'=>$bedrijfs_id,':specialiteit_1'=>$specialiteit_1,':specialiteit_2'=>$specialiteit_2,':specialiteit_3'=>$specialiteit_3,':specialiteit_4'=>$specialiteit_4,':specialiteit_5'=>$specialiteit_5,':specialiteit_6'=>$specialiteit_6,':specialiteit_7'=>$specialiteit_7,':specialiteit_8'=>$specialiteit_8,':specialiteit_9'=>$specialiteit_9,':specialiteit_10'=>$specialiteit_10,':specialiteit_11'=>$specialiteit_11,':specialiteit_12'=>$specialiteit_12,':specialiteit_13'=>$specialiteit_13,':specialiteit_14'=>$specialiteit_14,':specialiteit_15'=>$specialiteit_15,':specialiteit_16'=>$specialiteit_16,':specialiteit_17'=>$specialiteit_17,':specialiteit_18'=>$specialiteit_18,':specialiteit_19'=>$specialiteit_19,':specialiteit_20'=>$specialiteit_20);
-				
-				$sth = $pdo->prepare('INSERT INTO bedrijfs_specialiteiten (bedrijfs_id, specialiteit_1, specialiteit_2, specialiteit_3, specialiteit_4, specialiteit_5, specialiteit_6, specialiteit_7, specialiteit_8, specialiteit_9, specialiteit_10, specialiteit_11, specialiteit_12, specialiteit_13, specialiteit_14, specialiteit_15, specialiteit_16, specialiteit_17, specialiteit_18, specialiteit_19, specialiteit_20) VALUES (:bedrijfs_id, :specialiteit_1, :specialiteit_2, :specialiteit_3, :specialiteit_4, :specialiteit_5, :specialiteit_6, :specialiteit_7, :specialiteit_8, :specialiteit_9, :specialiteit_10, :specialiteit_11, :specialiteit_12, :specialiteit_13, :specialiteit_14, :specialiteit_15, :specialiteit_16, :specialiteit_17, :specialiteit_18, :specialiteit_19, :specialiteit_20)');
-				$sth->execute($parameters);
-					
-				
-				$parameters = array(
-						':bedrijfs_id'=>$bedrijfs_id,
-						':o_maandag'=>$o_maandag,
-						':o_dinsdag'=>$o_dinsdag,
-						':o_woensdag'=>$o_woensdag,
-						':o_donderdag'=>$o_donderdag,
-						':o_vrijdag'=>$o_vrijdag,
-						':o_zaterdag'=>$o_zaterdag,
-						':o_zondag'=>$o_zondag,
-						':d_maandag'=>$d_maandag,
-						':d_dinsdag'=>$d_dinsdag,
-						':d_woensdag'=>$d_woensdag,
-						':d_donderdag'=>$d_donderdag,
-						':d_vrijdag'=>$d_vrijdag,
-						':d_zaterdag'=>$d_zaterdag,
-						':d_zondag'=>$d_zondag);
-				$sth = $pdo->prepare('INSERT INTO openingstijden (bedrijfs_id, o_maandag, o_dinsdag, o_woensdag, o_donderdag, o_vrijdag, o_zaterdag, o_zondag, d_maandag, d_dinsdag, d_woensdag, d_donderdag, d_vrijdag, d_zaterdag, d_zondag) VALUES (:bedrijfs_id, :o_maandag, :o_dinsdag, :o_woensdag, :o_donderdag, :o_vrijdag, :o_zaterdag, :o_zondag, :d_maandag, :d_dinsdag, :d_woensdag, :d_donderdag, :d_vrijdag , :d_zaterdag, :d_zondag)');
-				$sth->execute($parameters);
+					$X++
+				} 
+			
+			
 			echo'De bedrijf gegevens zijn geregistreerd.<br />';
 			//echo '<META http-equiv="refresh" content="5;URL=index.php">';
 			
@@ -239,7 +240,7 @@ $branche_id = $_GET['branche'];
 			if (move_uploaded_file($_FILES["banner"]["tmp_name"], $target_file)){} 
 			$target_file = $target_dir . basename($_FILES["logo"]["name"]);
 			if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)){}
-			
+			*/
 		}
 	}
 	else

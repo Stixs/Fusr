@@ -270,6 +270,15 @@ input[type=submit]:focus,
 .gegevens {
 	border: 1px solid black
 }
+
+.no-padding-left{
+	padding-left: 0px;
+}
+
+.no-padding-right{
+	padding-right: 0px;
+}
+
 .bedrijfSpecs {
 	padding-top:40px;
 	padding-bottom:40px;
