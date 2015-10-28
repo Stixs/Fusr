@@ -4,7 +4,7 @@ function GEOprocess(position) {
 	// update the page to show we have the lat and long and explain what we do next
   document.getElementById('geo').innerHTML = 'Latitude: ' + position.coords.latitude + ' Longitude: ' + position.coords.longitude;
 	// now we send this data to the php script behind the scenes with the GEOajax function
-	GEOajax("test/test.php?accuracy=" + position.coords.accuracy + "&latlng=" + position.coords.latitude + "," + position.coords.longitude +"&altitude="+position.coords.altitude+"&altitude_accuracy="+position.coords.altitudeAccuracy+"&heading="+position.coords.heading+"&speed="+position.coords.speed+"");
+	GEOajax("test.php?accuracy=" + position.coords.accuracy + "&latlng=" + position.coords.latitude + "," + position.coords.longitude +"&altitude="+position.coords.altitude+"&altitude_accuracy="+position.coords.altitudeAccuracy+"&heading="+position.coords.heading+"&speed="+position.coords.speed+"");
 }
 
 // this is used when the visitor bottles it and hits the "Don't Share" option
