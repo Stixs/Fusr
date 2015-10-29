@@ -119,7 +119,7 @@
 					<?php
 					if(!isset($naam[0])){
 						$naam[0] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[0]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[0]);
 					
 					?>
 				</div>
@@ -129,7 +129,7 @@
 					<?php 
 					if(!isset($naam[1])){
 						$naam[1] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[1]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[1]);
 					?>
 				</div>
 			</div>
@@ -138,7 +138,7 @@
 					<?php 
 					if(!isset($naam[2])){
 						$naam[2] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[2]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[2]);
 					?>
 				</div>
 			</div>
@@ -147,7 +147,7 @@
 					<?php 
 					if(!isset($naam[3])){
 						$naam[3] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[3]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[3]);
 					?>
 				</div>
 			</div>
@@ -156,7 +156,7 @@
 					<?php 
 					if(!isset($naam[4])){
 						$naam[4] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[4]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[4]);
 					?>
 				</div>
 			</div>
@@ -165,7 +165,7 @@
 					<?php 
 					if(!isset($naam[5])){
 						$naam[5] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[5]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[5]);
 					?>
 				</div>
 			</div>
@@ -174,7 +174,7 @@
 					<?php 
 					if(!isset($naam[6])){
 						$naam[6] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[6]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[6]);
 					?>
 				</div>
 			</div>
@@ -183,7 +183,7 @@
 					<?php 
 					if(!isset($naam[7])){
 						$naam[7] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[7]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[7]);
 					?>
 				</div>
 			</div>
@@ -192,7 +192,7 @@
 					<?php 
 					if(!isset($naam[8])){
 						$naam[8] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[8]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[8]);
 					?>
 				</div>
 			</div>
@@ -201,7 +201,7 @@
 					<?php 
 					if(!isset($naam[9])){
 						$naam[9] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[9]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[9]);
 					?>
 				</div>
 			</div>
@@ -210,7 +210,7 @@
 					<?php 
 					if(!isset($naam[10])){
 						$naam[10] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[10]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[10]);
 					?>
 				</div>
 			</div>
@@ -219,7 +219,7 @@
 					<?php 
 					if(!isset($naam[11])){
 						$naam[11] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[11]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[11]);
 					?>
 				</div>
 			</div>
@@ -228,7 +228,7 @@
 					<?php 
 					if(!isset($naam[12])){
 						$naam[12] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[12]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[12]);
 					?>
 				</div>
 			</div>
@@ -237,7 +237,7 @@
 					<?php 
 					if(!isset($naam[13])){
 						$naam[13] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[13]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[13]);
 					?>
 				</div>
 			</div>
@@ -246,7 +246,7 @@
 					<?php 
 					if(!isset($naam[14])){
 						$naam[14] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[14]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[14]);
 					?>
 				</div>
 			</div>
@@ -255,7 +255,7 @@
 					<?php 
 					if(!isset($naam[15])){
 						$naam[15] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[15]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[15]);
 					?>
 				</div>
 			</div>
@@ -264,7 +264,7 @@
 					<?php 
 					if(!isset($naam[16])){
 						$naam[16] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[16]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[16]);
 					?>
 				</div>
 			</div>
@@ -273,7 +273,7 @@
 					<?php 
 					if(!isset($naam[17])){
 						$naam[17] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[17]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[17]);
 					?>
 				</div>
 			</div>
@@ -282,7 +282,7 @@
 					<?php 
 					if(!isset($naam[18])){
 						$naam[18] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[18]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[18]);
 					?>
 				</div>
 			</div>
@@ -291,7 +291,7 @@
 					<?php 
 					if(!isset($naam[19])){
 						$naam[19] = null;}
-					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $naam[19]);
+					echo specialiteitkeuze($pdo, $subbranche_id, false, 'specialiteit[]', 1, $specialiteiten[19]);
 					?>
 				</div>
 			</div>
@@ -322,8 +322,6 @@
 					<label for="beschrijving">Beschrijving:</label>
 					<textarea id="beschrijving" class="form-control" name="beschrijving" rows="5" ><?php echo $beschrijving; ?></textarea>
 					<script>
-					// Replace the <textarea id="editor1"> with a CKEditor
-					// instance, using default configuration.
 					CKEDITOR.replace( 'beschrijving' );
 					</script>
 				</div>

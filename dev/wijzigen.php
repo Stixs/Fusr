@@ -6,7 +6,6 @@ require('./controllers/header.php');
 if(LoginCheck($pdo))
 {
 	var_dump($_POST);
-	
 	//init fields
 	$bedrijfsnaam = $beschrijving = $bezoekadres = $postcode = $plaats = $provincie = $telefoonnummer = $mobielnummer = $email = $website = $branche_id = $openingstijden = $o_maandag = $o_dinsdag = $o_woensdag = $o_donderdag = $o_vrijdag = $o_zaterdag = $o_zondag = $d_maandag = $d_dinsdag = $d_woensdag = $d_donderdag = $d_vrijdag = $d_zaterdag = $d_zondag = NULL;
 
@@ -26,19 +25,7 @@ if(LoginCheck($pdo))
 		switch($action)
 		{
 			case'edit':
-					
-					$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-					
-					
-					$sth = $pdo->prepare('select * from openingstijden where bedrijfs_id = :bedrijfs_id');
-					$sth->execute($parameters);
-					$row = $sth->fetch();
-					
-					
-					
-					
-					
-					
+			
 					if(isset($_POST['Del_Image']))
 					{
 					$image = $_POST['Del_Image'];
@@ -72,7 +59,7 @@ if(LoginCheck($pdo))
 					$mobielnummer = $_POST['mobielnummer'];
 					$email = $_POST['email'];
 					$premium = $_POST['premium'];
-					
+					$specialiteiten = $_POST['specialiteit'];
 					$facebook = $_POST['facebook'];
 					$twitter = $_POST['twitter'];
 					$googleplus = $_POST['googleplus'];
@@ -219,9 +206,6 @@ if(LoginCheck($pdo))
 	
 						$sth->execute($parameters);
 						
-						
-						
-				
 						echo'De gegvens van '. $bedrijfsnaam.' zijn bijgewerkt.<br />';
 						echo '<META http-equiv="refresh" content="60;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
 					}
@@ -263,7 +247,6 @@ if(LoginCheck($pdo))
 					$_SESSION['banner'] = $row['banner'];
 					$_SESSION['foto'] = $row['foto'];
 					$premium = $row['premium'];
-					
 					$facebook = $row['facebook'];
 					$twitter = $row['twitter'];
 					$googleplus = $row['googleplus'];
@@ -271,9 +254,13 @@ if(LoginCheck($pdo))
 					$youtube = $row['youtube'];
 					$pinterest = $row['pinterest'];
 					
-					$naam[] = $row['naam'];					
+					$specialiteiten[] = $row['specialiteiten_id'];					
 					}
-					echo $subbranche_id;
+					for ($x = 0; $x <= 19; $x++){
+					$specialiteiten[$x] = null;
+					}
+					
+					var_dump($specialiteiten);
 					
 					
 					

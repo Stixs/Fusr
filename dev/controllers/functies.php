@@ -200,7 +200,7 @@ function specialiteitkeuze($pdo, $subbranche_id, $subbranche = NULL, $name, $id,
 			while($row = $sth->fetch())
 				{
 					
-					if($row['naam'] == $keuze)
+					if($row['id'] == $keuze)
 					{
 						$html .= '<option value="'.$row['id'].'" selected="selected">'.$row['naam'].'</option>';
 					}
@@ -232,18 +232,17 @@ function addhttp($url) {
 }
 function branchekeuze($pdo, $name, $id, $keuze = NULL) {
 	$html = '<label for="sel'.$id.'">Branche</label>';
-    $html .= '<script type="text/javascript">
-								function lastselected(value)
-								{
-									window.location.href = "toevoegenbedrijf.php?branche=" + value;
-								}
-								</script>
+    $html .= '<script type="text/javascript"></script>
 								
-								<select class="form-control" id="sel'.$id.'" name="'.$name.'" value="'.$name.'" onchange="lastselected(this.value)">';	
+								<select class="form-control" id="sel'.$id.'" name="'.$name.'" value="'.$name.'" onchange="this.form.submit(this.value)">';	
 	$sth = $pdo->prepare('select * from branches ORDER BY naam');
 		$sth->execute();
 			if(isset($_GET["branche"]))
-			{$branche_id = $_GET["branche"];}
+			{
+			$branche_id = $_GET["branche"];
+			if(isset($_POST['branche'])){
+			$branche_id = $_POST["branche"];}
+			}
 			else
 			{$branche_id = null;}
 			$html .= '<option style="display:none" value="">Selecteer branche</option>';

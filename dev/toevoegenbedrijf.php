@@ -6,11 +6,39 @@ if(LoginCheck($pdo))
 {
 	//init fields
 $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $telefoonnummer = $mobielnummer = $email = $website = $premium = $Picture = $facebook = $twitter = $googleplus = $linkedin = $youtube = $pinterest = $branche = NULL;
-
 	$subbranche_id = $_GET['branche'];
+	if(!empty($_POST['branche'])){$subbranche_id = $_POST['branche'];}
+	
+	for ($x = 0; $x <= 19; $x++){
+	$specialiteiten[$x] = null;
+	}
 	
 	//init error fields
 	$NameErr = $ZipErr = $CityErr = $TelErr = $MailErr = $OpeningsErr = NULL;
+	
+	if(empty($_POST['add_spec']) and empty($_POST['Registrerenbedrijf']) and !empty($_POST['branche']))
+	{
+	$facebook = $_POST['facebook'];
+	$twitter = $_POST['twitter'];
+	$googleplus = $_POST['googleplus'];
+	$linkedin = $_POST['linkedin'];
+	$youtube = $_POST['youtube'];
+	$pinterest = $_POST['pinterest'];
+	$adres = $_POST['adres'];
+	$toevoeging = $_POST['toevoeging'];
+	$premium = $_POST['premium'];
+	$bedrijfsnaam = $_POST["bedrijfsnaam"];
+	$beschrijving = $_POST['beschrijving'];
+	$postcode = $_POST["postcode"];
+	$plaats = $_POST['plaats'];
+	$website = $_POST['website'];
+	$telefoonnummer = $_POST['telefoonnummer'];
+	$mobielnummer = $_POST['mobielnummer'];
+	$email = $_POST['email'];
+	$specialiteiten = $_POST['specialiteit'];
+	}
+	
+	
 	if(isset($_POST['add_spec']) or isset($_POST['Registrerenbedrijf']))
 	{
 	$bedrijfsnaam = $_POST["bedrijfsnaam"];
@@ -45,9 +73,10 @@ $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $te
 	$response = file_get_contents($url);
 	$json = json_decode($response,TRUE);
 	
- 
+	if(!isset($postcode) or !isset($huisnummer)){
 	$latitude = $json['results'][0]['lat'];
 	$longitude = $json['results'][0]['lng'];
+	}
 	$provincie = $json['results'][0]['province'];
 	//var_dump($json);
 	
@@ -81,20 +110,15 @@ $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $te
 	}
 	$Specialiteiten = specialiteitenlijst($pdo);
 	if(isset($_POST['add_spec']) AND !empty($_POST['add_specialiteit']))
-		{
-		$N = 0;
-		$X = 1;
-		foreach($specialiteit as $value) 
-			{	
-				${'specialiteit_'.$X} = $value;
-				$N++;
-				$X++;
-			}
+	{
 			
 	$add_specialiteit = $_POST['add_specialiteit'];
-	$parameters = array(':add_specialiteit'=>$add_specialiteit);
-	$sth = $pdo->prepare('INSERT INTO specialiteiten (specialiteit)VALUES(:add_specialiteit)');
+	$parameters = array(':add_specialiteit'=>$add_specialiteit,
+						':branche_id'=>$subbranche_id
+						);
+	$sth = $pdo->prepare('INSERT INTO specialiteiten (naam, branche_id)VALUES(:add_specialiteit, :branche_id)');
 	$sth->execute($parameters);
+	
 	}
 	
 	
@@ -175,6 +199,16 @@ $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $te
 		echo 'Email = '.$email.'</br>';
 		echo 'Latitude = '.$latitude.'</br>';
 		echo 'Longitude = '.$longitude.'</br>';
+		echo 'Facebook = '.$facebook.'</br>';
+		echo 'Twitter = '.$twitter.'</br>';
+		echo 'LinkedIn = '.$linkedin.'</br>';
+		echo 'Pinterest = '.$pinterest.'</br>';
+		echo 'GooglePlus = '.$googleplus.'</br>';
+		echo 'youtube = '.$youtube.'</br>';
+		echo 'premium = '.$premium.'</br>';
+		echo 'logo = '.$logo.'</br>';
+		echo 'banner = '.$banner.'</br>';
+		echo 'foto = '.$foto.'</br>';
 		
 		echo '</br>';
 		
@@ -195,55 +229,57 @@ $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $te
 				':website'=>$website,
 				':email'=>$email,
 				':latitude'=>$latitude,
-				':longitude'=>$longitude
+				':longitude'=>$longitude,
 				':facebook'=>$facebook,
 				':twitter'=>$twitter,
-				':linkedIn'=>$linkedin,
+				':linkedin'=>$linkedin,
 				':pinterest'=>$pinterest,
 				':googleplus'=>$googleplus,
 				':youtube'=>$youtube,
 				':premium'=>$premium,
-				':foto'=>$foto,
+				':logo'=>$logo,
 				':banner'=>$banner,
-				':logo'=>$logo);
+				':foto'=>$foto
+				);
 								
-				$sth = $pdo->prepare('INSERT INTO bedrijfgegevens (subbranche_id, bedrijfsnaam, beschrijving, bezoekadres, postcode, plaats_id, telefoonnummmer, mobielnummer, website, email, facebook, twitter, linkedin, pinterest, googleplus, youtube, premium, logo, banner, foto, branche_id) VALUES(:subbranche_id, :bedrijfsnaam, :beschrijving, :bezoekadres, :postcode, :plaats_id, :telefoonnummer, :mobielnummer, :website, :email, :facebook, :witter, :linkedin, :pinterest, :googleplus,  :youtube, :premium, :foto, :banner, :logo)');
+				$sth = $pdo->prepare('INSERT INTO bedrijfgegevens (subbranche_id, bedrijfsnaam, beschrijving, bezoekadres, postcode, plaats_id, telefoonnummer, mobielnummer, website, email, latitude, longitude, facebook, twitter, linkedin, pinterest, googleplus, youtube, premium, logo, banner, foto) VALUES(:subbranche_id, :bedrijfsnaam, :beschrijving, :bezoekadres, :postcode, :plaats_id, :telefoonnummer, :mobielnummer, :website, :email, :latitude, :longitude, :facebook, :twitter, :linkedin, :pinterest, :googleplus, :youtube, :premium, :logo, :banner, :foto)');
 				$sth->execute($parameters);
-				$plaats_id = $pdo->lastInsertId();
+				$bedrijfgegevens_id = $pdo->lastInsertId();
 
-				$X=1
+			
 				var_dump($specialiteiten);
 				foreach ($specialiteiten as $value)
 				{
-					if($specialiteit[$X] != null)
+					if($value != null)
 					{
-						$parameters = array(':specialiteit'=>$specialiteit[],
-											':bedrijfgegevens_id'=>
+						$parameters = array(':specialiteiten_id'=>$value,
+											':bedrijfgegevens_id'=>$bedrijfgegevens_id
 											);
-						$sth = $pdo->prepare('INSERT INTO specialiteiten (specialiteit)VALUES(:specialiteit)');
+						$sth = $pdo->prepare('INSERT INTO bedrijfgegevens_specialiteiten (bedrijfgegevens_id, specialiteiten_id)VALUES(:bedrijfgegevens_id, :specialiteiten_id)');
 						$sth->execute($parameters);
 					}
-					$X++
 				} 
+				
 			
 			
 			echo'De bedrijf gegevens zijn geregistreerd.<br />';
-			//echo '<META http-equiv="refresh" content="5;URL=index.php">';
+			echo '<META http-equiv="refresh" content="5;URL=index.php">';
 			
-			if (!file_exists('images/bedrijf_images/'.$bedrijfs_id)) {
-			mkdir('images/bedrijf_images/'.$bedrijfs_id, 0777, true);
+			if (!file_exists('images/bedrijf_images/'.$bedrijfgegevens_id)) {
+			mkdir('images/bedrijf_images/'.$bedrijfgegevens_id, 0777, true);
 			}
-			$target_dir = "images/bedrijf_images/".$bedrijfs_id."/";
+			$target_dir = "images/bedrijf_images/".$bedrijfgegevens_id."/";
 			$target_file = $target_dir . basename($_FILES["foto"]["name"]);
 			if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)){} 
 			$target_file = $target_dir . basename($_FILES["banner"]["name"]);
 			if (move_uploaded_file($_FILES["banner"]["tmp_name"], $target_file)){} 
 			$target_file = $target_dir . basename($_FILES["logo"]["name"]);
 			if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)){}
-			*/
+			
 		}
 	}
 	else
+		
 	{
 		require('./views/ToevoegenBedrijfForm.php');
 	}
