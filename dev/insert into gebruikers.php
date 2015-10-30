@@ -1,19 +1,19 @@
 <?php
 require('./connection.php');
 $pdo = ConnectDB();
-$sth = $pdo->prepare("SELECT * FROM bedrijfgegevens");
-$sth->execute();
-$count = 0;
-while($row = $sth->fetch() and $count < 3)
-{
-	$count++;
+$sth = $pdo->prepare("Select * from mail 
+			inner join gebruikers on gebruiker_id = gebruikermail_id 
+			inner join bedrijfgegevens on id = gebruikermail_id 
+			where Mail_verstuurd = null");
+	$sth->execute();
 	
+	
+
+while($row = $sth->fetch())
+{
 	$bedrijfs_id = $row['id'];
 	$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-	$sth2 = $pdo->prepare("Select Mail_verstuurd from mail inner join gebruikers on gebruiker_id = gebruikermail_id where Mail_verstuurd = NULL");
-	$sth2->execute();
-	$row2= $sth2->fetch();
-	$Mail_verstuurd = $row2['Mail_verstuurd'];
+	
 	require('./Usernamegenerate.php');
 	require('./Passwordgenerate.php');
 	
@@ -95,7 +95,7 @@ if(!$mail->send()) {
 							);
 		$sth4 = $pdo->prepare("INSERT INTO mail (gebruikermail_id, Mail_verstuurd) VALUES (:gebruikermail_id, :Mail_verstuurd)");
 		$sth4-> execute($parameters);
-		echo $row['id'] . ' - ' . $pw . ' - ' . $username . ' - ' . $email . ' - ' . $datum . ' - asd' . $Mail_verstuurd . '<br>';
+		echo $row['id'] . ' - ' . $pw . ' - ' . $username . ' - ' . $email . ' - ' . $datum . ' - asd' . $row['Mail_verstuurd'] . '<br>';
 	
 		
 }
