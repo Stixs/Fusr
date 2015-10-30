@@ -9,12 +9,12 @@ $mail->isSMTP();                                      		// Set mailer to use SMT
 $mail->Host = 'www.thuisserver.org';  				  		// Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               		// Enable SMTP authentication
 $mail->Username = 'Jeroentest@thuisserver.org';       		// SMTP username
-$mail->Password = 'Admintest01';                   			// SMTP password
+$mail->Password = 'K00kb03k';                   			// SMTP password
 $mail->SMTPSecure = 'tls';                            		// Enable TLS encryption, `ssl` also accepted
-//$mail->Port = 587;                                    	// TCP port to connect to
+$mail->Port = 587;                                    	// TCP port to connect to
 
 $mail->setFrom('jeroentest@thuisserver.org', 'Jeroen');
-$mail->addAddress('jeroenbiggie@gmail.com', 'Jeroen');     	// Add a recipient
+$mail->addAddress($email);     								// Add a recipient
 //$mail->addAddress('');               					  	// Name is optional
 $mail->addReplyTo('jeroentest@thuisserver.org', 'Information');
 //$mail->addCC('cc@example.com');
@@ -24,8 +24,10 @@ $mail->addReplyTo('jeroentest@thuisserver.org', 'Information');
 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    	// Optional name
 $mail->isHTML(true);                                  		// Set email format to HTML
 
-$mail->Subject = 'Here is the subject';
-$mail->Body    =  $pw.'</br>'. $username ;
+$mail->Subject = 'Uw account voor fusr';
+$mail->Body    = 'Hierbij verstuur ik uw persoonlijk account voor fusr, Dit account is verbonden aan uw becrijf</br>
+				  Uw wachtwoord is:'.$pw.'</br>
+				  Uw gebruikersnaam is:'. $username ;
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 if(!$mail->send()) {
