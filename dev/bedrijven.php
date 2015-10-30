@@ -3,21 +3,50 @@
 require('./controllers/header.php');
 	$bedrijfs_id = $_GET['bedrijfs_id'];
 	
-	$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-	$sth = $pdo->prepare('select * from openingstijden where bedrijfs_id = :bedrijfs_id');
-	$sth->execute();
-	$row = $sth->fetch();
-	
 
 		
 	$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-	$sth = $pdo->prepare('select * from bedrijfgegevens where bedrijfs_id = :bedrijfs_id');
+	$sth = $pdo->prepare('SELECT *
+					FROM
+					bedrijfgegevens_specialiteiten
+					INNER JOIN
+					specialiteiten on bedrijfgegevens_specialiteiten.specialiteiten_id = specialiteiten.id
+					INNER JOIN
+					bedrijfgegevens on bedrijfgegevens_specialiteiten.bedrijfgegevens_id = bedrijfgegevens.id
+					INNER JOIN
+					plaatsen on bedrijfgegevens.plaats_id = plaatsen.id
+					WHERE
+					bedrijfgegevens_id = '.$bedrijfs_id);
 	$sth->execute($parameters);
-	$row = $sth->fetch();
+	while($row = $sth->fetch())
+		{
+		$premium = $row['premium'];
+		$facebook = $row['facebook'];
+		$twitter = $row['twitter'];
+		$googleplus = $row['googleplus'];
+		$linkedin = $row['linkedin'];
+		$youtube = $row['youtube'];
+		$pinterest = $row['pinterest'];			
+		$bedrijfsnaam = $row['bedrijfsnaam'];
+		$beschrijving = $row['beschrijving'];
+		$bezoekadres = $row['bezoekadres'];
+		$postcode = $row['postcode'];
+		$plaats = $row['plaats'];
+		$provincie = $row['provincie'];
+		$website = $row['website'];
+		$telefoonnummer = $row['telefoonnummer'];
+		$mobielnummer = $row['mobielnummer'];
+		$email = $row['email'];
+		$logo = $row['logo'];
+		$banner = $row['banner'];
+		$foto = $row['foto'];
+		$specialiteiten[] = $row['naam'];
+		}
+	
 	
 $krpano = 0;
-if ($row['premium'] == 'gold')
-{	
+if ($premium == 'gold')
+{
 ?>
 <div class="row">
 	<?php if($krpano == 1) { ?>
@@ -30,19 +59,19 @@ if ($row['premium'] == 'gold')
 		</script>
 	<?php } else { ?>
 	<div class="col-xs-12">
-		<?php if(!empty($row['banner'])){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $row['banner']; ?>" width="100%" role="banner" /> <?php } ?>
+		<?php if(!empty($banner)){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $banner; ?>" width="100%" role="banner" /> <?php } ?>
 	</div>
 	<?php  } ?>
 </div>
 <div class="rand row">
 	<div class="col-xs-12 naam-bedrijf">
-		<?php echo $row['bedrijfsnaam']; ?>
+		<?php echo $bedrijfsnaam; ?>
 	</div>
 	
 	<div class="col-xs-6 beschrijving">
-	<?php if(!empty($row['logo'])){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $row['logo']; ?>" width="200px"><br> <?php } ?>
-	<?php echo $row['beschrijving']; ?>
-	<?php if(!empty($row['afbeelding'])){ ?> <img src="images/bedrijf_images/<?php echo$bedrijfs_id .'/'. $row['afbeelding']; ?>" width="500px"/><br /> <?php } ?>
+	<?php if(!empty($logo)){ ?> <img src="images/bedrijf_images/<?php echo $bedrijfs_id .'/'. $logo; ?>" width="200px"><br> <?php } ?>
+	<?php echo $beschrijving; ?>
+	<?php if(!empty($afbeelding)){ ?> <img src="images/bedrijf_images/<?php echo$bedrijfs_id .'/'. $afbeelding; ?>" width="500px"/><br /> <?php } ?>
 	</div>
 	
 	<div class="col-xs-offset-1 col-xs-4 bedrijfSpecs">
@@ -51,31 +80,31 @@ if ($row['premium'] == 'gold')
 				<td colspan="2" class="titel">Bedrijfsinfo</td>
 			</tr>
 			<tr>
-				<td>Adres:</td><td><?php echo $row['adres']; ?></td>
+				<td>Adres:</td><td><?php echo $bezoekadres; ?></td>
 			</tr>
 			<tr>
-				<td>Plaats:</td><td><?php echo $row['plaats']; ?></td>
+				<td>Plaats:</td><td><?php echo $plaats; ?></td>
 			</tr>
 			<tr>
-				<td>Postcode:</td><td><?php echo $row['postcode']; ?></td>
+				<td>Postcode:</td><td><?php echo $postcode; ?></td>
 			</tr>
 			<tr>
-				<td>Provincie:</td><td><?php echo $row['provincie']; ?></td>
+				<td>Provincie:</td><td><?php echo $provincie; ?></td>
 			</tr>
 			<tr>
-				<td>Telefoon:</td><td><a href="tel:<?php echo $row['telefoon']; ?>"><?php echo $row['telefoon']; ?></a></td>
+				<td>Telefoon:</td><td><a href="tel:<?php echo $telefoonnummer; ?>"><?php echo $telefoonnummer; ?></a></td>
 			</tr>
 			<tr>
-				<td>Fax:</td><td><?php echo $row['fax']; ?></td>
+				<td>Mobiel:</td><td><a href="tel:<?php echo $mobielnummer; ?>"><?php echo $mobielnummer; ?></a></td>
 			</tr>
 			<tr>
-				<td>Email:</td><td><a href="mailto:<?php echo $row['bedrijfs_email']; ?>&subject=Contact via Fusr"><?php echo $row['bedrijfs_email']; ?></a></td>
+				<td>Email:</td><td><a href="mailto:<?php echo $email; ?>&subject=Contact via Fusr"><?php echo $email; ?></a></td>
 			</tr>
 			<tr>
-				<td>Website:</td><td><a href="http://<?php echo $row['website']; ?>" target="_blank" alt="<?php echo $row['bedrijfsnaam']; ?>"><?php echo $row['website']; ?></a></td>
+				<td>Website:</td><td><a href="http://<?php echo $website; ?>" target="_blank" alt="<?php echo $bedrijfsnaam; ?>"><?php echo $website; ?></a></td>
 			</tr>
 			<?php
-			if ($row['Facebook'] == '' and $row['Twitter'] == '' and $row['Google'] == '' and $row['LinkedIn'] == '' and $row['Instagram'] == '' and $row['Pinterest'] == '' )
+			if ($facebook == '' and $twitter == '' and $googleplus == '' and $linkedin == '' and $youtube == '' and $pinterest == '' )
 			{
 			}
 			Else
@@ -85,73 +114,74 @@ if ($row['premium'] == 'gold')
 			<td>Social media</td>
 				<td>
 					<?php
-						if ($row['Facebook'] == '')
+						if ($facebook == '')
 						{
 						}
 						Else
 						{
 						?>
-							<a href="<?php echo $row['Facebook'] ?>" class="btn btn-social-icon btn-facebook social-edge">
+							<a href="<?php echo $facebook ?>" class="btn btn-social-icon btn-facebook social-edge">
 								<i class="fa fa-facebook"></i>
 							</a>
 						<?php
 						}
 						
-						if ($row['Twitter'] == '')
+						if ($twitter == '')
 						{								
 						}
 						Else
 						{
 						?>
-							<a href="<?php echo $row['Twitter'] ?>" class="btn btn-social-icon btn-twitter social-edge">
+							<a href="<?php echo $twitter ?>" class="btn btn-social-icon btn-twitter social-edge">
 								<i class="fa fa-twitter"></i>
 							</a>
 						<?php
 						}
 
-						if ($row['Google'] == '')
+						if ($googleplus == '')
 						{									
 						}
 						Else
 						{
 						?>
-							<a href="<?php echo $row['Google'] ?>" class="btn btn-social-icon btn-google social-edge">
+							<a href="<?php echo $googleplus ?>" class="btn btn-social-icon btn-google social-edge">
 								<i class="fa fa-google"></i>
 							</a>
 						<?php
 						}
 	
-						if ($row['LinkedIn'] == '')
+						if ($linkedin == '')
 						{						
 						}
 						Else
 						{
 						?>
-							<a href="<?php echo $row['LinkedIn'] ?>" class="btn btn-social-icon btn-linkedin social-edge">
+							<a href="<?php echo $linkedin
+							?>" class="btn btn-social-icon btn-linkedin social-edge">
 								<i class="fa fa-linkedin"></i>
 							</a>
 						<?php
 						}
 					
-						if ($row['Instagram'] == '')
+						if ($youtube == '')
 						{								
 						}
 						Else
 						{
 						?>
-							<a href="<?php echo $row['Instagram'] ?>" class="btn btn-social-icon btn-instagram social-edge">
+							<a href="<?php echo $youtube ?>" class="btn btn-social-icon btn-instagram social-edge">
 								<i class="fa fa-instagram"></i>
 							</a>
 						<?php
 						}
 						
-						if ($row['Pinterest'] == '')
+						if ($pinterest == '')
 						{							
 						}
 						Else
 						{
 						?>
-							<a href="<?php echo $row['Pinterest'] ?>" class="btn btn-social-icon btn-pinterest social-edge">
+							<a href="<?php echo $pinterest ?>" class="btn btn-social-icon btn-pinterest social-edge">
 								<i class="fa fa-pinterest"></i>
 							</a>
 						<?php
@@ -164,50 +194,28 @@ if ($row['premium'] == 'gold')
 			
 			?>
 			<tr>
-				<td>Transport Manager:</td><td><?php echo $row['transport_manager']; ?></td>
-			</tr>
-			<tr>
 				<td>Specialiteit:</td><td>
 				<?php 
 				
-				$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-				$sth = $pdo->prepare('SELECT * FROM bedrijfs_specialiteiten WHERE bedrijfs_id = :bedrijfs_id');
-				$sth->execute($parameters);
-				
-				$row = $sth->fetch();
-				for($count = 1; $count <= 20; $count++){
-					if(!empty($row['specialiteit_'.$count])){
-					echo $row['specialiteit_'.$count].', ';
+				foreach ($specialiteiten as $value){
+					if (end($specialiteiten) == $value)
+						{
+						echo $value;
+						}
+						else
+						{
+						echo $value.', ';
+						}
 					}
-				}
+				
+				
+				
+				
 				
 				?>
 				</td>
 			</tr>
-			<?php
-			$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
-			$sth = $pdo->prepare('SELECT * FROM openingstijden WHERE bedrijfs_id = :bedrijfs_id');
-			$sth->execute($parameters);
-			
-			if(isset($row['o_maandag']) or isset($row['o_dinsdag']) or isset($row['o_woensdag']) or isset($row['o_donderdag']) or isset($row['o_vrijdag']) or isset($row['o_zaterdag']) or isset($row['o_zondag']))
-			{
-			?>
-			<tr>
-				<td>
-					<table>
-						<tr><td>Maandag</td><td><?php echo 'test'; ?></td></tr>
-						<tr><td>Dinsdag</td><td><?php echo 'test'; ?></td></tr>
-						<tr><td>Woensdag</td><td><?php echo 'test'; ?></td></tr>
-						<tr><td>Donderdag</td><td><?php echo 'test'; ?></td></tr>
-						<tr><td>vrijdag</td><td><?php echo 'test'; ?></td></tr>
-						<tr><td>zaterdag</td><td><?php echo 'test'; ?></td></tr>
-						<tr><td>zondag</td><td><?php echo 'test'; ?></td></tr>
-					</table>
-				<td>
-			</tr>
-			<?php
-			}
-			?>
+		
 		</table>
 		<div class="col-xs-12">
 			<!-- video -->
@@ -222,8 +230,8 @@ if ($row['premium'] == 'gold')
 else
 {
 	
-	$bedrijfsnaam = $row['bedrijfsnaam'];
-	$_SESSION['bedrijfsnaam'] = $bedrijfsnaam;
+	$bedrijfsnaam = $bedrijfsnaam;
+$_SESSION['bedrijfsnaam'] = $bedrijfsnaam;
 	?>
 	<br />
 	<div class="row">

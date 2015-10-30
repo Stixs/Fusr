@@ -1,21 +1,23 @@
 <?php
 
-if(isset($_POST['subbranche']))
+if(isset($_POST['branche']))
 {
-$_SESSION['subbranche'] = $_POST['subbranche'];
+$_SESSION['branche'] = $_POST['branche'];
 }
-
+else
+{
+	unset($_SESSION['beperk']);
+}
 
 if(isset($_POST['add_spec']))
 {
 $specialiteit = $_POST['specialiteit'];
-$subbranche = $_SESSION['subbranche'];
+$branche = $_POST['branche'];
 $parameters = array(':specialiteit'=>$specialiteit,
-					':subbranche'=>$subbranche
+					':branche'=>$branche
 					);
-	$sth = $pdo->prepare('INSERT INTO specialiteiten (specialiteit, subbranche_id)VALUES(:specialiteit, :subbranche)');
+	$sth = $pdo->prepare('INSERT INTO specialiteiten (branche_id, naam)VALUES(:branche, :specialiteit)');
 	$sth->execute($parameters);
-	echo 'test';
 	
 }
 
@@ -24,10 +26,9 @@ if(isset($_POST['edit_spec']))
 {
 $specialiteit = $_POST['specialiteit'];
 $keuze = $_POST['edit_spec'];
-$oudenaam = $_POST['oudenaam'];
-$parameters = array(':specialiteit'=>$specialiteit[$keuze],
+$parameters = array(':naam'=>$specialiteit[$keuze],
 					':keuze'=>$keuze);
-$sth = $pdo->prepare('UPDATE specialiteiten SET specialiteit=:specialiteit WHERE specialiteit_id = :keuze');
+$sth = $pdo->prepare('UPDATE specialiteiten SET naam=:naam WHERE id = :keuze');
 $sth->execute($parameters);
 
 }
@@ -36,43 +37,69 @@ $sth->execute($parameters);
 if(isset($_POST['del_spec']))
 {
 $keuze = $_POST['del_spec'];
+$parameters = array(':keuze'=>$keuze);
+$sth = $pdo->prepare('SELECT specialiteiten_id FROM bedrijfgegevens_specialiteiten WHERE specialiteiten_id = :keuze limit 1');
+
+	$sth->execute($parameters);
+	if ($sth->rowCount() >= 1)
+	{
+		echo 'Verwijderen niet mogelijk, deze specialiteit is nog gekoppeld aan een bedrijf';
+	}
+	else
+	{
 	$parameters = array(':keuze'=>$keuze);
-$sth = $pdo->prepare('DELETE FROM specialiteiten WHERE specialiteit_id = :keuze');
-$sth->execute($parameters);
+	$sth = $pdo->prepare('DELETE FROM specialiteiten WHERE id = :keuze');
+	$sth->execute($parameters);
+	}
 }
 
 
 echo '<form method="POST">';
-echo '<select name="subbranche" onchange="this.form.submit()">';
-echo '<option value="">Selecteer sub-branche</option>';
-$sth = $pdo->prepare("SELECT * FROM sub_branches");
+echo '<select name="branche" onchange="this.form.submit()">';
+echo '<option value="">Selecteer branche</option>';
+$sth = $pdo->prepare("SELECT * FROM branches order by naam");
 $sth->execute();
 while($row = $sth->fetch())
 	{
-		if($row['subbranche_id'] == $_SESSION['subbranche'])
+		if($row['id'] == $_SESSION['branche'])
 		{
-		echo '<option selected value="'.$row['subbranche_id'].'">'.$row['subbranche'].'</option>';
+		echo '<option selected value="'.$row['id'].'">'.$row['naam'].'</option>';
 		}
 		else
 		{
-		echo '<option value="'.$row['subbranche_id'].'">'.$row['subbranche'].'</option>';
+		echo '<option value="'.$row['id'].'">'.$row['naam'].'</option>';
 		}
 	}
 echo '</select>';
 echo '<noscript><input type="submit" value="Submit"></noscript>';
 echo '</form>';
 
-if(isset($_POST['subbranche']) or isset($_POST['edit_spec']) or isset($_POST['del_spec']) or isset($_POST['add_spec']))
+if(isset($_POST['branche']) or isset($_POST['edit_spec']) or isset($_POST['del_spec']) or isset($_POST['add_spec']))
 {
+	
+if(isset($_POST['beperk']))
+{
+	$_SESSION['beperk'] = $_POST['beperk'];
+	$beperk = $_SESSION['beperk'];
+}
+elseif (isset($_SESSION['beperk']))
+{
+	$beperk = $_SESSION['beperk'];
+}
+else
+{
+	
+	$_SESSION['beperk'] = null;
+}
 ?>
 
 
 <form  method="post">
 	<div class="col-xs-6">
 	<br>
-		<div class="form-group beperk">
-			<input class="form-control" type="text" placeholder="Zoek" name="beperk" autofocus size="1" value="" >
-			<input type="hidden" name="subbranche" value="<?php echo $_SESSION['subbranche']; ?>" >
+		<div class="form-$branche = $_POST['branche'];group beperk">
+			<input class="form-control" type="text" placeholder="Zoek" name="beperk" autofocus size="1" value="<?php echo $_SESSION['beperk']; ?>" >
+			<input type="hidden" name="branche" value="<?php echo $_SESSION['branche']; ?>" >
 		</div>
 	</div>
 </form>
@@ -80,18 +107,11 @@ if(isset($_POST['subbranche']) or isset($_POST['edit_spec']) or isset($_POST['de
 <div class="row">
 <?php
 
-if(isset($_POST['beperk']))
+
+
+if(isset($_SESSION['beperk']))
 {
-	$beperk = $_POST['beperk'];
-}
-else
-{
-	$beperk = NULL;
-}
-if(isset($_POST['beperk']))
-{
-	$branche = $_SESSION['branche'];
-	$sth = $pdo->prepare("SELECT * FROM specialiteiten WHERE subbranche_id = " . $_SESSION['subbranche'] . " AND specialiteit LIKE '%" . $beperk. "%'");
+	$sth = $pdo->prepare("SELECT * FROM specialiteiten WHERE branche_id = " . $_SESSION['branche'] . " AND naam LIKE '%" . $beperk. "%'");
 	$sth->execute();
 	?>
 	<div class="col-xs-12 ContentPadding" style="padding-top:20px;">
@@ -105,10 +125,11 @@ if(isset($_POST['beperk']))
 		
 		<div class="col-xs-6">
 			<div class="form-group specialiteit_wijzigen">
-				<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
-				<input type="text" class="form-control" name="specialiteit[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
-				<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="edit_spec" class="btn btn-default">Wijzig</button>
-				<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="del_spec" class="btn btn-danger">Verwijder</button>
+				<input type="hidden" name="branche" value="<?php echo $_SESSION['branche']; ?>" >
+				<input type="text" class="form-control" name="specialiteit[<?php echo $row['id'] ?>]" value="<?php echo $row['naam']; ?>">
+				<button type="submit" value="<?php echo $row['id'] ?>" name="edit_spec" class="btn btn-default">Wijzig</button>
+				<button type="submit" value="<?php echo $row['id'] ?>" name="del_spec" class="btn btn-danger">Verwijder</button>
+				
 			</div>
 		</div>
 		
@@ -131,7 +152,7 @@ else
 
 			<?php
 
-			$sth = $pdo->prepare("select * from specialiteiten WHERE subbranche_id = " . $_SESSION['subbranche'] . " ORDER BY specialiteit");
+			$sth = $pdo->prepare("select * from specialiteiten WHERE branche_id = " . $_SESSION['branche'] . " ORDER BY naam");
 			$sth->execute();
 			while($row = $sth->fetch())
 			{
@@ -139,10 +160,11 @@ else
 	
 			<div class="col-xs-6">
 				<div class="form-group specialiteit_wijzigen">
-					<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
-					<input type="text" class="form-control" name="specialiteit[<?php echo $row['specialiteit_id'] ?>]" value="<?php echo $row['specialiteit']; ?>">
-					<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="edit_spec" class="btn btn-default">Wijzig</button>
-					<button type="submit" value="<?php echo $row['specialiteit_id'] ?>" name="del_spec" class="btn btn-danger">Verwijder</button>
+					<input type="hidden" name="branche" value="<?php echo $row['branche_id']; ?>" >
+					<input type="text" class="form-control" name="specialiteit[<?php echo $row['id'] ?>]" value="<?php echo $row['naam']; ?>">
+					<button type="submit" value="<?php echo $row['id'] ?>" name="edit_spec" class="btn btn-default">Wijzig</button>
+					<button type="submit" value="<?php echo $row['id'] ?>" name="del_spec" class="btn btn-danger">Verwijder</button>
+					
 				</div>
 			</div>
 			
@@ -153,12 +175,14 @@ else
 		</form>
 	</div>
 	<?php
+	
 	}
 	?>
 	<div class="col-xs-12 ContentPadding" style="padding-top:20px;">
 		<form class="form-inline" method="post" action="" >
 			<div class="form-group spacer2">
 				<label for="specialiteit">Specialiteit</label>
+				<input type="hidden" name="branche" value="<?php echo $_SESSION['branche']; ?>" >
 				<input type="text" class="form-control" id="specialiteit" name="specialiteit">
 				<button type="submit" name="add_spec" class="btn btn-default">Toevoegen</button>
 			</div>

@@ -367,8 +367,6 @@
 					<label for="beschrijving">Beschrijving:</label>
 					<textarea id="beschrijving" class="form-control" name="beschrijving" rows="5" ><?php echo $beschrijving; ?></textarea>
 					<script>
-					// Replace the <textarea id="editor1"> with a CKEditor
-					// instance, using default configuration.
 					CKEDITOR.replace( 'beschrijving' );
 					</script>
 				</div>

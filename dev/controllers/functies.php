@@ -187,7 +187,7 @@ function specialiteitkeuze($pdo, $subbranche_id, $subbranche = NULL, $name, $id,
 		$sth = $pdo->prepare('SELECT * FROM subbranches WHERE id = :subbranche_id ORDER BY naam');
 		$sth->execute($parameters);
 		$row = $sth->fetch();
-		$branche_id = $row['branche_id'];
+		$subbranche_id = $row['branche_id'];
 		}
 		
 	

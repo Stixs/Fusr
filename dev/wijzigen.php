@@ -254,13 +254,15 @@ if(LoginCheck($pdo))
 					$youtube = $row['youtube'];
 					$pinterest = $row['pinterest'];
 					
-					$specialiteiten[] = $row['specialiteiten_id'];					
-					}
-					for ($x = 0; $x <= 19; $x++){
-					$specialiteiten[$x] = null;
+					$specialiteiten[] = $row['specialiteiten_id'];
 					}
 					
-					var_dump($specialiteiten);
+					for ($x = 0; $x <= 19; $x++){
+						if(!isset($specialiteiten[$x])){
+							$specialiteiten[$x] = NULL;
+						}
+						
+					}
 					
 					
 					
