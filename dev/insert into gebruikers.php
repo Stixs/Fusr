@@ -1,16 +1,23 @@
 <?php
 require('./connection.php');
 $pdo = ConnectDB();
-$sth = $pdo->prepare("Select * from mail 
-			inner join gebruikers on gebruiker_id = gebruikermail_id 
-			inner join bedrijfgegevens on id = gebruikermail_id 
-			where Mail_verstuurd = null");
+$sth = $pdo->prepare("Select * from bedrijfgegevens 
+			");
 	$sth->execute();
-	
 	
 
 while($row = $sth->fetch())
 {
+	$bedrijfs_id = $row['id'];
+	$parameter = array(':id'=>$bedrijfs_id);
+	$countrow = $pdo->prepare('SELECT Mail_verstuurd FROM mail WHERE gebruikermail_id = :id LIMIT 1');
+ 
+       	$countrow->execute($parameter);
+		if ($countrow->rowCount() == 1)
+		{
+		}
+		else
+		{
 	$bedrijfs_id = $row['id'];
 	$parameters = array(':bedrijfs_id'=>$bedrijfs_id);
 	
@@ -95,9 +102,9 @@ if(!$mail->send()) {
 							);
 		$sth4 = $pdo->prepare("INSERT INTO mail (gebruikermail_id, Mail_verstuurd) VALUES (:gebruikermail_id, :Mail_verstuurd)");
 		$sth4-> execute($parameters);
-		echo $row['id'] . ' - ' . $pw . ' - ' . $username . ' - ' . $email . ' - ' . $datum . ' - asd' . $row['Mail_verstuurd'] . '<br>';
+		echo $row['id'] . ' - ' . $pw . ' - ' . $username . ' - ' . $email . ' - ' . $datum . ' - asd<br>';
 	
-		
+	}
 }
 
 ?> 
