@@ -1,21 +1,17 @@
-<div id="header">
-    <div class="col-xs-12">
-        <span class="menu-button glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-    </div>
-</div>
+<div id="Fusr_Logo"></div>
 
-<div class="zoeken">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 filter2">
-            <form id="opnaam" method="post" action="gids.php">
-                <div class="col-xs-9 col-sm-9 col-md-6">
-                    <input class="form-control" type="text" name="trefwoord" placeholder="Trefwoord" autofocus size="20" value="<?php echo $trefwoord; ?>" />
-                </div>
+<div class="HomeSearch">
+    <div class="filter2">
+        <form id="opnaam" method="get" action="gids.php">
+            <div class="col-sm-6 col-sm-offset-2 col-md-5 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                <input class="form-control" type="text" name="q" placeholder="Lunchroom, advocaat, schoenwinkel etc." autofocus size="20" value="<?php echo $trefwoord; ?>" />
+                <input type="hidden" name="branche" value="<?php echo $branche; ?>" />
+                <input type="hidden" name="subbranche" value="<?php echo $subbranche; ?>" />
+            </div>
 
-                <div class="col-xs-6 col-sm-6 col-md-2 xs-pull-right">
-                    <button class="btn btn-default col-xs-12" type="submit" name="Zoek" value="Zoek">Zoek</button>
-                </div>
-            </form>
-        </div>
+            <div class="col-sm-3 col-md-2 zoekknop">
+                <button class="btn btn-default col-xs-12" type="submit" value="Zoek">Zoek</button>
+            </div>
+        </form>
     </div>
 </div>

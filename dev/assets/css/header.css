@@ -1,0 +1,98 @@
+/*  Header styling  */
+
+#header {
+	background-color: #fff;
+	height: 149px;
+	width: 100%;
+}
+#Fusr_Logo-small {
+	display: none; 
+	visibility: hidden;
+}
+.HeaderSearch {
+	top: 52px; 
+	padding-top: 10px;
+	width: 100%;
+	position: absolute;
+	border-top: 1px solid #D3DCE4;
+	background: #f9f9f9; 
+}
+.Menubtn {
+	float: left; 
+ 	margin: 12px 0 0 20px;
+	cursor: pointer;
+}
+.Menubtn img {
+	padding: 5px 0px;
+}
+.filters {
+	display: none; 
+	visibility: hidden;
+}
+.Searchbtn .btn {
+    width: 45px;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: -46px;
+    height: 46px;
+    overflow: hidden;
+    right: 15px;
+}
+
+.teruglink {
+	height: 46px;
+	border-bottom: 1px solid #E1E1E1;
+	font-size: 0.8em;
+	padding: 11px 0px;
+	background: #F2F2F2 none repeat scroll 0% 0%;
+	text-align: center;
+	top: 63px;
+	position: absolute;
+	width: 100%;
+
+}
+.teruglink div {
+	padding-top: 2px;
+	word-break: break-all;
+}
+
+.MobileLocatie {
+	height: 40px;
+	padding: 5px 15px 0 15px;
+	font-size: 1em;
+	line-height: 1.8em;
+	font-family: "trebuchet ms", Verdana, Sans-Serif;
+	border-bottom: 1px solid #e1e1e1;
+	background: #F9F9F9;
+}
+.MobileLocatie a {
+	padding: 0px 40px 0px 0px;
+	float: right;
+	text-decoration: underline;
+	color: #343434;
+	background: url('../images/geo-icon.png') right center no-repeat;
+}
+
+.MobileFilter {
+	background: url('../images/filter.png') no-repeat center; 
+	position: absolute; 
+	height: 21px; 
+	right: 10px; 
+	width: 21px; 
+	top: 0; 
+	padding: 26px; 
+	cursor: pointer;
+}
+
+/*  Homepage header  */
+
+.home {
+	height: 50px !important;
+	margin-bottom: 85px;
+	border-bottom: 1px solid #D3DCE4;
+}
+ .home #menu #Fusr_Logo {
+	display: none; 
+	visibility: hidden;
+}

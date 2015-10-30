@@ -247,4 +247,14 @@ function convertSearchString($string) {
 	$string = str_replace('>', '', html_entity_decode($string));
 	return preg_replace('/\b(?<!\+)\w+|["|\'].+?["|\']/', '+$0', $string);
 }
+
+function activeFilter($specialiteit, $word) {
+	$specialiteit = htmlspecialchars_decode($specialiteit);
+
+	if (preg_match('/"(.*?)"/', $specialiteit, $matches)) {
+		if($matches[1] == $word) {
+			return 1;
+		}
+	}
+}
 ?>

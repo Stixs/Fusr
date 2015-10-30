@@ -37,11 +37,11 @@ $sth->execute();
 
 $output = [];
 while($row = $sth->fetch()) {
-    if(strtolower(trim($row['branche_naam'])) == strtolower(trim($row['subbranche_naam']))) {
-        array_push($output, trim($row['branche_naam']));
-    } else {
-        array_push($output, trim($row['branche_naam']) . ' > ' . trim($row['subbranche_naam']));
-    }
+    //if(strtolower(trim($row['branche_naam'])) == strtolower(trim($row['subbranche_naam']))) {
+    //    array_push($output, ['branche' => trim($row['branche_naam']));
+    //} else {
+        array_push($output, ['branche' => trim($row['branche_naam']), 'subbranche' => trim($row['subbranche_naam'])]);
+    //}
 }
 
 echo json_encode($output);

@@ -15,6 +15,12 @@ $pdo = ConnectDB();
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/header.css" rel="stylesheet">
+    <link href="assets/css/menu.css" rel="stylesheet">
+    <link href="assets/css/beheer.css" rel="stylesheet">
+    <link href="assets/css/forms.css" rel="stylesheet">
+    <link href="assets/css/footer.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
     <link href="assets/css/bootstrap-social.css" rel="stylesheet">
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -36,6 +42,3 @@ $pdo = ConnectDB();
     <![endif]-->
 </head>
 <body>
-
-<div class="container">
-    <?php require('views/menu.php'); ?>

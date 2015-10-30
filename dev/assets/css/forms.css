@@ -1,0 +1,107 @@
+
+/*  Formulier elementen  */
+
+.form-control {
+	border: 1px solid #cccccc;
+	font-size: 0.938em;
+	line-height: 0.938em;
+	color: #acacac;
+	padding: 2px 5px;
+	height: 30px;
+}
+.form-control:hover,
+.form-control:active,
+.form-control:focus {
+	color: #4e4e4e;
+	border: 1px solid #00aeef;
+}
+
+.btn, .form-control {
+	border-radius: 0;
+}
+
+label {
+	font-weight: 400;
+}
+
+.checkbox label, .radio label {
+    line-height: 35px;
+}
+
+select.input-sm[multiple] {
+	height: 30px;
+}
+
+/* Invoervelden */
+input {
+	height: 30px;
+	border: 1px solid #CCC;
+	box-shadow: none;
+}
+input[type=text], input[type=password] {
+	font-size: 1em;
+	line-height: 1em;
+	color: #acacac;
+	font-weight:400;
+	padding: 5px 10px;
+	height: 30px;
+}
+input[type=text]:hover, input[type=password]:hover,
+input[type=text]:active, input[type=password]:active,
+input[type=text]:focus,input[type=password]:focus {
+	color: #4e4e4e;
+	border-color: #00aeef;
+	box-shadow: none;
+}
+.HomeSearch input[type=text], .HeaderSearch input[type=text] {
+	height: 46px;
+}
+
+
+.zoeken input[type=text] {
+	border: 1px solid #b2b2b2;
+}
+
+textarea {
+	resize: none;
+	border: 1px solid #4e4e4e;
+}
+
+
+
+/* Knoppen */
+.btn-group-lg > .btn, .btn-lg {
+	font-size: 1em;
+	font-weight: 600;
+	padding: 10px 26px;
+}
+.btn-success {
+	background: #A3DD49;
+	border-color: #8bbc3e;
+}
+.btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {
+	background: #8bbc3e;
+}
+
+input[type=submit], .btn {
+	background-color: #2777b8;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #2777b8 #1c5584 #1c5584 #2777b8;
+	color: #fff;
+	font-size: 1em;
+	line-height: 1em;
+	height: 46px;
+}
+input[type=submit]:hover,
+input[type=submit]:active,
+input[type=submit]:focus,
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus {
+	color: #fff;
+	background-color: #3474AA;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #1C5584 #2777b8 #2777b8 #1C5584;
+}

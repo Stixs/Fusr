@@ -1,0 +1,125 @@
+
+/*  Menu elementen  */
+#menu {
+	background-color: rgba(255,255,255, 0.97);
+	position: absolute;
+	width: 335px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99;
+	display: none;
+	border-right: 1px solid #d3dce4;
+}
+
+.hide-menu {
+	float: left;
+	margin-top: 14px;
+	margin-left: 21px;
+	cursor: pointer;
+}
+#menu #Fusr_Logo {
+	margin: 13px 15px 0 0;
+	float: right;
+	background: transparent url("../images/Fusr.nl_logo-menu.png") no-repeat scroll center top;
+	height: 38px;
+	width: 74px;
+}
+.home #menu #Fusr_Logo {
+	display: none;
+	visibility: hidden;
+}
+.MenuItems {
+	margin-top: 140px;
+}
+.home .MenuItems {
+	margin-top: 90px;
+}
+.MenuItems a {
+	text-decoration: none;
+}
+.MenuItems a:hover,
+.MenuItems a:active,
+.MenuItems a:focus
+ {
+	text-decoration: underline;
+}
+.MenuItems ul {
+	list-style: none;
+	padding-left:25px;
+	margin:0;
+}
+.MenuItems ul li a {
+	color: #959595;
+	font-size: 1.2em;
+	line-height: 1.8em;
+	cursor: pointer;
+}
+.MenuItems ul.less-important li a {
+	color: #B1AEAE;
+	font-size: 1em;
+	line-height: 1.8em;
+	cursor: pointer;
+}
+
+hr.menu-line {
+	border: 0; 
+	height: 1px; 
+	margin:15px 0;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(219, 226, 231, 0.75), rgba(0, 0, 0, 0));
+}
+
+.Hoofdmenu {margin-top:45px;}
+.navbar {
+    min-height: 40px;
+	margin-bottom:0;
+	border:0;
+	background:#fff;
+}
+.navbar .nav {
+	min-height: 30px;
+	padding: 4px 0 0 50px;
+}
+.navbar-default {
+	border-radius: 0;
+}
+.navbar-default .navbar-nav > li > a {
+	color: rgba(78, 78, 78, 0.75);
+	font-family: 'Open Sans',sans-serif;
+	font-size: 1.2em;
+	font-weight: 600;
+}
+.navbar-nav > li > a {
+    margin: 0 10px;
+	padding:0;
+    text-transform: lowercase;
+}
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+	border-bottom: 1px solid #00539b;
+	color: #00539b;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+	text-decoration:none;
+	background-color:transparent;
+	border-bottom: 1px solid #00539b;
+	color: #00539b;
+}
+.LoginLink {
+	font-size:0.9em;
+	text-transform: lowercase;
+	padding: 5px 25px 0px 0px;
+	position: absolute;
+	display: inline;
+	top: 0;
+	right: 0;
+	z-index:9;
+}
+.LoginLink li {
+	list-style: none;
+}
+.LoginLink a {
+	color: #dadada;
+}

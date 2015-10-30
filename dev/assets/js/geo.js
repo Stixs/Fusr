@@ -9,9 +9,15 @@ function GEOprocess(position) {
     GEOajax(getBaseUrl() + "controllers/geo.php?accuracy=" + position.coords.accuracy + "&lat=" + position.coords.latitude + "&lng=" + position.coords.longitude);
 }
 
+function NoPermission() {
+    $.session.set("geo", 1);
+
+    GEOajax(getBaseUrl() + "controllers/geo.php?permission=0");
+}
+
 if (navigator.geolocation) {
    if($.session.get("geo") != 1) {
-        navigator.geolocation.getCurrentPosition(GEOprocess);
+        navigator.geolocation.getCurrentPosition(GEOprocess, NoPermission);
    }
 }
 
