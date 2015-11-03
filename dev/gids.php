@@ -119,7 +119,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_GET['nr']) || isset($_GET['q'
 		if(isset($specialiteiten)) {
 			$query .= ' AND specialiteiten.naam in ("' . implode('","',$specialiteiten) . '")';
 			$selectView .= ' AND specialiteiten.naam in ("' . implode('","',$specialiteiten) . '")';
-			//$queryFilter .= ' AND specialiteiten.naam = "' . $specialiteiten[0] . '"';
 		}
 
 		if(!isset($latitude) && !isset($longitude)) {
@@ -158,9 +157,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_GET['nr']) || isset($_GET['q'
 
 				$selectView .= 'GROUP BY bedrijfgegevens.id HAVING distance < ' . $distance;
 			}
-
-			/*$queryFilter .= ' HAVING
-								distance < ' . $distance; */
 		}
 
 		$sth = $pdo->prepare($select . $query);
@@ -178,6 +174,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_GET['nr']) || isset($_GET['q'
 		$querytest = $selectFilter;
 		$sthtest = $pdo->prepare($querytest);
 		$sthtest->execute();
+
 		$resultFilter = $sthtest->fetchAll(PDO::FETCH_ASSOC);
 
 		$branches = [];

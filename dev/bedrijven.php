@@ -1,4 +1,6 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 'on');
 require('views/header.php');
 
 $company = $_GET['bedrijf'];
@@ -15,6 +17,7 @@ if(is_numeric($company)) {
     $sth = $pdo->prepare('SELECT
                             bedrijfgegevens.*,
                             openingstijden.*,
+                            bedrijfgegevens.id as bedrijfs_id,
                             plaatsen.plaats,
                             plaatsen.provincie,
                             specialiteiten.naam as specialiteiten_naam
@@ -33,6 +36,7 @@ if(is_numeric($company)) {
 
     $sth->bindParam(':company', $company);
     $sth->execute();
+
     $row = $sth->fetch();
 
     if($row['premium'] == 'gold') {

@@ -20,6 +20,8 @@
         }
 
         if(count($specialiteiten) > 0) {
+            sort($specialiteiten);
+
             echo '<h2>Specialiteiten</h2>';
             foreach($specialiteiten as $specialiteit) {
                 $name = '';
@@ -29,14 +31,22 @@
                 }
 
                 if(isset($_GET['specialiteit'])) {
-                    $name = $_GET['specialiteit'];
-                    $speciurl .= '&specialiteit[]=' . $_GET['specialiteit'][0];
+                    foreach($_GET['specialiteit'] as $speci) {
+                        $speciurl .= '&specialiteit[]=' . $speci;
+                    }
                 }
 
-                $speciurl .= '&specialiteit[]=' . $specialiteit;
+                $speciurl .= '&specialiteit[]=' . urlencode(html_entity_decode($specialiteit));
 
                 if(isset($_GET['specialiteit']) && in_array($specialiteit, $_GET['specialiteit'])) {
-                    echo '<a class="active" href="' . $url . '">' . $specialiteit . '</a>';
+                    $activeurl = '';
+                    foreach($_GET['specialiteit'] as $speci) {
+                        if($speci != $specialiteit) {
+                            $activeurl .= '&specialiteit[]=' . $speci;
+                        }
+                    }
+
+                    echo '<a class="active" href="' . $url . $activeurl . '">' . $specialiteit . '</a>';
                 } else {
                     echo '<a href="' . $speciurl . '">' . $specialiteit . '</a>';
                 }
@@ -63,16 +73,16 @@
                     <div class="search-image">
                         <?php
                         if ($row['premium'] == 'gold' && !empty($row['logo'])) {
-                            echo '<img class="col-md-4 col-lg-3" src="./assets/images/bedrijf_' . $row['id'] . '/' . $row['logo'] . '" />';
+                            echo '<img class="col-md-4 col-lg-3" src="./assets/images/bedrijf_images/' . $row['id'] . '/' . $row['logo'] . '" />';
                         }
                         ?>
                     </div>
                     <div class="col-sm-7 col-md-8 col-lg-6 search-naam">
                         <?php
                         echo '<div class="bedrijfsnaam">' . $row['bedrijfsnaam'] . '</div>
-                                  <div class="specialiteit"><em><a href="' . $url . '&specialiteit[]=' . $row['specialiteit'] .'">' . $row['specialiteit'] . '</a></em></div>
+                                  <div class="specialiteit"><a href="' . $url . '&specialiteit[]=' . $row['specialiteit'] .'">' . $row['specialiteit'] . '</a></div>
                                   <div class="bezoekadres">' . $row['bezoekadres'] . ', ' . ucfirst(strtolower($row['plaatsnaam'])) . '</div>
-                                  <div class="telefoonnummer">' . $row['telefoonnummer'] . '</div>';
+                                  <div class="telefoonnummer"><a href="tel:' . $row['telefoonnummer'] . '">' . $row['telefoonnummer'] . '</a></div>';
                         ?>
                     </div>
 

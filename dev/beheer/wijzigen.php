@@ -199,7 +199,7 @@ if(LoginCheck($pdo))
 						}
 
 						echo'De gegvens van '. $bedrijfsnaam.' zijn bijgewerkt.<br />';
-						echo '<META http-equiv="refresh" content="60;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
+						echo '<META http-equiv="refresh" content="1;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
 					}
 				}
 				else

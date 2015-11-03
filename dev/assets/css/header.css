@@ -1,7 +1,7 @@
 /*  Header styling  */
 
 #header {
-	background-color: #fff;
+	background-color: #FBFBFB;
 	height: 149px;
 	width: 100%;
 }
@@ -14,7 +14,7 @@
 	padding-top: 10px;
 	width: 100%;
 	position: absolute;
-	border-top: 1px solid #D3DCE4;
+	border-top: 1px solid #E1E1E1;
 	background: #f9f9f9; 
 }
 .Menubtn {
@@ -45,12 +45,11 @@
 	border-bottom: 1px solid #E1E1E1;
 	font-size: 0.8em;
 	padding: 11px 0px;
-	background: #F2F2F2 none repeat scroll 0% 0%;
+	background: #FBFBFB;
 	text-align: center;
 	top: 63px;
 	position: absolute;
 	width: 100%;
-
 }
 .teruglink div {
 	padding-top: 2px;
@@ -59,12 +58,14 @@
 
 .MobileLocatie {
 	height: 40px;
-	padding: 5px 15px 0 15px;
+	padding: 5px 20px 0 15px;
+	margin-top: 8px;
 	font-size: 1em;
 	line-height: 1.8em;
-	font-family: "trebuchet ms", Verdana, Sans-Serif;
-	border-bottom: 1px solid #e1e1e1;
-	background: #F9F9F9;
+	font-family: 'Catamaran', Verdana, Sans-Serif;
+	border-top: 1px solid #E1E1E1;
+	border-bottom: 1px solid #E1E1E1;
+	background: #EDEFED;
 }
 .MobileLocatie a {
 	padding: 0px 40px 0px 0px;
@@ -89,8 +90,8 @@
 
 .home {
 	height: 50px !important;
-	margin-bottom: 85px;
-	border-bottom: 1px solid #D3DCE4;
+	margin-bottom: 35px;
+	border-bottom: 1px solid #E1E1E1;
 }
  .home #menu #Fusr_Logo {
 	display: none; 

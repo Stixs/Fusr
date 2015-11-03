@@ -33,10 +33,20 @@ $(document).ready(function() {
         }
     });
 
-    $(".zoekPlaats").click(function() {
+    $(".zoekPlaats").on("click", function() {
         $(this).hide();
 
         $("#zoeken").show();
         $(".plaatszoeken").prop("type", "text");
+    });
+
+    $("#zoeken input").on("click", function() {
+        $(this).val('');
+    });
+
+    $("input[name='q']").on("click", function() {
+        $(this).val('');
+        $("input[name='branche']").val('');
+        $("input[name='subbranche']").val('');
     });
 });

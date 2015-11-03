@@ -13,8 +13,18 @@ if(isset($_POST['plaats'])) {
         $_SESSION['plaats'] = $_POST['plaats'];
         $_SESSION['latitude'] = $latitude;
         $_SESSION['longitude'] = $longitude;
+    } else {
+        $_SESSION['plaats'] = 'nnb';
+        unset($_SESSION['latitude']);
+        unset($_SESSION['longitude']);
     }
 
-    header('Location: gids.php?q=fotografie');
+    $url = $_GET['q'];
+
+    if(isset($_GET['subbranche']) && isset($_GET['branche'])) {
+        $url .= '&branche=' . $_GET['branche'] . '&subbranche=' . $_GET['subbranche'];
+    }
+
+    header('Location: gids.php?q=' . $url);
 }
 ?>

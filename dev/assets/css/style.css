@@ -1,50 +1,66 @@
+/*   Font   */
+@import url(https://fonts.googleapis.com/css?family=Catamaran:300,400,600,700);
+
+/*  COLORS  
+
+text 1: #4E4E4E;
+text 2: #7E7E7E;
+
+Prim color: #188E44;
+Sec color: #B1247A;
+Link color: #CC5E05;
+
+Grijs 1: #FBFBFB;
+Grijs 2: #EDEFED;
+Grijs 3: #E1E1E1;
+
+non-focus input: #CCC;
+
+Highlighted text: #278AC7;
+
+*/
 
 /*  Algehele styling  */
 body {
-	color: #4e4e4e;
-    font-family: Verdana, Sans-Serif;
-    font-size: 16px;
-    line-height: 20px;
-	background-color: #eeeef0;
+	color: #4E4E4E;
+    font-family: 'Catamaran', Verdana, Sans-Serif;
+    font-size: 18px;
+    line-height: 25px;
+	background-color: #fff;
 }
 .h1, .h2, .h3, h1, h2, h3 {
 	margin: 0;
 }
 h1 {
-	font-family: "trebuchet ms", Verdana, Sans-Serif;
+	font-family: 'Catamaran', Verdana, Sans-Serif;
 	font-size: 1.667em;
+	font-weight: 600;
 	padding-bottom: 15px;
 }
 h2 {
-	font-family: "trebuchet ms", Verdana, Sans-Serif;
+	font-family: 'Catamaran', Verdana, Sans-Serif;
 	font-size: 1.385em;
+	font-weight: 600;
 	padding-bottom: 10px;
 	padding-top: 20px;
 }
 a {
 	text-decoration: underline;
 	cursor: pointer;
+	color: #a12621;
 }
-a.noline {
+a:hover, a.active, a:focus {
 	text-decoration: none;
+	cursor: pointer;
+	color: #a12621;
 }
-.weight-normal {
-	font-weight: 400;
-}
-.lightbold {
-	font-weight: 600;
-}
-.bold {
-	font-weight: 700;
-}
+a.noline {text-decoration: none;}
+
 .pull-center {
 	text-align: center;
 }
 .align-right {
 	text-align:right !important;
-}
-.right {
-	float: right;
 }
 .vert-align-bottom {
 	padding-top: 8px;
@@ -63,49 +79,57 @@ a.noline {
 /* Logo */
 #Fusr_Logo {
 	margin: 0 auto;
-	background: url('../images/Fusr.nl_logo.png') top center no-repeat transparent;
+	background: url('../images/Fusr.nl_logo.png') center center no-repeat transparent;
 	height: 153px;
 	display: block;
-	margin-bottom: 85px;
+	margin-bottom: 35px;
 }
 
 
 /*  Homepage  */
 /* Zoekbalk aanvulling */
+.ui-widget {
+	font-family: 'Catamaran', Verdana, Sans-Serif !important;
+	font-weight: 300;
+}
 .ui-autocomplete {
-	border-radius: 0 !important;
-	border-top: 0 !important;
-	border-right: 1px solid #00aeef !important;
-	border-bottom: 1px solid #00aeef !important;
-	border-left: 1px solid #00aeef !important;
-	background: #FFF !important;
+	-webkit-border-radius: 23px !important;
+			border-radius: 23px !important;
+	border-width: 0 1px 1px 1px !important;
+	border-style: solid !important;
+	border-color: #188E44 !important;
+	background: #fff none repeat scroll 0% 0% !important;
 	color: #4E4E4E !important;
-	padding: 5px 0 !important;
+	padding: 10px 10px !important;
 }
 .ui-menu .ui-menu-item {
 	border-radius: 0 !important;
-    padding: 0!important;
+    padding: 4px 0 !important;
 }
 .ui-widget-content a {
-    color: #686666 !important;
+    color: #343434 !important;
     font-size: 0.9em !important;
     width: 100%;
     text-indent: 10px;
     display: block;
 	padding: 5px 0;
+	text-decoration: none;
 }
-.ui-widget-content .ui-state-hover, .ui-widget-content a:hover {
-    background: #EEEEF0 none !important;
+.ui-widget-content .ui-state-hover, 
+.ui-widget-content a:hover, 
+.ui-widget-content a.active {
+    background: #EDEFED !important;
     border: 0 !important;
-    border-radius: 0;
+    font-weight: 300 !important;
+    -webkit-border-radius: 15px;
+			border-radius: 15px;
     text-decoration: none;
 }
 .search_results {
-    background-color: #00aeef;
-    color: #fff !important;
-    text-align: center;
+    font-weight: 700;
 }
 /* zoekbalk en knop */
+
 .HomeSearch .zoekknop {
 	margin-top: 15px;
 }
@@ -115,59 +139,73 @@ a.noline {
 /* filters */
 .filters {
 	margin-top: -96px;
-	background: #EEEEF0;
+	background: #FFF;	
 }
 .filtersbg {
-	background: #fff;
-	border: 1px solid #d3dce4;
+	background: #FBFBFB;
+	border: 1px solid #EDEFED;
+	-webkit-border-radius: 23px;
+			border-radius: 23px;
 	word-break: break-all;
-	padding-left: 20px;
+	padding: 0 20px;
+	text-transform: capitalize;
 }
+
 .filters h1 {
 	padding-top: 10px;
-	font-family: Verdana, Sans-Serif;
+}
+.filters h2 {
+	margin-top: 20px;
+	color: #B1247A;
+}
+.filters h2:first-child {
+	margin-top: 0;
 }
 .filters a {
 	color: #343434;
 	display: block;
-	padding: 3px 10px;
+	padding: 5px 15px;
 	text-decoration: none;
 }
 .filters a:hover, 
 .filters a.active {
 	color: #fff;
-	background-color: #d08111;
+	background-color: #B1247A;
 	text-decoration: none;
+	-webkit-border-radius: 15px;
+			border-radius: 15px;
 }
 
 
 /* zoekresultaten */
-.search-result h2 {
-	margin-top: 20px;
-	font-family: "trebuchet ms", Verdana, Sans-Serif;
-	color: #d08111;
-	font-weight: 600;
-}
-.search-result h2:first-child {
-	margin-top: 0;
-}
+
 /*.resultspageborder {
 	height:0px;
 	border-bottom: 1px solid #d3dce4;
 }*/
 .resultspage {
-	margin-top: 15px;
+	margin-top: 25px;
+	margin-bottom: 50px;
+	background: #FFF;
 }
 .resultsbg {
-	background: #fff;
-	padding: 20px;
-	border: 1px solid #DEDEDE;
+	padding: 0 20px 12px 20px;
+	background: #FBFBFB;
+	border: 1px solid #EDEFED;
+	-webkit-border-radius: 23px;
+			border-radius: 23px;
 }
 
 .resultspage .search-container {
 	border-bottom: 1px solid #dbe2e7;
 	position: relative;
+	margin: 0;
 }
+
+.resultspage .search-container:last-child {
+	border-bottom: 0px;
+}
+
 	.resultspage .imglink {
 
 	}
@@ -175,26 +213,28 @@ a.noline {
 		text-align: center;
 	}
 	.resultspage .search-image img {
-	    max-width:180px;
-	    max-height:180px;
+	    max-width:130px;
+	    max-height:130px;
 	    width: auto;
 	    height: auto;
-		padding: 20px 0 20px 20px;
+		padding: 0;
+		margin-top: 20px;
+		-webkit-box-shadow: 1px 1px 10px 0 #EDEFED;
+				box-shadow: 1px 1px 10px 0 #EDEFED;
 	}
 
 .resultspage .search-naam {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	line-height: 22px;
 }
 	.resultspage .bedrijfsnaam {
-		color: #0066cc;
+		color: #188E44;
 	}
 	.resultspage .specialiteit {
-
+		font-size: 0.9em;
 	}
 	.resultspage .specialiteit a {
-		color: #343434;
+		
 	}
 	.resultspage .bezoekadres {
 
@@ -208,24 +248,42 @@ a.noline {
 	right: 0;
 }
 	.resultspage .afstand {
-		color: #B1B1B1;
+		color: #7E7E7E;
 		font-size: 0.9em;
 	}
 	.resultspage .link {
-
+		color: #B1247A;
 	}
 
-
+.resultspage .pagination {
+	margin-top: 15px;
+	padding: 0px 30px;
+	margin-bottom: 0px;
+}
+.resultspage .pagination a {
+	color: #188E44;
+	padding: 15px 0;
+} 
+.resultspage .pagination .pag_prev {
+	float: left;
+}
+.resultspage .pagination .pag_next {
+	float: right;
+}
 
 /*  Profielpagina  */
 
 .profilepage {
 	padding: 20px 0px;
+	margin-top: 9px;
+	background: #FFF;
 }
 .profilebg {
-	background: #fff;
-	border: 1px solid #DEDEDE;
+	background: #FBFBFB;
+	border: 1px solid #EDEFED;
 	padding: 30px 20px;
+	-webkit-border-radius: 23px;
+			border-radius: 23px;
 }
 
 .profilepage .company-logo {
@@ -238,6 +296,8 @@ a.noline {
 .profilepage .company-image {
 	height: 130px;
 	overflow: hidden;
+	-webkit-border-radius: 23px;
+			border-radius: 23px;
 }
 
 .profilepage h1 {
@@ -245,30 +305,42 @@ a.noline {
 	padding-right: 20px;
 	margin-top: 20px;
 	margin-bottom: 5px;
-	font-family: Verdana, sans-serif;
 	font-size: 1.2em;
 	color: #343434;
 }
 .profilepage h2 {
 	padding-top: 0px;
 	margin-bottom: 10px;
-	font-family: Verdana, sans-serif;
 	font-weight: 600;
 	font-size: 1.25em;
 }
 .profilepage .beschrijving {
+	font-size: 0.9em;
 	margin-bottom: 39px;
 }
-.profilepage .adres, .profilepage .social {
-	margin-bottom: 39px;
+.profilepage .beschrijving h1 {
+	margin-top: 0;
+	padding-bottom: 5px;
+	padding-left: 0px;
 }
-.profilepage .openingstijden span {
-	display: block;
+.profilepage .beschrijving h2 {
+	margin-top: 20px;
+	padding-left: 0px;
+	margin-bottom: 0;
+	padding-bottom: 5px;
+}
+.profilepage .adres {
+	margin-bottom: 39px;
 }
 .profilepage .specialisaties {
 	margin-bottom: 39px;
 }
-
 #zoeken {
 	display: none;
+	float: right;
+	margin-top: -6px;
+}
+#zoeken input {
+	height: 40px;
+	font-size: 16px;
 }

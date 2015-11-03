@@ -124,7 +124,7 @@ function Dropdown($name, $options, $id) {
 
 function specialiteitenlijst($pdo) {
 	$specialiteiten = array("");
-	$sth = $pdo->prepare('select specialiteit from specialiteiten');
+	$sth = $pdo->prepare('select naam from specialiteiten');
 		$sth->execute();
 		$result = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
 		
@@ -156,17 +156,40 @@ function openingstijden($openingstijd = NULL, $dag) {
     return $html;
 }
 
+function speciBeheer($pdo, $id = NULL) {
+	$html = '<label for="sel'.$id.'">Specialiteit:</label>';
+	$html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';
+
+	$query = "SELECT * FROM specialiteiten";
+
+	if($id != NULL) {
+		$query .= " WHERE id = " . $id;
+	}
+
+	$sth = $pdo->prepare($query);
+	$sth->execute();
+	$html .= '<option value=""></option>';
+	while($row = $sth->fetch()) {
+		if($id != NULL) {
+			$html .= '<option value="'.$row['specialiteit'].'" selected="selected">'.$row['specialiteit'].'</option>';
+		} else {
+			$html .= '<option value="'.$row['specialiteit'].'">'.$row['specialiteit'].'</option>';
+		}
+	}
+	$html .= '</select>';
+	return $html;
+}
+
 function specialiteitkeuze($pdo, $name, $id, $keuze = NULL, $branche_id = null) {
 
 
 	$html = '<label for="sel'.$id.'">Specialiteit:</label>';
     $html .= '<select class="form-control" id="sel'.$id.'" name="'.$name.'">';	
-	$sth = $pdo->prepare('SELECT * FROM specialiteiten where subbranche_id = '.$branche_id);
+	$sth = $pdo->prepare('SELECT * FROM specialiteiten where branche_id = '.$branche_id);
 		$sth->execute();
 			$html .= '<option value=""></option>';
 			while($row = $sth->fetch())
 				{
-					
 					if($row['specialiteit'] == $keuze)
 					{
 						$html .= '<option value="'.$row['specialiteit'].'" selected="selected">'.$row['specialiteit'].'</option>';

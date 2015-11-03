@@ -1,8 +1,9 @@
 
 /*  Media Queries  >  responsive   */
 
-/*  Media Queries  :  mobiel   */
- @media screen and (min-width: 768px) {
+/*  Media Queries  :  tablet   */
+@media screen and (min-width: 768px) {
+
  	.MobileFilter, .filters h1 {
 		display: none; visibility: hidden;
 	}
@@ -10,8 +11,8 @@
  		display: block; visibility: visible;
  	}
  	#Fusr_Logo-small { 
- 		margin:19px 20px;
-		background: url('../images/Fusr.nl_logo-sm.png') top center no-repeat transparent;
+ 		margin: 19px 20px;
+		background: url('../images/Fusr.nl_logo-sm.png') center center no-repeat transparent;
 		height: 71px;
 		width: 138px;
 		float: left;
@@ -20,11 +21,12 @@
 		position: absolute;
 		z-index: 2;
 	}
+
  	.filters {
 		margin-top: 0px;
 		padding-top: 25px;
 		background: #fff;
-		border-right: 1px solid #d3dce4;
+		border-right: 1px solid #E1E1E1;
 	}
 	.filtersbg {
 		background: transparent;
@@ -40,6 +42,9 @@
 		top: 15px;
 		position: absolute;
 		z-index: 2;
+	}
+	.home {
+		margin-bottom: 85px;
 	}
 	.home .Menubtn {
 		top: 0px;
@@ -59,12 +64,12 @@
 	}
 	.MobileLocatie {
 		margin-top: 69px;
-		border-top: 1px solid #d3dce4;
+		border-top: 1px solid #E1E1E1;
 	}
 	#menu {
 		left: auto;
 		right: 0;
-		border-left: 1px solid #d3dce4;
+		border-left: 1px solid #E1E1E1;
 	}
 	#menu #Fusr_Logo {
 		margin: 24px 0px 0px 20px;
@@ -73,6 +78,7 @@
 	.resultspage {
 		margin-top: 20px;
 	}
+	
 	.hide-menu {
 		float:right;
 		margin: 29px 31px 0 0;
@@ -80,12 +86,12 @@
 	.home .hide-menu {
 		margin-top: 15px;
 	}
-	.HomeSearch .zoekknop {
-		margin-top: 0px;
-	}
 	.teruglink {
 		position: relative;
 		top: auto;
+	}
+	.profilepage {
+		margin-top:0;
 	}
 	.profilepage .company-logo img {
 		height: 110px;
@@ -96,13 +102,18 @@
 	.profilepage h1 {
 		font-size: 1.5em;
 	}
-
-/*  Media Queries  :  tablet   */
-@media screen and (min-width: 991px) {
-
 }
 
 /*  Media Queries  :  standaard desktop   */
+@media screen and (min-width: 991px) {
+	.resultspage .search-image img {
+		margin: 20px 0;
+		max-width:150px;
+	    max-height:150px;
+	}
+}
+
+/*  Media Queries  :  groot desktop   */
 @media screen and (min-width: 1200px) {
 	.profilepage .company-image {
 		height: 330px;

@@ -17,23 +17,23 @@
                 </div>
 
                 <div class="col-sm-2 Searchbtn">
-                    <button class="btn btn-default col-xs-12" type="submit" name="Zoek" value="Zoek">Zoek</button>
+                    <button class="btn btn-default col-xs-12" type="submit" value="Zoek">Zoek</button>
                 </div>
             </form>
         </div>
         <!-- Mobile only -->
         <div class="MobileLocatie">
             <?php
-            if(isset($_SESSION['plaats'])) {
+            if(isset($_SESSION['plaats']) && $_SESSION['plaats'] != 'nnb' && !empty($_SESSION['plaats'])) {
                 $plaats = trim($_SESSION['plaats']);
+            } elseif($_SESSION['plaats'] == 'nnb') {
+                $plaats = 'onbekende plaats opgegeven';
             } else {
                 $plaats = 'geen plaats opgegeven';
             }
             ?>
-            Er wordt gezocht in: <form id="zoeken" action="location.php<?php echo $url; ?>" method="post"><input type="hidden" name="plaats" class="right plaatszoeken" value="<?php echo $plaats; ?>" /></form> <a href="#" class="zoekPlaats"><?php echo $plaats; ?></a>
-
+            Er wordt gezocht in: <form id="zoeken" action="location.php<?php echo $url; ?>" method="post"><input type="hidden" name="plaats" class="form-control right plaatszoeken" value="<?php echo $plaats; ?>" /></form> <a href="#" class="zoekPlaats"><?php echo $plaats; ?></a>
         </div>
-
     </div>
 
     <!-- Mobile only -->
