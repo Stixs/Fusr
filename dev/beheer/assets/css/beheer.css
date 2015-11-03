@@ -1,0 +1,25 @@
+
+/*  Beheer pagina's  */
+
+/* Beheer menu */
+.BeheerNav {
+	background:#dbdbdd;
+	padding-top:2px;
+}
+.BeheerNav .navbar-nav > li > a {
+	color: #4e4e4e;
+	font-family: Verdana, Sans-Serif;
+	font-size: 1em;
+	font-weight:400;
+	line-height:1.2em;
+	border-bottom: 1px solid #9bcc5f;
+}
+
+
+/* Uitlijning */
+.ContentPadding {
+	padding:60px 4%;
+}
+.specialiteit_wijzigen{
+	padding:5px 0;
+}
