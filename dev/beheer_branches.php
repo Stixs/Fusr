@@ -1,14 +1,13 @@
 <?php
 
-
+var_dump($_POST);
 if(isset($_POST['add_brn']))
 {
 $branche = $_POST['branche'];
 $parameters = array(':branche'=>$branche,
 					);
-	$sth = $pdo->prepare('INSERT INTO branches (branche)VALUES(:branche)');
+	$sth = $pdo->prepare('INSERT INTO branches (naam)VALUES(:branche)');
 	$sth->execute($parameters);
-	echo 'test';
 	
 }
 
@@ -17,10 +16,9 @@ if(isset($_POST['edit_brn']))
 {
 $branche = $_POST['branche'];
 $keuze = $_POST['edit_brn'];
-$oudenaam = $_POST['oudenaam'];
 $parameters = array(':branche'=>$branche[$keuze],
 					':keuze'=>$keuze);
-$sth = $pdo->prepare('UPDATE branches SET branche=:branche WHERE branche_id = :keuze');
+$sth = $pdo->prepare('UPDATE branches SET naam=:branche WHERE id = :keuze');
 $sth->execute($parameters);
 
 }
@@ -30,7 +28,7 @@ if(isset($_POST['del_brn']))
 {
 $keuze = $_POST['del_brn'];
 	$parameters = array(':keuze'=>$keuze);
-$sth = $pdo->prepare('DELETE FROM branches WHERE branche_id = :keuze');
+$sth = $pdo->prepare('DELETE FROM branches WHERE id = :keuze');
 $sth->execute($parameters);
 }
 
@@ -53,8 +51,7 @@ $sth->execute($parameters);
 if(isset($_POST['beperk']))
 {
 	$beperk = $_POST['beperk'];
-	$branche = $_SESSION['branche'];
-	$sth = $pdo->prepare("SELECT * FROM branches WHERE branche LIKE '%" . $beperk. "%'");
+	$sth = $pdo->prepare("SELECT * FROM branches WHERE naam LIKE '%" . $beperk. "%'");
 	$sth->execute();
 	
 	?>
@@ -69,10 +66,9 @@ if(isset($_POST['beperk']))
 		
 		<div class="col-xs-6">
 			<div class="form-group specialiteit_wijzigen">
-				<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['branche_id'] ?>]" value="<?php echo $row['branche']; ?>">
-				<input type="text" class="form-control" name="branche[<?php echo $row['branche_id'] ?>]" value="<?php echo $row['branche']; ?>">
-				<button type="submit" value="<?php echo $row['branche_id'] ?>" name="edit_brn" class="btn btn-default">Wijzig</button>
-				<button type="submit" value="<?php echo $row['branche_id'] ?>" name="del_brn" class="btn btn-danger">Verwijder</button>
+				<input type="text" class="form-control" name="branche[<?php echo $row['id'] ?>]" value="<?php echo $row['naam']; ?>">
+				<button type="submit" value="<?php echo $row['id'] ?>" name="edit_brn" class="btn btn-default">Wijzig</button>
+				<button type="submit" value="<?php echo $row['id'] ?>" name="del_brn" class="btn btn-danger">Verwijder</button>
 			</div>
 		</div>
 		
@@ -103,10 +99,9 @@ else
 	
 			<div class="col-xs-6">
 				<div class="form-group specialiteit_wijzigen">
-					<input type="hidden" class="form-control" name="oudenaam[<?php echo $row['branche_id'] ?>]" value="<?php echo $row['branche']; ?>">
-					<input type="text" class="form-control" name="branche[<?php echo $row['branche_id'] ?>]" value="<?php echo $row['branche']; ?>">
-					<button type="submit" value="<?php echo $row['branche_id'] ?>" name="edit_brn" class="btn btn-default">Wijzig</button>
-					<button type="submit" value="<?php echo $row['branche_id'] ?>" name="del_brn" class="btn btn-danger">Verwijder</button>
+					<input type="text" class="form-control" name="branche[<?php echo $row['id'] ?>]" value="<?php echo $row['naam']; ?>">
+					<button type="submit" value="<?php echo $row['id'] ?>" name="edit_brn" class="btn btn-default">Wijzig</button>
+					<button type="submit" value="<?php echo $row['id'] ?>" name="del_brn" class="btn btn-danger">Verwijder</button>
 				</div>
 			</div>
 			
@@ -117,11 +112,14 @@ else
 		</form>
 	</div>
 	<div class="col-xs-12 ContentPadding" style="padding-top:20px;">
-		<form class="form-inline" method="post" action="" >
+		<form method="post" action="" >
 			<div class="form-group spacer2">
-				<label for="specialiteit">Specialiteit</label>
-				<input type="text" class="form-control" id="branche" name="branche">
+			<div class="col-xs-10 no-padding-left">
+				<input type="text" class="form-control"  id="branche" name="branche" placeholder="Branche">
+			</div>
+			<div class="col-xs-2 no-padding-left">
 				<button type="submit" name="add_brn" class="btn btn-default">Toevoegen</button>
+			</div>
 			</div>
 		</form>
 	</div>

@@ -1,6 +1,8 @@
 <?php
 require('./controllers/header.php');
 
+var_dump($pdo);
+
 //Controleert of je wel bent ingelogd.
 if(LoginCheck($pdo))
 {
@@ -72,10 +74,11 @@ $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $te
 	$url = 'https://api.pro6pp.nl/v1/autocomplete?auth_key=9mPiDJVEjKZliA8I&nl_sixpp='.$postcode.'&streetnumber='.$huisnummer . $toevoeging.'&format=json';
 	$response = file_get_contents($url);
 	$json = json_decode($response,TRUE);
-	
-	if(!isset($postcode) or !isset($huisnummer)){
-	$latitude = $json['results'][0]['lat'];
-	$longitude = $json['results'][0]['lng'];
+	if(!isset($postcode) or !isset($huisnummer)){}
+	else
+	{
+		$latitude = $json['results'][0]['lat'];
+		$longitude = $json['results'][0]['lng'];
 	}
 	$provincie = $json['results'][0]['province'];
 	//var_dump($json);
@@ -111,7 +114,7 @@ $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $te
 	$Specialiteiten = specialiteitenlijst($pdo);
 	if(isset($_POST['add_spec']) AND !empty($_POST['add_specialiteit']))
 	{
-			
+		
 	$add_specialiteit = $_POST['add_specialiteit'];
 	$parameters = array(':add_specialiteit'=>$add_specialiteit,
 						':branche_id'=>$subbranche_id
@@ -263,7 +266,7 @@ $bedrijfsnaam = $beschrijving = $adres = $toevoeging = $postcode = $plaats = $te
 			
 			
 			echo'De bedrijf gegevens zijn geregistreerd.<br />';
-			echo '<META http-equiv="refresh" content="5;URL=index.php">';
+			//echo '<META http-equiv="refresh" content="5;URL=index.php">';
 			
 			if (!file_exists('images/bedrijf_images/'.$bedrijfgegevens_id)) {
 			mkdir('images/bedrijf_images/'.$bedrijfgegevens_id, 0777, true);

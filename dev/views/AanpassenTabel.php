@@ -49,6 +49,11 @@ else
 		<?php 
 		} 
 		?>
+		<tr>
+			<td colspan="6">
+				<a class="btn btn-default" role="button" href="toevoegenbedrijf.php?branche=0">Toevoegen</a>
+			</td>
+		</tr>
 	</table>
 </div>
 </div>

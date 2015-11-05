@@ -26,6 +26,18 @@ if(LoginCheck($pdo))
 		{
 			case'edit':
 			
+				if(isset($_POST['add_spec']) AND !empty($_POST['add_specialiteit']))
+					{
+							echo '*********************';
+					$add_specialiteit = $_POST['add_specialiteit'];
+					$parameters = array(':add_specialiteit'=>$add_specialiteit,
+										':branche_id'=>$_SESSION['branche']
+										);
+					$sth = $pdo->prepare('INSERT INTO specialiteiten (naam, branche_id)VALUES(:add_specialiteit, :branche_id)');
+					$sth->execute($parameters);
+					}
+			
+			
 					if(isset($_POST['Del_Image']))
 					{
 					$image = $_POST['Del_Image'];
@@ -44,9 +56,6 @@ if(LoginCheck($pdo))
 					$CheckOnErrors = false;
 					
 					//Gegevens uit het formulier halen
-					$special = NULL;
-					$specialZ = "'";
-					$specialname = NULL;
 					
 					$bedrijfsnaam = $_POST['bedrijfsnaam'];
 					$beschrijving = $_POST['beschrijving'];
@@ -93,7 +102,7 @@ if(LoginCheck($pdo))
 								$logo = basename($_FILES["logo"]["name"]);
 								}
 					
-					echo $banner;
+					
 					
 					
 					
@@ -253,9 +262,14 @@ if(LoginCheck($pdo))
 					$linkedin = $row['linkedin'];
 					$youtube = $row['youtube'];
 					$pinterest = $row['pinterest'];
-					
 					$specialiteiten[] = $row['specialiteiten_id'];
 					}
+					$parameters = array(':subbranche_id'=>$subbranche_id);
+					$sth = $pdo->prepare('SELECT branche_id FROM subbranches WHERE id = :subbranche_id');
+					$sth->execute($parameters);
+					$row = $sth->fetch();
+					$_SESSION['branche'] = $row['branche_id'];
+					
 					
 					for ($x = 0; $x <= 19; $x++){
 						if(!isset($specialiteiten[$x])){

@@ -1,9 +1,17 @@
 <?php $aan = 1; ?>
 <div class="row">
-<div class="ContentPadding">
-	<div class="col-xs-12">
-		<h1>Wijzigen</h1>
-		<form name="WijzigenFormulier" class="wijzigen" action="" method="post" enctype="multipart/form-data">
+	<div class="col-xs-12 ContentPadding">
+		<h1>Toevoegen</h1>
+		<div class="col-xs-6 col-xs-offset-6">
+	
+		<form name="RegistrerenFormulier" class="registreren" action="" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<input type="text" class="form-control" id="specialiteit" name="add_specialiteit" placeholder="Specialiteit">
+				<button type="submit" name="add_spec" class="btn btn-default">Toevoegen</button>
+			</div>
+		
+	</div>
+		<form name="RegistrerenFormulier" class="registreren" action="" method="post" enctype="multipart/form-data">
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
 					<label for="Bedrijfsnaam">Bedrijfsnaam:</label>
