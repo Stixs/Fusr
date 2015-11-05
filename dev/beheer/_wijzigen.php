@@ -25,16 +25,6 @@ if(LoginCheck($pdo))
 		{
 			case'edit':
 
-                                if(isset($_POST['add_spec']) AND !empty($_POST['add_specialiteit']))
-					{
-					$add_specialiteit = $_POST['add_specialiteit'];
-					$parameters = array(':add_specialiteit'=>$add_specialiteit,
-										':branche_id'=>$_SESSION['branche']
-										);
-					$sth = $pdo->prepare('INSERT INTO specialiteiten (naam, branche_id)VALUES(:add_specialiteit, :branche_id)');
-					$sth->execute($parameters);
-					}
-
 				if(isset($_POST['Del_Image']))
 				{
 					$image = $_POST['Del_Image'];
@@ -209,7 +199,7 @@ if(LoginCheck($pdo))
 						}
 
 						echo'De gegvens van '. $bedrijfsnaam.' zijn bijgewerkt.<br />';
-						echo '<META http-equiv="refresh" content="60;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
+						echo '<META http-equiv="refresh" content="1;URL=wijzigen.php?action=edit&bedrijfs_id='.$bedrijfs_id.'">';
 					}
 				}
 				else
@@ -251,12 +241,6 @@ if(LoginCheck($pdo))
 
 						$specialiteiten[] = $row['specialiteiten_id'];
 					}
-
-                                        $parameters = array(':subbranche_id'=>$subbranche_id);
-					$sth = $pdo->prepare('SELECT branche_id FROM subbranches WHERE id = :subbranche_id');
-					$sth->execute($parameters);
-					$row = $sth->fetch();
-					$_SESSION['branche'] = $row['branche_id'];
 
 					for ($x = 0; $x <= 19; $x++){
 						if(!isset($specialiteiten[$x])){

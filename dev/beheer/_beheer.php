@@ -1,4 +1,10 @@
 <?php require('views/header.php'); ?>
+<div class="row">
+	<div class="col-xs-12 ContentPadding" style="padding-bottom:0;">
+		<h3>Beheer fusr</h3>
+		<br/>
+	</div>
+</div>
 
 <?php
 require('views/menu.php');
@@ -24,10 +30,6 @@ else
 	elseif($_GET['wijzig'] == 3)
 		{
 			require('beheer_branches.php');
-		}
-	elseif($_GET['wijzig'] == 4)
-		{
-			require('beheer_zoektermen.php');
 		}
 }
 ?>

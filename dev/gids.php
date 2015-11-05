@@ -96,6 +96,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_GET['nr']) || isset($_GET['q'
 		$query = ' FROM bedrijfgegevens
 				INNER JOIN subbranches on subbranches.id = bedrijfgegevens.subbranche_id
 				INNER JOIN branches on branches.id = subbranches.branche_id
+				INNER JOIN zoektermen_branches on zoektermen_branches.branche_id = branches.id
 				INNER JOIN bedrijfgegevens_specialiteiten on bedrijfgegevens_specialiteiten.bedrijfgegevens_id = bedrijfgegevens.id
 				INNER JOIN specialiteiten on specialiteiten.id = bedrijfgegevens_specialiteiten.specialiteiten_id
 				INNER JOIN plaatsen on plaatsen.id = bedrijfgegevens.plaats_id';
@@ -103,13 +104,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_GET['nr']) || isset($_GET['q'
 		$selectFilter .= ' FROM Bedrijven_speci
 						INNER JOIN subbranches on subbranches.id = Bedrijven_speci.subbranche_id
 						INNER JOIN branches on branches.id = subbranches.branche_id
+						INNER JOIN zoektermen_branches on zoektermen_branches.branche_id = branches.id
 						INNER JOIN bedrijfgegevens_specialiteiten on bedrijfgegevens_specialiteiten.bedrijfgegevens_id = Bedrijven_speci.id
 						INNER JOIN specialiteiten on specialiteiten.id = bedrijfgegevens_specialiteiten.specialiteiten_id';
 
 		if($branche != '' && $subbranche != '') {
 			$where = ' WHERE branches.naam = "' . $branche . '" AND subbranches.naam = "' . $subbranche . '"';
 		} else {
-			$where = ' WHERE MATCH (branches.naam, subbranches.naam, bedrijfgegevens.bedrijfsnaam, specialiteiten.naam)
+			$where = ' WHERE MATCH (branches.naam, zoektermen_branches.naam, subbranches.naam, bedrijfgegevens.bedrijfsnaam, specialiteiten.naam)
 				AGAINST ("' . convertSearchString($trefwoord) . '*" IN BOOLEAN MODE)';
 		}
 
